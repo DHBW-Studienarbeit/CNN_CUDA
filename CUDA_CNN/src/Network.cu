@@ -11,17 +11,24 @@
 #include <math.h>
 #include <limits>
 #include <iostream>
+#include <cublas_v2.h>
 
 
 Network::Network()
 {
 	layer_list = new vector<Layer*>();
-	node_list = new vector<Matrix*>();
-	weight_list = new vector<Matrix*>();
-	bias_list = new vector<Matrix*>();
-	node_deriv_list = new vector<Matrix*>();
-	weight_deriv_list = new vector<Matrix*>();
-	bias_deriv_list = new vector<Matrix*>();
+//	node_list = new vector<Matrix*>();
+//	weight_list = new vector<Matrix*>();
+//	bias_list = new vector<Matrix*>();
+//	node_deriv_list = new vector<Matrix*>();
+//	weight_deriv_list = new vector<Matrix*>();
+//	bias_deriv_list = new vector<Matrix*>();
+	nodeArrayPtrs = nullptr;
+	weightArrayPtrs = nullptr;
+	biasArrayPtrs = nullptr;
+	nodeDerivArrayPtrs = nullptr;
+	weightDerivArrayPtrs = nullptr;
+	biasDerivArrayPtrs = nullptr;
 	train_picture_container = new PictureContainer("./train", 55);
 	test_picture_container = new PictureContainer("./test", 10);
 }
@@ -33,31 +40,31 @@ Network::~Network()
 		delete layer_list->at(i);
 	}
 
-	for(unsigned int i = 0; i < layer_list->size(); i++)
-	{
-		delete node_list->at(i);
-		delete node_deriv_list->at(i);
-	}
-
-	for(unsigned int i = 0; i < layer_list->size(); i++)
-	{
-		delete weight_list->at(i);
-		delete weight_deriv_list->at(i);
-	}
-
-	for(unsigned int i = 0; i < layer_list->size(); i++)
-	{
-		delete bias_list->at(i);
-		delete bias_deriv_list->at(i);
-	}
+//	for(unsigned int i = 0; i < layer_list->size(); i++)
+//	{
+//		delete node_list->at(i);
+//		delete node_deriv_list->at(i);
+//	}
+//
+//	for(unsigned int i = 0; i < layer_list->size(); i++)
+//	{
+//		delete weight_list->at(i);
+//		delete weight_deriv_list->at(i);
+//	}
+//
+//	for(unsigned int i = 0; i < layer_list->size(); i++)
+//	{
+//		delete bias_list->at(i);
+//		delete bias_deriv_list->at(i);
+//	}
 
 	delete layer_list;
-	delete node_list;
-	delete weight_list;
-	delete bias_list;
-	delete node_deriv_list;
-	delete weight_deriv_list;
-	delete bias_deriv_list;
+//	delete node_list;
+//	delete weight_list;
+//	delete bias_list;
+//	delete node_deriv_list;
+//	delete weight_deriv_list;
+//	delete bias_deriv_list;
 }
 
 void Network::add_Layer(Layer* layer)
@@ -77,6 +84,9 @@ bool Network::generate_network()
 	int node_index=0;
 	int bias_index=0;
 	int weight_index=0;
+
+	cudaError_t cuda_error = cudaSuccess;
+
 	for(unsigned int i = 0; i < layer_list->size(); i++)
 	{
 		Layer* layer = layer_list->at(i);
@@ -86,8 +96,11 @@ bool Network::generate_network()
 			{
 				Input_Layer* input_layer = (Input_Layer*) layer;
 				input_layer->setNodeIndex(node_index);
-				node_list->push_back(new Matrix(input_layer->getRows(),input_layer->getCols()));
-				node_deriv_list->push_back(new Matrix(input_layer->getRows(),input_layer->getCols()));
+				/* allocate memory for pointers at host and memory for  node array *
+				 * on GPU device
+				 */
+				nodeArrayPtrs = (float**) malloc(sizeof(float*));
+				cuda_error = cudaMalloc((void**) nodeArrayPtrs[0], input_layer->getRows()*input_layer->getCols() * sizeof(float));
 				node_index++;
 				break;
 			}
