@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="/home/benjamin/git/CNN_CUDA/.git" key="GitSelectRepositoryPage.lastRepository"/>
+	<item value="0" key="org.eclipse.egit.ui.internal.clone.GitSelectWizardPageWizardSel"/>
 	<item value="true" key="CommitDialog.showUntracked"/>
 	<list key="CommitDialog.authorValues">
 		<item value="Benjamin Riedle &lt;riedle.benjamin@gmail.com&gt;"/>
@@ -7,20 +9,23 @@
 	<list key="CommitDialog.committerValues">
 		<item value="Benjamin Riedle &lt;riedle.benjamin@gmail.com&gt;"/>
 	</list>
+	<section name="GitImportWizard">
+		<item value="true" key="GitProjectsImportPage.STORE_NESTED_PROJECTS"/>
+	</section>
 	<section name="GitCommitMessageComponent">
 	</section>
 	<section name="org.eclipse.egit.ui.COMMIT_DIALOG_SECTION">
 		<item value="626" key="DIALOG_WIDTH"/>
 		<item value="91" key="DIALOG_Y_ORIGIN"/>
-		<item value="148" key="DIALOG_X_ORIGIN"/>
 		<item value="655" key="DIALOG_HEIGHT"/>
+		<item value="148" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.push.PushResultDialog.dialogBounds">
 		<item value="650" key="DIALOG_WIDTH"/>
 		<item value="193" key="DIALOG_Y_ORIGIN"/>
-		<item value="706" key="DIALOG_X_ORIGIN"/>
 		<item value="456" key="DIALOG_HEIGHT"/>
+		<item value="706" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 </section>

@@ -17,7 +17,7 @@ MaxPooling_Layer::MaxPooling_Layer(int x_receptive, int y_receptive, int no_feat
 }
 
 MaxPooling_Layer::~MaxPooling_Layer() {
-	// TODO Auto-generated destructor stub
+	/** nothing to destroy */
 }
 
 int MaxPooling_Layer::getNoFeatures()

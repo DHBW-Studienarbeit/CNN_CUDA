@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
 	correct_net = network->generate_network();
 	if(correct_net)
 	{
-		std::cout << "Generation was successful!" << std::endl;
+		std::cout << "Generation was successful! Start training..." << std::endl;
 		train_success = network->train(BATCH_SIZE_D, NO_ITERATIONS_D);
 	}
 	else
@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
 
 	if(train_success)
 	{
-		std::cout << "Training finished! Start Test..." << std::endl;
+		std::cout << "Training finished! Start test..." << std::endl;
 		accuracy = network->test();
 		std::cout << "Accuracy: " << accuracy << std::endl;
 	}
