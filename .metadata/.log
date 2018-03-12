@@ -1539,3 +1539,261 @@ Binding(ALT+CTRL+H,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.cdt.ui.cViewScope,,,system)
+!SESSION 2018-03-12 15:08:50.682 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.jface 2 0 2018-03-12 15:09:43.553
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-12 15:09:43.553
+!MESSAGE A conflict occurred for ALT+CTRL+I:
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4dcdde53,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4dcdde53,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-12 15:09:43.553
+!MESSAGE A conflict occurred for ALT+SHIFT+R:
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6bf430d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6bf430d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-12 15:09:43.553
+!MESSAGE A conflict occurred for F4:
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@76cb0df0,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@76cb0df0,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-12 15:09:43.553
+!MESSAGE A conflict occurred for F3:
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@d00447e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@d00447e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-12 15:09:43.553
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@c90b2dd,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@c90b2dd,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-12 15:09:43.553
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6fced19c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6fced19c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-12 15:09:43.553
+!MESSAGE A conflict occurred for ALT+CTRL+H:
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7323921c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7323921c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2018-03-12 15:31:19.502
+!MESSAGE Unsupported statement type: CPPASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2018-03-12 15:31:19.504
+!MESSAGE Unsupported statement type: CPPASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2018-03-12 15:31:19.504
+!MESSAGE Internal Error
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.codan.core.cxx.internal.model.cfg.CxxPlainNode cannot be cast to org.eclipse.cdt.codan.core.model.cfg.IConnectorNode
+	at org.eclipse.cdt.codan.internal.core.cfg.JumpNode.addOutgoing(JumpNode.java:73)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.addOutgoing(ControlFlowGraphBuilder.java:494)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:152)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:143)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:143)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createFor(ControlFlowGraphBuilder.java:369)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:159)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:143)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.build(ControlFlowGraphBuilder.java:84)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.CxxControlFlowGraph.build(CxxControlFlowGraph.java:33)
+	at org.eclipse.cdt.codan.core.cxx.model.CxxModelsCache.getControlFlowGraph(CxxModelsCache.java:89)
+	at org.eclipse.cdt.codan.internal.checkers.ReturnChecker.endsWithNoExitNode(ReturnChecker.java:241)
+	at org.eclipse.cdt.codan.internal.checkers.ReturnChecker.processFunction(ReturnChecker.java:171)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractAstFunctionChecker$1.visit(AbstractAstFunctionChecker.java:34)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:176)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:265)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractAstFunctionChecker.processAst(AbstractAstFunctionChecker.java:26)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3015)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2018-03-12 15:31:21.214
+!MESSAGE Unsupported statement type: CPPASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2018-03-12 15:31:21.216
+!MESSAGE Unsupported statement type: CPPASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2018-03-12 15:31:21.216
+!MESSAGE Internal Error
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.codan.core.cxx.internal.model.cfg.CxxPlainNode cannot be cast to org.eclipse.cdt.codan.core.model.cfg.IConnectorNode
+	at org.eclipse.cdt.codan.internal.core.cfg.JumpNode.addOutgoing(JumpNode.java:73)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.addOutgoing(ControlFlowGraphBuilder.java:494)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:152)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:143)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:143)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createFor(ControlFlowGraphBuilder.java:369)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:159)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:143)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.build(ControlFlowGraphBuilder.java:84)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.CxxControlFlowGraph.build(CxxControlFlowGraph.java:33)
+	at org.eclipse.cdt.codan.core.cxx.model.CxxModelsCache.getControlFlowGraph(CxxModelsCache.java:89)
+	at org.eclipse.cdt.codan.internal.checkers.ReturnChecker.endsWithNoExitNode(ReturnChecker.java:241)
+	at org.eclipse.cdt.codan.internal.checkers.ReturnChecker.processFunction(ReturnChecker.java:171)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractAstFunctionChecker$1.visit(AbstractAstFunctionChecker.java:34)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:176)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:265)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractAstFunctionChecker.processAst(AbstractAstFunctionChecker.java:26)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3015)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2018-03-12 15:31:28.891
+!MESSAGE Unsupported statement type: CPPASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core.cxx 4 1 2018-03-12 15:31:28.893
+!MESSAGE Unsupported statement type: CPPASTCaseStatement.
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2018-03-12 15:31:28.893
+!MESSAGE Internal Error
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.codan.core.cxx.internal.model.cfg.CxxPlainNode cannot be cast to org.eclipse.cdt.codan.core.model.cfg.IConnectorNode
+	at org.eclipse.cdt.codan.internal.core.cfg.JumpNode.addOutgoing(JumpNode.java:73)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.addOutgoing(ControlFlowGraphBuilder.java:494)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:152)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:143)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:143)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createFor(ControlFlowGraphBuilder.java:369)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:159)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.createSubGraph(ControlFlowGraphBuilder.java:143)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.ControlFlowGraphBuilder.build(ControlFlowGraphBuilder.java:84)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.cfg.CxxControlFlowGraph.build(CxxControlFlowGraph.java:33)
+	at org.eclipse.cdt.codan.core.cxx.model.CxxModelsCache.getControlFlowGraph(CxxModelsCache.java:89)
+	at org.eclipse.cdt.codan.internal.checkers.ReturnChecker.endsWithNoExitNode(ReturnChecker.java:241)
+	at org.eclipse.cdt.codan.internal.checkers.ReturnChecker.processFunction(ReturnChecker.java:171)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractAstFunctionChecker$1.visit(AbstractAstFunctionChecker.java:34)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:176)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:265)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractAstFunctionChecker.processAst(AbstractAstFunctionChecker.java:26)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3015)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)

@@ -48,54 +48,9 @@ private:
 	int *nodeArrayLengths;
 	int *weightArrayLengths;
 	int *biasArrayLengths;
-//	int *nodeDerivArrayLengths;
-//	int *weightDerivArrayLengths;
-//	int *biasDerivArrayLengths;
-
-	/* X and Y dimensions of arrays *
-	 * ROWS (X)  COLS (Y)			*/
-	int *nodeMatrixDims_x;
-	int *weightMatrixDims_x;
-	int *biasMatrixDims_x;
-//	int *nodeDerivMatrixDims_x;
-//	int *weightDerivMatrixDims_x;
-//	int *biasDerivMatrixDims_x;
-
-	int *nodeMatrixDims_y;
-	int *weightMatrixDims_y;
-	int *biasMatrixDims_y;
-//	int *nodeDerivMatrixDims_y;
-//	int *weightDerivMatrixDims_y;
-//	int *biasDerivMatrixDims_y;
-
-	/* GPU device memory for array lengths */
-	int *nodeDeviceArrayLengths;
-	int *weightDeviceArrayLengths;
-	int *biasDeviceArrayLengths;
-	int *nodeDerivDeviceArrayLengths;
-	int *weightDerivDeviceArrayLengths;
-	int *biasDerivDeviceArrayLengths;
-
-	/* X and Y dimensions of arrays *
-	 * ROWS (X)  COLS (Y) stored at device memory	*/
-	int *nodeDeviceMatrixDims_x;
-	int *weightDeviceMatrixDims_x;
-	int *biasDeviceMatrixDims_x;
-	int *nodeDerivDeviceMatrixDims_x;
-	int *weightDerivDeviceMatrixDims_x;
-	int *biasDerivDeviceMatrixDims_x;
-
-	int *nodeDeviceMatrixDims_y;
-	int *weightDeviceMatrixDims_y;
-	int *biasDeviceMatrixDims_y;
-	int *nodeDerivDeviceMatrixDims_y;
-	int *weightDerivDeviceMatrixDims_y;
-	int *biasDerivDeviceMatrixDims_y;
-
-	/* matrix counters */
-	int no_node_matrices;
-	int no_weight_matrices;
-	int no_bias_matrices;
+	int *nodeDerivArrayLengths;
+	int *weightDerivArrayLengths;
+	int *biasDerivArrayLengths;
 
 	PictureContainer* train_picture_container;
 	PictureContainer* test_picture_container;
