@@ -35,12 +35,12 @@ class Network {
 
 private:
 	vector<Layer*>* layer_list;
-	vector<Matrix*>* node_list;
-	vector<Matrix*>* weight_list;
-	vector<Matrix*>* bias_list;
-	vector<Matrix*>* node_deriv_list;
-	vector<Matrix*>* weight_deriv_list;
-	vector<Matrix*>* bias_deriv_list;
+//	vector<Matrix*>* node_list;
+//	vector<Matrix*>* weight_list;
+//	vector<Matrix*>* bias_list;
+//	vector<Matrix*>* node_deriv_list;
+//	vector<Matrix*>* weight_deriv_list;
+//	vector<Matrix*>* bias_deriv_list;
 
 	/** Arrays of pointer to allocated memory for matrices on CUDA */
 	float **nodeArrayPtrs;

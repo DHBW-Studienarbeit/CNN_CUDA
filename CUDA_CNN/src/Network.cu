@@ -264,8 +264,11 @@ bool Network::generate_network()
 	}
 
 
-	//TODO: adapt parallelization parameters
 	cuda::init<<1,1>>(nodeArrayPtrs, node_index, nodeArrayLengths);
+	cuda::init<<1,1>>(weightArrayPtrs, weight_index, weightArrayLengths);
+	cuda::init<<1,1>>(biasArrayPtrs, bias_index, biasArrayLengths);
+
+	cudaDeviceSynchronize();
 
 	return true;
 }

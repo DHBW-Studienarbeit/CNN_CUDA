@@ -44,13 +44,9 @@ private:
 	float **weightDerivArrayPtrs;
 	float **biasDerivArrayPtrs;
 
-	/* Arrays of array lengths */
 	int *nodeArrayLengths;
 	int *weightArrayLengths;
 	int *biasArrayLengths;
-	int *nodeDerivArrayLengths;
-	int *weightDerivArrayLengths;
-	int *biasDerivArrayLenghts;
 
 	PictureContainer* train_picture_container;
 	PictureContainer* test_picture_container;
