@@ -478,7 +478,6 @@ bool Network::generate_network()
 bool Network::train(int batch_size, int no_iterations)
 {
 	cudaError_t cuda_error = cudaSuccess;
-	float* devicePictureAddr;
 	int outer_loop = NO_DATA_D/batch_size;
 	float cost_sum = 0.0f;
 	bool ret_val = false;
@@ -493,12 +492,7 @@ bool Network::train(int batch_size, int no_iterations)
 			{
 				Picture* picture = train_picture_container->get_nextpicture();
 
-				cuda_error |= cudaMalloc((void**) devicePictureAddr, 784 * sizeof(float));
-				cuda_error |= cudaMemcpy(devicePictureAddr, picture->get_input(), 784 * sizeof(float), cudaMemcpyHostToDevice);
-
-				cuda::loadPicture<<1,1>>(nodeArrayPtrs[0], devicePictureAddr);
-
-				cuda_error |= cudaFree(devicePictureAddr);
+				cuda::loadPicture<<1,1>>(nodeArrayPtrs[0], picture->get_input());
 
 				cost_sum += forward(picture->get_output());
 				ret_val = backpropagate(picture->get_output());
@@ -519,28 +513,14 @@ float Network::test()
 	int calculated_index = 0;
 	float max_val = 0.0f;
 	int correct_detections = 0;
-	float* devicePictureAddr;
-	float* hostOutputAddr;
-	cudaError_t cuda_error = cudaSuccess;
-
 	for(int i = 0; i < NO_TEST_FILES_D; i++)
 	{
 		for(int j = 0; j < NO_PICS_PER_FILE_D; j++)
 		{
 			max_val = 0.0f;
 			Picture* picture = train_picture_container->get_nextpicture();
-
-			cuda_error |= cudaMalloc((void**) devicePictureAddr, 784 * sizeof(float));
-			cuda_error |= cudaMemcpy(devicePictureAddr, picture->get_input(), 784 * sizeof(float), cudaMemcpyHostToDevice);
-
-			cuda::loadPicture<<1,1>>(nodeArrayPtrs[0], devicePictureAddr);
-
-			cuda_error |= cudaFree(devicePictureAddr);
-
+			node_list->at(0)->copy_all(picture->get_input());
 			forward(picture->get_output());
-
-			hostOutputAddr = malloc(10*sizeof(float));
-			cuda_error |= cudaMemcpy((void**) nodeArrayPtrs[no_node_matrices - 1], hostOuputAddr, 10 * sizeof(float), cudaMemcpyDeviceToHost);
 
 			for(int k = 0; k < OUTPUT_SIZE; k++)
 			{
@@ -549,10 +529,10 @@ float Network::test()
 					correct_index = k;
 				}
 
-				if(hostOutputAddr[i] > max_val)
+				if(node_list->at(node_list->size()-1)->get()[k] > max_val)
 				{
 					calculated_index = k;
-					max_val = hostOutputAddr[i];
+					max_val = node_list->at(node_list->size()-1)->get()[k];
 				}
 			}
 

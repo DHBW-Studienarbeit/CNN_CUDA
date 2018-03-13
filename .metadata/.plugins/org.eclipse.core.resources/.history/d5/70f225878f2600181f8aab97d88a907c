@@ -33,9 +33,7 @@ __global__ void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLeng
 
 __global__ void loadPicture(float* arrayPtr, float* picturePtr)
 {
-	int index = blockIdx.x * blockDim.x + threadIdx.x;
-	int stride = blockDim.x * gridDim.x;
-	// TODO: parrallelisation
+
 	/* column major */
 	for(int i = 0; i < 24; i++)
 	{

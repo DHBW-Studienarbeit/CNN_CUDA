@@ -12,7 +12,6 @@
 namespace cuda {
 
 void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLengths);
-void loadPicture(float* arrayPtr, float* picturePtr);
 
 } /* end namespace cuda */
 
