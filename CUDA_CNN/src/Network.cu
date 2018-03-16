@@ -588,41 +588,12 @@ float Network::forward(float* labels)
 			{
 				if(layer_list->at(i-1)->getLayerType() == INPUT_LAYER)
 				{
-					Conv_Layer*  conv_layer  = (Conv_Layer*) layer_list->at(i);
-					int x_steps = conv_layer->getXSize();
-					int y_steps = conv_layer->getYSize();
-					int no_feature_maps = conv_layer->getNoFeatureMaps();
-					int x_receptive = conv_layer->getXReceptive();
-					int y_receptive = conv_layer->getYReceptive();
-
-					for(int j = 0; j < y_steps; j++)
-					{
-						for(int k = 0; k < x_steps; k++)
-						{
-							Matrix* node_vector = new Matrix(conv_layer->getXReceptive()*
-																	conv_layer->getYReceptive(),1);
-							for(int l = 0; l < y_receptive; l++)
-							{
-								for(int m = 0; m < x_receptive; m++)
-								{
-									node_vector->set(l*conv_layer->getXReceptive()+m, 0 ,
-											node_list->at(node_index-1)->get(j+l, k+m));
-								}
-							}
-
-							Matrix node_tmp = (*(weight_list->at(weight_index))) * (*node_vector);
-							Matrix node_results = node_tmp + (*(bias_list->at(bias_index)));
-							delete node_vector;
-							mathematics::sigmoid(node_results.get(), node_results.get(), no_feature_maps);
-							for(int h = 0; h < no_feature_maps; h++)
-							{
-								node_list->at(node_index+h)->set(j, k, node_results.get(h,0));
-							}
-						}
-					}
+					cuda::convolution<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
+												nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
+												weightMatrixDims_y[weight_index]);
 					weight_index++;
 					bias_index++;
-					node_index+=no_feature_maps;
+					node_index++;
 				}
 				else if (layer_list->at(i-1)->getLayerType() == POOLING_LAYER)
 				{

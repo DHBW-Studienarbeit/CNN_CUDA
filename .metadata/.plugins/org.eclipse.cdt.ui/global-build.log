@@ -1,116 +1,416 @@
-08:16:46 **** Clean-only build of configuration Debug for project CUDA_CNN ****
-make clean 
-rm -rf  ./src/CUDA_CNN.d ./src/ConvLayer.d ./src/DropoutLayer.d ./src/FullyConnectedLayer.d ./src/InputLayer.d ./src/Layer.d ./src/MaxPoolingLayer.d ./src/Network.d ./src/Picture.d ./src/PictureContainer.d ./src/mathematics.d ./src/matrix.d ./src/testfile.d  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/mathematics.o ./src/matrix.o ./src/testfile.o  CUDA_CNN
- 
-08:16:47 **** Build of configuration Debug for project CUDA_CNN ****
+09:49:53 **** Build of configuration Debug for project testmatrix ****
 make all 
-Building file: ../src/CUDA_CNN.cu
+Building file: ../src/simpleCUBLAS.cpp
 Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
 nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/CUDA_CNN.d" "../src/CUDA_CNN.cu"
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/CUDA_CNN.o" "../src/CUDA_CNN.cu"
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
 nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/CUDA_CNN.cu
+Finished building: ../src/simpleCUBLAS.cpp
  
-Building file: ../src/ConvLayer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/ConvLayer.d" "../src/ConvLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/ConvLayer.o" "../src/ConvLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/ConvLayer.cu
- 
-Building file: ../src/DropoutLayer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/DropoutLayer.d" "../src/DropoutLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/DropoutLayer.o" "../src/DropoutLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/DropoutLayer.cu
- 
-Building file: ../src/FullyConnectedLayer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/FullyConnectedLayer.d" "../src/FullyConnectedLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/FullyConnectedLayer.o" "../src/FullyConnectedLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/FullyConnectedLayer.cu
- 
-Building file: ../src/InputLayer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/InputLayer.d" "../src/InputLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/InputLayer.o" "../src/InputLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/InputLayer.cu
- 
-Building file: ../src/Layer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Layer.d" "../src/Layer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Layer.o" "../src/Layer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/Layer.cu
- 
-Building file: ../src/MaxPoolingLayer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/MaxPoolingLayer.d" "../src/MaxPoolingLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/MaxPoolingLayer.o" "../src/MaxPoolingLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/MaxPoolingLayer.cu
- 
-Building file: ../src/Network.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Network.d" "../src/Network.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Network.o" "../src/Network.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/Network.cu
- 
-Building file: ../src/Picture.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Picture.d" "../src/Picture.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Picture.o" "../src/Picture.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/Picture.cu
- 
-Building file: ../src/PictureContainer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/PictureContainer.d" "../src/PictureContainer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/PictureContainer.o" "../src/PictureContainer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/PictureContainer.cu
- 
-Building file: ../src/mathematics.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/mathematics.d" "../src/mathematics.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/mathematics.o" "../src/mathematics.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/mathematics.cu
- 
-Building file: ../src/matrix.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/matrix.d" "../src/matrix.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/matrix.o" "../src/matrix.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/matrix.cu
- 
-Building file: ../src/testfile.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/testfile.d" "../src/testfile.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/testfile.o" "../src/testfile.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/testfile.cu
- 
-Building target: CUDA_CNN
+Building target: testmatrix
 Invoking: NVCC Linker
-/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "CUDA_CNN"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/mathematics.o ./src/matrix.o ./src/testfile.o   
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_20,code=sm_20 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
 nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building target: CUDA_CNN
+Finished building target: testmatrix
+ 
+09:50:13 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+../src/simpleCUBLAS.cpp: In function ‘int main(int, char**)’:
+../src/simpleCUBLAS.cpp:111:17: error: invalid conversion from ‘void*’ to ‘float*’ [-fpermissive]
+     h_A = malloc(3*2*sizeof(float));
+                 ^
+../src/simpleCUBLAS.cpp:112:17: error: invalid conversion from ‘void*’ to ‘float*’ [-fpermissive]
+     h_B = malloc(2*3*sizeof(float));
+                 ^
+../src/simpleCUBLAS.cpp:113:17: error: invalid conversion from ‘void*’ to ‘float*’ [-fpermissive]
+     h_C = malloc(3*3*sizeof(float));
+                 ^
+../src/simpleCUBLAS.cpp:141:22: error: ‘h_c’ was not declared in this scope
+      printf("%f \t", h_c[i]);
+                      ^
+../src/simpleCUBLAS.cpp:148:26: error: cannot convert ‘cublasContext**’ to ‘cublasHandle_t {aka cublasContext*}’ for argument ‘1’ to ‘cublasStatus_t cublasDestroy_v2(cublasHandle_t)’
+     cublasDestroy(&handle);
+                          ^
+make: *** [src/simpleCUBLAS.o] Fehler 1
+src/subdir.mk:18: die Regel für Ziel „src/simpleCUBLAS.o“ scheiterte
+09:51:43 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_20,code=sm_20 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+09:52:40 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+make: Für das Ziel „all“ ist nichts zu tun.
+09:56:15 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_20,code=sm_20 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+09:57:03 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_20,code=sm_20 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+09:57:22 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+make: Für das Ziel „all“ ist nichts zu tun.
+09:58:06 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_20,code=sm_20 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+09:59:52 **** Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:01:16 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:06:03 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:10:06 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:13:33 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:14:35 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:15:59 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:20:50 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:21:20 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:23:17 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:27:37 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:28:01 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:28:31 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:28:54 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:35:08 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:36:53 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:37:23 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:37:52 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
+ 
+10:40:23 **** Incremental Build of configuration Debug for project testmatrix ****
+make all 
+Building file: ../src/simpleCUBLAS.cpp
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/simpleCUBLAS.d" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda-8.0/bin/nvcc -I"/usr/local/cuda-8.0/samples/7_CUDALibraries" -I"/usr/local/cuda-8.0/samples/common/inc" -I"/home/benjamin/git/CNN_CUDA/testmatrix" -G -g -O0 --compile  -x c++ -o  "src/simpleCUBLAS.o" "../src/simpleCUBLAS.cpp"
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building: ../src/simpleCUBLAS.cpp
+ 
+Building target: testmatrix
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "testmatrix"  ./src/simpleCUBLAS.o   -lcublas
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Finished building target: testmatrix
  

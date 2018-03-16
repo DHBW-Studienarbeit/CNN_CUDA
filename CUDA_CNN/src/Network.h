@@ -48,25 +48,16 @@ private:
 	int *nodeArrayLengths;
 	int *weightArrayLengths;
 	int *biasArrayLengths;
-//	int *nodeDerivArrayLengths;
-//	int *weightDerivArrayLengths;
-//	int *biasDerivArrayLengths;
 
 	/* X and Y dimensions of arrays *
 	 * ROWS (X)  COLS (Y)			*/
 	int *nodeMatrixDims_x;
 	int *weightMatrixDims_x;
 	int *biasMatrixDims_x;
-//	int *nodeDerivMatrixDims_x;
-//	int *weightDerivMatrixDims_x;
-//	int *biasDerivMatrixDims_x;
 
 	int *nodeMatrixDims_y;
 	int *weightMatrixDims_y;
 	int *biasMatrixDims_y;
-//	int *nodeDerivMatrixDims_y;
-//	int *weightDerivMatrixDims_y;
-//	int *biasDerivMatrixDims_y;
 
 	/* GPU device memory for array lengths */
 	int *nodeDeviceArrayLengths;
