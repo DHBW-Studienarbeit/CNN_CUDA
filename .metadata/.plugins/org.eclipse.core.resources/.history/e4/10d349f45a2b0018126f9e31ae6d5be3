@@ -38,13 +38,13 @@ __global__ void loadPicture(float* arrayPtr, float* picturePtr)
 	int stride = blockDim.x * gridDim.x;
 	// TODO: parrallelisation
 	/* column major */
-	for(int i = 0; i < 24; i++) /* rows in original row-major picture */
+	for(int i = 0; i < 24; i++)
 	{
-		for(int j = 0; j < 24; j++) /* columns in original row-major picture */
+		for(int j = 0; j < 24; j++)
 		{
-			for(int k = 0; k < 5; k++) /* convolutional kernel rows in original picture */
+			for(int k = 0; k < 5; k++)
 			{
-				for(int l = 0; l < 5; l++) /* convolutional kernel columns in original picture */
+				for(int l = 0; l < 5; l++)
 				{
 					arrayPtr[(k*5+l)*576+i*24+j] = picturePtr[(i+k)*24+j+l];
 				}
@@ -75,7 +75,7 @@ __global__ void convolution(float* inputPtr, float* outputPtr, float* weightPtr,
 __global__ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, int y_receptive,
 							int inputDim_x, int inputDim_y, int outputDim_x, int outputDim_y,
 							int convDim_x, int convDim_y, int nextDim_x, int nextDim_y,
-							int nextReceptive_x, int nextReceptive_y, LAYER_TYPE nextLayerType)
+							int nextReceptive_x, int nextReceptive_y)
 {
 	int dimSquare = nextDim_x * nextDim_y;
 	int pooling_x = convDim_x / x_receptive;
@@ -121,35 +121,19 @@ __global__ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, i
 
 	/* resort matrix to fit conditions of next layer operation */
 	/* column major */
-	if(nextLayerType == CONV_LAYER)
+	for(int i = 0; i < nextDim_y; i++)
 	{
-		for(int i = 0; i < nextDim_x; i++)
+		for(int j = 0; j < nextDim_x; j++)
 		{
-			for(int j = 0; j < nextDim_y; j++)
+			for(int k = 0; k < nextReceptive_y; k++)
 			{
-				for(int k = 0; k < inputDim_y; k++) /* number features of last layer */
+				for(int l = 0; l < nextReceptive_x; l++)
 				{
-					for(int l = 0; l < nextReceptive_y; l++) /* convolutional kernel of each feature */
-					{
-						for(int m = 0; m < nextReceptive_x; m++)
-						{
-							/* pooling_mat sorted in column major */
-							outputPtr[(k*nextReceptive_x*nextReceptive_y + l*nextReceptive_x+m)*nextDim_x*nextDim_y+i*nextDim_y+j] =
-									pooling_mat[(k*poolDim_y)+(i+l)*nextDim_x+j+m];
-
-						}
-					}
+					outputPtr[(k*nextReceptive_x+l)*nextDim_y*nextDim_x+i*nextDim_x+j] =
+							pooling_mat[(i+k)*nextDim_x+j+l];
 				}
 			}
 		}
-	}
-	else if(nextLayerType == FULLY_CONNECTED_LAYER)
-	{
-		/* no additional sorting needed
-		 * data is already correctly sorted in memory
-		 * that way, the user can just switch from a (m*n)x(f)-Matrix to a 1x(m*n*f)-Matrix
-		 */
-		cuda_error |= cudaMemcpy(outputPtr, pooling_mat, inputDim_y*poolingDim_y*sizeof(float), cudaMemcpyDeviceToDevice);
 	}
 
 	cuda_error |= cudaFree(pooling_mat);
