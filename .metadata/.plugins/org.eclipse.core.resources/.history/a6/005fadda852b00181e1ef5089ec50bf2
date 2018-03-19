@@ -36,29 +36,20 @@ __global__ void loadPicture(float* arrayPtr, float* picturePtr)
 {
 	int index = blockIdx.x * blockDim.x + threadIdx.x;
 	int stride = blockDim.x * gridDim.x;
-
+	// TODO: parrallelisation
 	/* column major */
-//	for(int i = 0; i < 24; i++) /* rows in original row-major picture */
-//	{
-//		for(int j = 0; j < 24; j++) /* columns in original row-major picture */
-//		{
-//			for(int k = 0; k < 5; k++) /* convolutional kernel rows in original picture */
-//			{
-//				for(int l = 0; l < 5; l++) /* convolutional kernel columns in original picture */
-//				{
-//					arrayPtr[(k*5+l)*576+i*24+j] = picturePtr[(i+k)*24+j+l];
-//				}
-//			}
-//		}
-//	}
-
-	if(index < 14400)
+	for(int i = 0; i < 24; i++) /* rows in original row-major picture */
 	{
-		int i = index / 600;
-		int j = (index%600)/25;
-		int k = (index%25)/5;
-		int l = (index%5);
-		arrayPtr[index] = picturePtr[(i+k)*24+j+l]
+		for(int j = 0; j < 24; j++) /* columns in original row-major picture */
+		{
+			for(int k = 0; k < 5; k++) /* convolutional kernel rows in original picture */
+			{
+				for(int l = 0; l < 5; l++) /* convolutional kernel columns in original picture */
+				{
+					arrayPtr[(k*5+l)*576+i*24+j] = picturePtr[(i+k)*24+j+l];
+				}
+			}
+		}
 	}
 }
 
