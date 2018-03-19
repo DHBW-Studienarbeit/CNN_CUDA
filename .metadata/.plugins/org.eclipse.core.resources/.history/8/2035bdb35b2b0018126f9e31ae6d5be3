@@ -19,8 +19,7 @@ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, int y_recept
 		int inputDim_x, int inputDim_y, int outputDim_x, int outputDim_y,
 		int convDim_x, int convDim_y, int nextDim_x, int nextDim_y,
 		int nextReceptive_x, int nextReceptive_y, LAYER_TYPE nextLayerType);
-void fullyConnected(float* inputPtr, float* outputPtr, float* weightPtr,
-		int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y);
+
 
 } /* end namespace cuda */
 

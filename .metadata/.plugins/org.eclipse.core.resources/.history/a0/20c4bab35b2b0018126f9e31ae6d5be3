@@ -155,24 +155,5 @@ __global__ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, i
 	cuda_error |= cudaFree(pooling_mat);
 }
 
-__global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightPtr,
-		int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y)
-{
-	cublasStatus_t cublasState;
-	cublasHandle_t cublasHandle;
-	cublasCreate(&cublasHandle);
-
-	const float alpha = 1.0f;
-	const float beta = 0.0f;
-	const float* alpha_ptr = &alpha;
-	const float* beta_ptr = &beta;
-
-	cublasState = cublasSgemm(cublasHandle, CUBLAS_OP_N, CUBLAS_OP_N, inputDim_x, weightDim_x,
-			inputDim_y, alpha_ptr, (const float*) inputPtr, inputDim_x,
-			(const float*) weightPtr, weightDim_x, beta_ptr, outputPtr, inputDim_x);
-
-	cublasDestroy(cublasHandle);
-}
-
 } /* end namespace cuda */
 
