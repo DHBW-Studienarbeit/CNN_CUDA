@@ -572,8 +572,6 @@ float Network::forward(float* labels)
 	int bias_index = 0;
 	int node_index = 0;
 
-	float *outputData_host;
-
 	int no_layers = layer_list->size();
 
 	for(int i = 0; i < no_layers; i++)
@@ -589,7 +587,7 @@ float Network::forward(float* labels)
 			case CONV_LAYER:
 			{
 				cuda::convolution<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
-						biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
+						nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
 						weightMatrixDims_y[weight_index]);
 				weight_index++;
 				bias_index++;
@@ -664,11 +662,7 @@ float Network::forward(float* labels)
 			}
 		}
 	}
-
-	outputData_host = (float*) malloc(nodeArrayLengths[node_index-1]*sizeof(float));
-	cuda_error |= cudaMemcpy(outputData_host, nodeArrayPtrs[node_index-1],nodeArrayLengths[node_index-1]*sizeof(float), cudaMemcpyDeviceToHost);
-
-	return mathematics::get_cost(outputData_host, labels, OUTPUT_SIZE);
+	return mathematics::get_cost(node_list->at(node_list->size()-1)->get(), labels, OUTPUT_SIZE);
 }
 
 bool Network::backpropagate(float* labels)

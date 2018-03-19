@@ -572,8 +572,6 @@ float Network::forward(float* labels)
 	int bias_index = 0;
 	int node_index = 0;
 
-	float *outputData_host;
-
 	int no_layers = layer_list->size();
 
 	for(int i = 0; i < no_layers; i++)
@@ -588,70 +586,192 @@ float Network::forward(float* labels)
 			}
 			case CONV_LAYER:
 			{
-				cuda::convolution<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
-						biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
-						weightMatrixDims_y[weight_index]);
-				weight_index++;
-				bias_index++;
-				node_index++;
-
-				break;
-			}
-			case POOLING_LAYER:
-			{
-				MaxPooling_Layer* pooling_layer = (MaxPooling_Layer*) layer_list->at(i);
-				Conv_Layer* last_layer = (Conv_Layer*) layer_list->at(i-1);
-
-				int x_receptive = pooling_layer->getXReceptive();
-				int y_receptive = pooling_layer->getYReceptive();
-				int convDim_x = last_layer->getXSize();
-				int convDim_y = last_layer->getYSize();
-
-				if(layer_list->at(i+1)->getLayerType() == CONV_LAYER)
+				if(layer_list->at(i-1)->getLayerType() == INPUT_LAYER)
 				{
-					Conv_Layer* next_layer = (Conv_Layer*) layer_list->at(i+1);
-					int nextDim_x = next_layer->getXSize();
-					int nextDim_y = next_layer->getYSize();
-					int nextReceptive_x = next_layer->getXReceptive();
-					int nextReceptive_y = next_layer->getYReceptive();
-
-					cuda::maxPooling<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
-												y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
-												nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, CONV_LAYER);
-
-
+					cuda::convolution<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
+												nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
+												weightMatrixDims_y[weight_index]);
+					weight_index++;
+					bias_index++;
+					node_index++;
 				}
-				else if(layer_list->at(i+1)->getLayerType() == FULLY_CONNECTED_LAYER)
+				else if (layer_list->at(i-1)->getLayerType() == POOLING_LAYER)
 				{
-					int nextDim_x = 0;
-					int nextDim_y = 0;
-					int nextReceptive_x = 0;
-					int nextReceptive_y = 0;
+					MaxPooling_Layer* input_layer = (MaxPooling_Layer*) layer_list->at(i-1);
+					Conv_Layer*  conv_layer  = (Conv_Layer*) layer_list->at(i);
+					int x_steps = conv_layer->getXSize();
+					int y_steps = conv_layer->getYSize();
+					int no_feature_maps_conv = conv_layer->getNoFeatureMaps();
+					int no_feature_maps_pool = input_layer->getNoFeatures();
+					int x_receptive = conv_layer->getXReceptive();
+					int y_receptive = conv_layer->getYReceptive();
+					int prev_node_index = node_index - no_feature_maps_pool; /* node_index is positioned at current node matrix,
+						this line calculates the index of the first matrix of the previous pooling layer */
 
-					cuda::maxPooling<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
-																	y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
-																	nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, FULLY_CONNECTED_LAYER);
+					for(int j = 0; j < y_steps; j++)
+					{
+						for(int k = 0; k < x_steps; k++)
+						{
+							Matrix* node_vector = new Matrix(x_receptive * y_receptive *
+																	no_feature_maps_pool,1);
+							for(int n = 0; n < no_feature_maps_pool; n++)
+							{
+								for(int l = 0; l < y_receptive; l++)
+								{
+									for(int m = 0; m < x_receptive; m++)
+									{
+										/* getting node values from different feature maps of previous pooling layer (n) */
+										node_vector->set(n*y_receptive*x_receptive + l*x_receptive+m, 0 ,
+												node_list->at(prev_node_index + n)->get(j+l, k+m));
+									}
+								}
+							}
+							Matrix node_tmp = (*(weight_list->at(weight_index))) * (*node_vector);
+							Matrix node_results = node_tmp + (*(bias_list->at(bias_index)));
+							delete node_vector;
+
+							mathematics::sigmoid(node_results.get(), node_results.get(), no_feature_maps_conv);
+
+							for(int h = 0; h < no_feature_maps_conv; h++)
+							{
+								node_list->at(node_index+h)->set(j, k, node_results.get(h,0));
+							}
+						}
+					}
+
+					weight_index++;
+					bias_index++;
+					node_index+=no_feature_maps_conv;
 				}
 				else
 				{
 					return -1.0f;
 				}
+				break;
+			}
+			case POOLING_LAYER:
+			{
+				if(layer_list->at(i-1)->getLayerType() == CONV_LAYER)
+				{
+					Conv_Layer* last_layer = (Conv_Layer*) layer_list->at(i-1);
+					MaxPooling_Layer* pooling_layer = (MaxPooling_Layer*) layer_list->at(i);
+					int no_feature_maps = last_layer->getNoFeatureMaps();
+					int conv_x_size = last_layer->getXSize();
+					int conv_y_size = last_layer->getYSize();
+					int x_step_size = pooling_layer->getXReceptive();
+					int y_step_size = pooling_layer->getYReceptive();
+					float max_node = 0.0f;
+					float new_node = 0.0f;
 
-				node_index++;
-
+					for(int feature_map = 0; feature_map < no_feature_maps; feature_map++)
+					{
+						for(int j = 0; j < conv_y_size; j=j+y_step_size)
+						{
+							for(int k = 0; k < conv_x_size; k=k+x_step_size)
+							{
+								max_node = 0.0f;
+								for(int l = 0; l < y_step_size; l++)
+								{
+									for(int m = 0; m < x_step_size; m++)
+									{
+										new_node = node_list->at(node_index-1)->get(j+l,k+m);
+										if(new_node >= max_node)
+										{
+											max_node = new_node;
+										}
+									}
+								}
+								node_list->at(node_index + feature_map)->set(j/y_step_size,k/x_step_size, max_node);
+							}
+						}
+					}
+					node_index+=pooling_layer->getNoFeatures();
+				}
+				else
+				{
+					return -1.0f;
+				}
 				break;
 			}
 			case FULLY_CONNECTED_LAYER:
 			{
-				cuda::fullyConnected<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index],
-						weightArrayPtrs[weight_index], biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
-						weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
+				if(layer_list->at(i-1)->getLayerType() == CONV_LAYER)
+				{
+					Conv_Layer* last_layer = (Conv_Layer*) layer_list->at(i-1);
+					Matrix* full_conv_matrix = new Matrix(last_layer->getSize(), 1);
 
+					int no_feature_maps = last_layer->getNoFeatureMaps();
+					int y_size = last_layer->getYSize();
+					int x_size = last_layer->getXSize();
+					int temp_node_index = node_index - no_feature_maps;
 
-				node_index++;
-				weight_index++;
-				bias_index++;
+					for(int j = 0; j < no_feature_maps; j++)
+					{
+						for(int k = 0; k < y_size; k++)
+						{
+							for(int l = 0; l < x_size; l++)
+							{
+								full_conv_matrix->set(j*y_size*x_size + k * x_size + l, 0,
+										node_list->at(temp_node_index)->get(k, l));
+							}
+						}
+						temp_node_index++;
+					}
+					Matrix tmp = (*(weight_list->at(weight_index))) * (*full_conv_matrix);
+					Matrix node_results = tmp + (*(bias_list->at(bias_index)));
+					mathematics::sigmoid(node_results.get(), node_list->at(node_index)->get(), tmp.getHeight());
 
+					delete full_conv_matrix;
+
+					node_index++;
+					bias_index++;
+					weight_index++;
+				}
+				else if (layer_list->at(i-1)->getLayerType() == POOLING_LAYER)
+				{
+					MaxPooling_Layer* last_layer = (MaxPooling_Layer*) layer_list->at(i-1);
+					Matrix* full_pool_matrix = new Matrix(last_layer->getSize(), 1);
+
+					int no_feature_maps = last_layer->getNoFeatures();
+					int y_size = last_layer->getYSize();
+					int x_size = last_layer->getXSize();
+					int temp_node_index = node_index - no_feature_maps;
+
+					for(int j = 0; j < no_feature_maps; j++)
+					{
+						for(int k = 0; k < y_size; k++)
+						{
+							for(int l = 0; l < x_size; l++)
+							{
+								full_pool_matrix->set(j*y_size*x_size + k * x_size + l, 0,
+										node_list->at(temp_node_index)->get(k, l));
+							}
+						}
+						temp_node_index++;
+					}
+					Matrix tmp = (*(weight_list->at(weight_index))) * (*full_pool_matrix);
+					Matrix node_results = tmp + (*(bias_list->at(bias_index)));
+					mathematics::sigmoid(node_results.get(), node_list->at(node_index)->get(), tmp.getHeight());
+
+					delete full_pool_matrix;
+
+					node_index++;
+					bias_index++;
+					weight_index++;
+				}
+				else if (layer_list->at(i-1)->getLayerType() == FULLY_CONNECTED_LAYER)
+				{
+					Matrix tmp = (*weight_list->at(weight_index)) * (*node_list->at(node_index-1));
+					Matrix node_results = tmp + (*(bias_list->at(bias_index)));
+					mathematics::sigmoid(node_results.get(), node_list->at(node_index)->get(), tmp.getHeight());
+					node_index++;
+					bias_index++;
+					weight_index++;
+				}
+				else
+				{
+					return -1.0f;
+				}
 				break;
 			}
 			case DROPOUT_LAYER:
@@ -664,11 +784,7 @@ float Network::forward(float* labels)
 			}
 		}
 	}
-
-	outputData_host = (float*) malloc(nodeArrayLengths[node_index-1]*sizeof(float));
-	cuda_error |= cudaMemcpy(outputData_host, nodeArrayPtrs[node_index-1],nodeArrayLengths[node_index-1]*sizeof(float), cudaMemcpyDeviceToHost);
-
-	return mathematics::get_cost(outputData_host, labels, OUTPUT_SIZE);
+	return mathematics::get_cost(node_list->at(node_list->size()-1)->get(), labels, OUTPUT_SIZE);
 }
 
 bool Network::backpropagate(float* labels)

@@ -589,7 +589,7 @@ float Network::forward(float* labels)
 			case CONV_LAYER:
 			{
 				cuda::convolution<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
-						biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
+						nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
 						weightMatrixDims_y[weight_index]);
 				weight_index++;
 				bias_index++;

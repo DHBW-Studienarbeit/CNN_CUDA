@@ -53,7 +53,7 @@ __global__ void loadPicture(float* arrayPtr, float* picturePtr)
 	}
 }
 
-__global__ void convolution(float* inputPtr, float* outputPtr, float* weightPtr, float* biasPtr,
+__global__ void convolution(float* inputPtr, float* outputPtr, float* weightPtr,
 		int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y)
 {
 	cublasStatus_t cublasState;
@@ -73,9 +73,9 @@ __global__ void convolution(float* inputPtr, float* outputPtr, float* weightPtr,
 }
 
 __global__ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, int y_receptive,
-							int inputDim_x, int inputDim_y, int convDim_x, int convDim_y,
-							int nextDim_x, int nextDim_y, int nextReceptive_x,
-							int nextReceptive_y, LAYER_TYPE nextLayerType)
+							int inputDim_x, int inputDim_y, int outputDim_x, int outputDim_y,
+							int convDim_x, int convDim_y, int nextDim_x, int nextDim_y,
+							int nextReceptive_x, int nextReceptive_y, LAYER_TYPE nextLayerType)
 {
 	int dimSquare = nextDim_x * nextDim_y;
 	int pooling_x = convDim_x / x_receptive;
@@ -155,8 +155,8 @@ __global__ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, i
 	cuda_error |= cudaFree(pooling_mat);
 }
 
-__global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightPtr, float* biasPtr,
-							int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y)
+__global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightPtr,
+		int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y)
 {
 	cublasStatus_t cublasState;
 	cublasHandle_t cublasHandle;
