@@ -313,13 +313,13 @@ __global__ float forward(Layer* layer_list, int no_layers, float* inputPicture, 
 			{
 				case INPUT_LAYER:
 				{
-					cuda::loadPicture<<1,80>>(nodeArrayPtrs[0], inputPicture);
+					cuda::loadPicture<<1,24>>(nodeArrayPtrs[0], inputPicture);
 					node_index++;
 					break;
 				}
 				case CONV_LAYER:
 				{
-					cuda::convolution<<1,80>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
+					cuda::convolution<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
 							biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
 							weightMatrixDims_y[weight_index]);
 					weight_index++;
@@ -346,7 +346,7 @@ __global__ float forward(Layer* layer_list, int no_layers, float* inputPicture, 
 						int nextReceptive_x = next_layer->getXReceptive();
 						int nextReceptive_y = next_layer->getYReceptive();
 
-						cuda::maxPooling<<1,80>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
+						cuda::maxPooling<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
 													y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
 													nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, CONV_LAYER);
 
@@ -359,7 +359,7 @@ __global__ float forward(Layer* layer_list, int no_layers, float* inputPicture, 
 						int nextReceptive_x = 0;
 						int nextReceptive_y = 0;
 
-						cuda::maxPooling<<1,80>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
+						cuda::maxPooling<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
 																		y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
 																		nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, FULLY_CONNECTED_LAYER);
 					}
@@ -374,7 +374,7 @@ __global__ float forward(Layer* layer_list, int no_layers, float* inputPicture, 
 				}
 				case FULLY_CONNECTED_LAYER:
 				{
-					cuda::fullyConnected<<1,80>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index],
+					cuda::fullyConnected<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index],
 							weightArrayPtrs[weight_index], biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
 							weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
 

@@ -496,7 +496,7 @@ bool Network::train(int batch_size, int no_iterations)
 				cuda_error |= cudaMalloc((void**) devicePictureAddr, 784 * sizeof(float));
 				cuda_error |= cudaMemcpy(devicePictureAddr, picture->get_input(), 784 * sizeof(float), cudaMemcpyHostToDevice);
 
-				cuda::loadPicture<<57,256>>(nodeArrayPtrs[0], devicePictureAddr);
+				cuda::loadPicture<<1,80>>(nodeArrayPtrs[0], devicePictureAddr);
 
 				cuda_error |= cudaFree(devicePictureAddr);
 
@@ -615,7 +615,7 @@ float Network::forward(float* labels)
 					int nextReceptive_x = next_layer->getXReceptive();
 					int nextReceptive_y = next_layer->getYReceptive();
 
-					cuda::maxPooling<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
+					cuda::maxPooling<<1,80>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
 												y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
 												nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, CONV_LAYER);
 
@@ -628,7 +628,7 @@ float Network::forward(float* labels)
 					int nextReceptive_x = 0;
 					int nextReceptive_y = 0;
 
-					cuda::maxPooling<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
+					cuda::maxPooling<<1,80>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
 																	y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
 																	nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, FULLY_CONNECTED_LAYER);
 				}
@@ -643,7 +643,7 @@ float Network::forward(float* labels)
 			}
 			case FULLY_CONNECTED_LAYER:
 			{
-				cuda::fullyConnected<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index],
+				cuda::fullyConnected<<1,80>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index],
 						weightArrayPtrs[weight_index], biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
 						weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
 

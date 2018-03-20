@@ -264,17 +264,21 @@ __global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightP
 	const float* alpha_ptr = &alpha;
 	const float* beta_ptr = &beta;
 
+
 	int output_size = inputDim_x * weightDim_y;
 
-	for(int i = index; i < weightDim_y; i+= stride) /* parallelize over output nodes (columns of weight matrix) */
+	for(int i = index; i < weightDim_y; i+= stride) /* parallelize over features (columns of weight matrix) */
 	{
 		float result = 0.0;
-		/* matrices are ordered as column-major */
-		cublasState |= cublasSdot(cublasHandle, weightDim_x,
-				(const float*) &inputPtr[j], inputDim_x,
-				(const float*) &weightPtr[i], 1,
-				&result);
-		outputPtr[i*weightDim_y+j] = sigmoid_once(result + biasPtr[i*weightDim_y+j]);
+		for(int j = 0; j < inputDim_x; j++) /* perform vector dot product for every point in an output feature */
+		{
+			/* matrices are ordered as column-major */
+			cublasState |= cublasSdot(cublasHandle, weightDim_x,
+					(const float*) &inputPtr[j], inputDim_x,
+					(const float*) &weightPtr[i], 1,
+					&result);
+			outputPtr[i*weightDim_y+j] = sigmoid_once(result + biasPtr[i*weightDim_y+j]);
+		}
 	}
 
 
@@ -313,13 +317,13 @@ __global__ float forward(Layer* layer_list, int no_layers, float* inputPicture, 
 			{
 				case INPUT_LAYER:
 				{
-					cuda::loadPicture<<1,80>>(nodeArrayPtrs[0], inputPicture);
+					cuda::loadPicture<<1,24>>(nodeArrayPtrs[0], inputPicture);
 					node_index++;
 					break;
 				}
 				case CONV_LAYER:
 				{
-					cuda::convolution<<1,80>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
+					cuda::convolution<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
 							biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
 							weightMatrixDims_y[weight_index]);
 					weight_index++;
@@ -346,7 +350,7 @@ __global__ float forward(Layer* layer_list, int no_layers, float* inputPicture, 
 						int nextReceptive_x = next_layer->getXReceptive();
 						int nextReceptive_y = next_layer->getYReceptive();
 
-						cuda::maxPooling<<1,80>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
+						cuda::maxPooling<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
 													y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
 													nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, CONV_LAYER);
 
@@ -359,7 +363,7 @@ __global__ float forward(Layer* layer_list, int no_layers, float* inputPicture, 
 						int nextReceptive_x = 0;
 						int nextReceptive_y = 0;
 
-						cuda::maxPooling<<1,80>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
+						cuda::maxPooling<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
 																		y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
 																		nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, FULLY_CONNECTED_LAYER);
 					}
@@ -374,7 +378,7 @@ __global__ float forward(Layer* layer_list, int no_layers, float* inputPicture, 
 				}
 				case FULLY_CONNECTED_LAYER:
 				{
-					cuda::fullyConnected<<1,80>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index],
+					cuda::fullyConnected<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index],
 							weightArrayPtrs[weight_index], biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
 							weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
 
