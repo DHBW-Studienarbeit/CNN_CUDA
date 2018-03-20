@@ -268,111 +268,111 @@ __global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightP
 	cublasDestroy(cublasHandle);
 }
 
-//__global__ float forward(LAYER_TYPE* layertype_list, int no_layers, float* inputPicture, float* labels,
-//					float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs)
-//{
-//
-//	/* Indices to iterate through weight_list, node_list and bias_list */
-//		int weight_index = 0;
-//		int bias_index = 0;
-//		int node_index = 0;
-//
-//		float *outputData_host;
-//
-//		for(int i = 0; i < no_layers; i++)
-//		{
-//			switch (layertype_list[i])
-//			{
-//				case INPUT_LAYER:
-//				{
-//					cuda::loadPicture<<1,24>>(nodeArrayPtrs[0], inputPicture);
-//					node_index++;
-//					break;
-//				}
-//				case CONV_LAYER:
-//				{
-//					cuda::convolution<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
-//							biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
-//							weightMatrixDims_y[weight_index]);
-//					weight_index++;
-//					bias_index++;
-//					node_index++;
-//
-//					break;
-//				}
-//				case POOLING_LAYER:
-//				{
-//					MaxPooling_Layer* pooling_layer = (MaxPooling_Layer*) layer_list->at(i);
-//					Conv_Layer* last_layer = (Conv_Layer*) layer_list->at(i-1);
-//
-//					int x_receptive = pooling_layer->getXReceptive();
-//					int y_receptive = pooling_layer->getYReceptive();
-//					int convDim_x = last_layer->getXSize();
-//					int convDim_y = last_layer->getYSize();
-//
-//					if(layertype_list[i+1] == CONV_LAYER)
-//					{
-//						Conv_Layer* next_layer = (Conv_Layer*) layer_list->at(i+1);
-//						int nextDim_x = next_layer->getXSize();
-//						int nextDim_y = next_layer->getYSize();
-//						int nextReceptive_x = next_layer->getXReceptive();
-//						int nextReceptive_y = next_layer->getYReceptive();
-//
-//						cuda::maxPooling<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
-//													y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
-//													nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, CONV_LAYER);
-//
-//
-//					}
-//					else if(layertype_list[i+1] == FULLY_CONNECTED_LAYER)
-//					{
-//						int nextDim_x = 0;
-//						int nextDim_y = 0;
-//						int nextReceptive_x = 0;
-//						int nextReceptive_y = 0;
-//
-//						cuda::maxPooling<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
-//																		y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
-//																		nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, FULLY_CONNECTED_LAYER);
-//					}
-//					else
-//					{
-//						return -1.0f;
-//					}
-//
-//					node_index++;
-//
-//					break;
-//				}
-//				case FULLY_CONNECTED_LAYER:
-//				{
-//					cuda::fullyConnected<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index],
-//							weightArrayPtrs[weight_index], biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
-//							weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
-//
-//
-//					node_index++;
-//					weight_index++;
-//					bias_index++;
-//
-//					break;
-//				}
-//				case DROPOUT_LAYER:
-//				{
-//					break;
-//				}
-//				default:
-//				{
-//					return -1.0f;
-//				}
-//			}
-//		}
-//
-//		outputData_host = (float*) malloc(nodeArrayLengths[node_index-1]*sizeof(float));
-//		cuda_error |= cudaMemcpy(outputData_host, nodeArrayPtrs[node_index-1],nodeArrayLengths[node_index-1]*sizeof(float), cudaMemcpyDeviceToHost);
-//
-//		return mathematics::get_cost(outputData_host, labels, OUTPUT_SIZE);
-//}
+__global__ float forward(LAYER_TYPE* layertype_list, int no_layers, float* inputPicture, float* labels,
+					float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs)
+{
+
+	/* Indices to iterate through weight_list, node_list and bias_list */
+		int weight_index = 0;
+		int bias_index = 0;
+		int node_index = 0;
+
+		float *outputData_host;
+
+		for(int i = 0; i < no_layers; i++)
+		{
+			switch (layertype_list[i])
+			{
+				case INPUT_LAYER:
+				{
+					cuda::loadPicture<<1,24>>(nodeArrayPtrs[0], inputPicture);
+					node_index++;
+					break;
+				}
+				case CONV_LAYER:
+				{
+					cuda::convolution<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
+							biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
+							weightMatrixDims_y[weight_index]);
+					weight_index++;
+					bias_index++;
+					node_index++;
+
+					break;
+				}
+				case POOLING_LAYER:
+				{
+					MaxPooling_Layer* pooling_layer = (MaxPooling_Layer*) layer_list->at(i);
+					Conv_Layer* last_layer = (Conv_Layer*) layer_list->at(i-1);
+
+					int x_receptive = pooling_layer->getXReceptive();
+					int y_receptive = pooling_layer->getYReceptive();
+					int convDim_x = last_layer->getXSize();
+					int convDim_y = last_layer->getYSize();
+
+					if(layertype_list[i+1] == CONV_LAYER)
+					{
+						Conv_Layer* next_layer = (Conv_Layer*) layer_list->at(i+1);
+						int nextDim_x = next_layer->getXSize();
+						int nextDim_y = next_layer->getYSize();
+						int nextReceptive_x = next_layer->getXReceptive();
+						int nextReceptive_y = next_layer->getYReceptive();
+
+						cuda::maxPooling<<1,1>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
+													y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
+													nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, CONV_LAYER);
+
+
+					}
+					else if(layertype_list[i+1] == FULLY_CONNECTED_LAYER)
+					{
+						int nextDim_x = 0;
+						int nextDim_y = 0;
+						int nextReceptive_x = 0;
+						int nextReceptive_y = 0;
+
+						cuda::maxPooling<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
+																		y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
+																		nextDim_x, nextDim_y, nextReceptive_x, nextReceptive_y, FULLY_CONNECTED_LAYER);
+					}
+					else
+					{
+						return -1.0f;
+					}
+
+					node_index++;
+
+					break;
+				}
+				case FULLY_CONNECTED_LAYER:
+				{
+					cuda::fullyConnected<<1,24>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index],
+							weightArrayPtrs[weight_index], biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
+							weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
+
+
+					node_index++;
+					weight_index++;
+					bias_index++;
+
+					break;
+				}
+				case DROPOUT_LAYER:
+				{
+					break;
+				}
+				default:
+				{
+					return -1.0f;
+				}
+			}
+		}
+
+		outputData_host = (float*) malloc(nodeArrayLengths[node_index-1]*sizeof(float));
+		cuda_error |= cudaMemcpy(outputData_host, nodeArrayPtrs[node_index-1],nodeArrayLengths[node_index-1]*sizeof(float), cudaMemcpyDeviceToHost);
+
+		return mathematics::get_cost(outputData_host, labels, OUTPUT_SIZE);
+}
 
 } /* end namespace cuda */
 

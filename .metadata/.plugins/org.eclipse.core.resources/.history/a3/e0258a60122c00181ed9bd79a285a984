@@ -1,0 +1,211 @@
+/*
+ * cuda_kernels.cu
+ *
+ *  Created on: 09.03.2018
+ *      Author: benjamin
+ */
+
+#include <cuda.h>
+#include <curand.h>
+#include <cublas_v2.h>
+
+
+namespace cuda {
+
+__global__ void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLengths)
+{
+	int index = blockIdx.x * blockDim.x + threadIdx.x;
+	int stride = blockDim.x * gridDim.x;
+
+	for(int i = index; i < no_node_matrices; i+=stride)
+	{
+		curandGenerator_t generator;
+		curandStatus_t curand_state;
+
+		curand_state = curandCreateGenerator(&generator, CURAND_RNG_PSEUDO_DEFAULT);
+
+		curand_state = curandSetPseudoRandomGeneratorSeed(gen, (unsigned long) clock());
+
+		curand_state = curandGenerateUniform(generator, nodeArrayPtrs[i], arrayLengths[i]);
+
+		curand_state = curandDestroyGenerator(generator);
+	}
+}
+
+__global__ void loadPicture(float* arrayPtr, float* picturePtr)
+{
+	int index = blockIdx.x * blockDim.x + threadIdx.x;
+	int stride = blockDim.x * gridDim.x;
+
+	/* column major */
+//	for(int i = 0; i < 24; i++) /* rows in original row-major picture */
+//	{
+//		for(int j = 0; j < 24; j++) /* columns in original row-major picture */
+//		{
+//			for(int k = 0; k < 5; k++) /* convolutional kernel rows in original picture */
+//			{
+//				for(int l = 0; l < 5; l++) /* convolutional kernel columns in original picture */
+//				{
+//					arrayPtr[(k*5+l)*576+i*24+j] = picturePtr[(i+k)*24+j+l];
+//				}
+//			}
+//		}
+//	}
+
+	if(index < 14400)
+	{
+		int i = index / 600;
+		int j = (index%600)/25;
+		int k = (index%25)/5;
+		int l = (index%5);
+		arrayPtr[index] = picturePtr[(i+k)*24+j+l]
+	}
+}
+
+__global__ void convolution(float* inputPtr, float* outputPtr, float* weightPtr, float* biasPtr,
+		int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y)
+{
+	cublasStatus_t cublasState;
+	cublasHandle_t cublasHandle;
+	cublasCreate(&cublasHandle);
+
+	const float alpha = 1.0f;
+	const float beta = 0.0f;
+	const float* alpha_ptr = &alpha;
+	const float* beta_ptr = &beta;
+
+	int output_size = inputDim_x * weightDim_y;
+
+	cublasState = cublasSgemm(cublasHandle, CUBLAS_OP_N, CUBLAS_OP_N, inputDim_x, weightDim_x,
+								inputDim_y, alpha_ptr, (const float*) inputPtr, inputDim_x,
+								(const float*) weightPtr, weightDim_x, beta_ptr, outputPtr, inputDim_x);
+	/* adding the bias */
+	cublasState |= cublasSaxpy(cublasHandle, inputDim_x*weightDim_y, alpha_ptr,
+			(const float*) biasPtr, 1, (const float*) outputPtr, 1);
+
+	/* activation function */
+	for(int i = 0; i < output_size; i++)
+	{
+		outputPtr[i] = sigmoid_once(outputPtr[i]);
+	}
+
+
+	cublasDestroy(cublasHandle);
+}
+
+__global__ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, int y_receptive,
+							int inputDim_x, int inputDim_y, int convDim_x, int convDim_y,
+							int nextDim_x, int nextDim_y, int nextReceptive_x,
+							int nextReceptive_y, LAYER_TYPE nextLayerType)
+{
+	int dimSquare = nextDim_x * nextDim_y;
+	int pooling_x = convDim_x / x_receptive;
+	int pooling_y = convDim_y / y_receptive;
+	int poolDim_y = pooling_x * pooling_y;
+
+	float* pooling_mat; /* store pooled values and resort afterwards */
+	cudaError_t cuda_error = cudaSuccess;
+
+	cuda_error = cudaMalloc((void**)&pooling_mat, pooling_x*pooling_y*inputDim_y*sizeof(float));
+
+
+	/* feature maps sorted linear in array because of column major ordering */
+	for(int i = 0; i < inputDim_y; i++)
+	{
+		/* pooling in x and y dimension of a single feature map as a two dimensional array *
+		 * of "pixels"
+		 */
+		for(int j = 0; j < convDim_y; j+=y_receptive)
+		{
+			for(int k = 0; k < convDim_x; k+=x_receptive)
+			{
+				float max_val = 0.0f; /* declared here to prevent using same value in different threads */
+				int index = 0;
+				/* finding max value out of kernel */
+				for(int l = 0; l < y_receptive; l++)
+				{
+					for(int m = 0; m < x_receptive; m++)
+					{
+						index = i*inputDim_y+(j+*convDim_x+l)+(k*y_receptive+m);
+						if(max_val <= inputPtr[index])
+						{
+							max_val = inputPtr[index];
+						}
+					}
+				}
+
+				pooling_mat[i*poolDim_y+(j/y_receptive)*pooling_y + (k/x_receptive)] =
+						max_val;
+			}
+		}
+	}
+
+	/* resort matrix to fit conditions of next layer operation */
+	/* column major */
+	if(nextLayerType == CONV_LAYER)
+	{
+		for(int i = 0; i < nextDim_x; i++)
+		{
+			for(int j = 0; j < nextDim_y; j++)
+			{
+				for(int k = 0; k < inputDim_y; k++) /* number features of last layer */
+				{
+					for(int l = 0; l < nextReceptive_y; l++) /* convolutional kernel of each feature */
+					{
+						for(int m = 0; m < nextReceptive_x; m++)
+						{
+							/* pooling_mat sorted in column major */
+							outputPtr[(k*nextReceptive_x*nextReceptive_y + l*nextReceptive_x+m)*nextDim_x*nextDim_y+i*nextDim_y+j] =
+									pooling_mat[(k*poolDim_y)+(i+l)*nextDim_x+j+m];
+
+						}
+					}
+				}
+			}
+		}
+	}
+	else if(nextLayerType == FULLY_CONNECTED_LAYER)
+	{
+		/* no additional sorting needed
+		 * data is already correctly sorted in memory
+		 * that way, the user can just switch from a (m*n)x(f)-Matrix to a 1x(m*n*f)-Matrix
+		 */
+		cuda_error |= cudaMemcpy(outputPtr, pooling_mat, inputDim_y*poolingDim_y*sizeof(float), cudaMemcpyDeviceToDevice);
+	}
+
+	cuda_error |= cudaFree(pooling_mat);
+}
+
+__global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightPtr, float* biasPtr,
+							int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y)
+{
+	cublasStatus_t cublasState;
+	cublasHandle_t cublasHandle;
+	cublasCreate(&cublasHandle);
+
+	const float alpha = 1.0f;
+	const float beta = 0.0f;
+	const float* alpha_ptr = &alpha;
+	const float* beta_ptr = &beta;
+
+
+	/* convolution: multiplication with weights */
+	cublasState = cublasSgemm(cublasHandle, CUBLAS_OP_N, CUBLAS_OP_N, inputDim_x, weightDim_x,
+			inputDim_y, alpha_ptr, (const float*) inputPtr, inputDim_x,
+			(const float*) weightPtr, weightDim_x, beta_ptr, outputPtr, inputDim_x);
+
+	/* adding the bias */
+	cublasState |= cublasSaxpy(cublasHandle, weightDim_y, alpha_ptr,
+					(const float*) biasPtr, 1, (const float*) outputPtr, 1);
+
+
+	for(int i = 0; i < weightDim_y; i++)
+	{
+		outputPtr[i] = sigmoid_once(outputPtr[i]);
+	}
+
+	cublasDestroy(cublasHandle);
+}
+
+} /* end namespace cuda */
+

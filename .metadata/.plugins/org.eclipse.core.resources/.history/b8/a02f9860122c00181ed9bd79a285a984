@@ -22,10 +22,6 @@ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, int y_recept
 void fullyConnected(float* inputPtr, float* outputPtr, float* weightPtr, float* biasPtr,
 		int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y);
 
-//float forward(LAYER_TYPE* layertype_list, int no_layers, float* inputPicture, float* labels,
-//			float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs);
-
-
 } /* end namespace cuda */
 
 #endif /* CUDA_KERNELS_H_ */
