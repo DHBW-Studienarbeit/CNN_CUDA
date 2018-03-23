@@ -26,8 +26,8 @@ float forward(Layer* layer_list, int no_layers, float* labels,
 			float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs);
 
 float train(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
-			float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs);
-void gradient_descent(float cost, float** weightArrayPtrs, float** biasArrayPtrs, int no_weights);
+float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs);
+
 
 } /* end namespace cuda */
 

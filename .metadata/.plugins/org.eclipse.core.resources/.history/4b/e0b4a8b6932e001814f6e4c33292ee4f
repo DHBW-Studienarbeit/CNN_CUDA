@@ -127,15 +127,9 @@ bool Network::generate_network()
 
 	cudaError_t cuda_error = cudaSuccess;
 
-	/* transfer layer_list to GPU memory */
-	Layer* layer_array = malloc(layer_list->size()*sizeof(Layer));
-	cuda_error |= cudaMalloc((void**) &device_layer_list, layer_list->size()*sizeof(Layer));
-
-
 	for(unsigned int i = 0; i < layer_list->size(); i++)
 	{
 		Layer* layer = layer_list->at(i);
-		layer_array[i] = layer;
 		switch(layer->getLayerType())
 		{
 			case INPUT_LAYER:
@@ -470,12 +464,11 @@ bool Network::generate_network()
 	cuda_error |= cudaMemcpy(weightDerivDeviceMatrixDims_y, weightMatrixDims_y, no_weight_matrices * sizeof(int), cudaMemcpyHostToDevice);
 	cuda_error |= cudaMemcpy(biasDerivDeviceMatrixDims_y, biasMatrixDims_y, no_bias_matrices * sizeof(int), cudaMemcpyHostToDevice);
 
-	cuda_error |= cudaMemcpy(device_layer_list, layer_array, layer_list->size()*sizeof(Layer), cudaMemcpyHostToDevice);
 
 	/* initializes matrices with uniform pseudo-random values between 0.0 and 1.0 */
-	cuda::init<<1,16>>(nodeArrayPtrs, node_index, nodeDeviceArrayLengths);
-	cuda::init<<1,16>>(weightArrayPtrs, weight_index, weightDeviceArrayLengths);
-	cuda::init<<1,16>>(biasArrayPtrs, bias_index, biasDeviceArrayLengths);
+	cuda::init<<1,1>>(nodeArrayPtrs, node_index, nodeDeviceArrayLengths);
+	cuda::init<<1,1>>(weightArrayPtrs, weight_index, weightDeviceArrayLengths);
+	cuda::init<<1,1>>(biasArrayPtrs, bias_index, biasDeviceArrayLengths);
 
 	cudaDeviceSynchronize();
 
@@ -495,22 +488,26 @@ bool Network::train(int batch_size, int no_iterations)
 		for(int j = 0; j < outer_loop; j++)
 		{
 			cost_sum = 0.0f;
-//			reset_backprop_state();
-
-			/* allocate device memory for a batch of input pictures */
-			cuda_error |= cudaMalloc((void**) devicePictureAddr, batch_size * 784 * sizeof(float));
-
-			/* transfer picture data to device */
+			reset_backprop_state();
 			for(int i = 0; i < batch_size; i++)
 			{
 				Picture* picture = train_picture_container->get_nextpicture();
 
-				cuda_error |= cudaMemcpy(&devicePictureAddr[i*784], picture->get_input(), 784 * sizeof(float), cudaMemcpyHostToDevice);
+				cuda_error |= cudaMalloc((void**) devicePictureAddr, 784 * sizeof(float));
+				cuda_error |= cudaMemcpy(devicePictureAddr, picture->get_input(), 784 * sizeof(float), cudaMemcpyHostToDevice);
 
+				cuda::loadPicture<<1,80>>(nodeArrayPtrs[0], devicePictureAddr);
+
+				cuda_error |= cudaFree(devicePictureAddr);
+
+				cost_sum += forward(picture->get_output());
+				ret_val = backpropagate(picture->get_output());
+				if(ret_val == false)
+				{
+					return ret_val; /* end function if failed */
+				}
 			}
-			cost_sum = cuda::train(device_layer_list, layer_list->size(), devicePictureAddr, batch_size, deviceLabelAddr,
-					nodeArrayPtrs, weightArrayPtrs, biasArrayPtrs);
-			cuda::gradient_descent(cost_sum/batch_size, weightArrayPtrs, biasArrayPtrs, no_weight_matrices);
+			gradient_descent(cost_sum/batch_size);
 		}
 	}
 	return ret_val;

@@ -4877,3 +4877,43 @@ Binding(ALT+CTRL+H,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.cdt.ui.cViewScope,,,system)
+!SESSION 2018-03-20 15:17:56.399 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.egit.core 4 0 2018-03-20 16:40:45.007
+!MESSAGE An exception occurred during push on URI https://github.com/DHBW-Studienarbeit/CNN_CUDA.git: https://github.com/DHBW-Studienarbeit/CNN_CUDA.git: cannot open git-receive-pack
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: https://github.com/DHBW-Studienarbeit/CNN_CUDA.git: cannot open git-receive-pack
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:160)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:228)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI.execute(PushOperationUI.java:167)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI$1.run(PushOperationUI.java:229)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: org.eclipse.jgit.errors.TransportException: https://github.com/DHBW-Studienarbeit/CNN_CUDA.git: cannot open git-receive-pack
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:521)
+	at org.eclipse.jgit.transport.TransportHttp.openPush(TransportHttp.java:399)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:154)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1173)
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:156)
+	... 4 more
+Caused by: javax.net.ssl.SSLException: Received fatal alert: protocol_version
+	at sun.security.ssl.Alerts.getSSLException(Alerts.java:208)
+	at sun.security.ssl.Alerts.getSSLException(Alerts.java:154)
+	at sun.security.ssl.SSLSocketImpl.recvAlert(SSLSocketImpl.java:1977)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:1093)
+	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:1328)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1355)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1339)
+	at sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:515)
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:185)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1299)
+	at java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:468)
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:338)
+	at org.eclipse.jgit.transport.http.JDKHttpConnection.getResponseCode(JDKHttpConnection.java:98)
+	at org.eclipse.jgit.util.HttpSupport.response(HttpSupport.java:168)
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:475)
+	... 8 more

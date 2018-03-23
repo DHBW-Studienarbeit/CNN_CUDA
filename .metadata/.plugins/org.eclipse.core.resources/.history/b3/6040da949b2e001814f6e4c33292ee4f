@@ -510,7 +510,7 @@ bool Network::train(int batch_size, int no_iterations)
 			}
 			cost_sum = cuda::train(device_layer_list, layer_list->size(), devicePictureAddr, batch_size, deviceLabelAddr,
 					nodeArrayPtrs, weightArrayPtrs, biasArrayPtrs);
-			cuda::gradient_descent(cost_sum/batch_size, weightArrayPtrs, biasArrayPtrs, no_weight_matrices);
+			cuda::gradient_descent(cost_sum/batch_size);
 		}
 	}
 	return ret_val;

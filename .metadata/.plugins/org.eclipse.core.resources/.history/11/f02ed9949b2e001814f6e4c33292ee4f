@@ -296,30 +296,6 @@ __global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightP
 	cublasDestroy(cublasHandle);
 }
 
-__global__ float train(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
-			float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs)
-{
-	int index = threadIdx.x;
-	float ret_val = 0.0;
-
-	//TODO: copy nodes, weights, and biases to prevent race conditions
-
-	loadPicture<<1,80>>(nodeArray[0], &inputPictures[index*784]);
-	cudaDeviceSynchronize(); //TODO: howto synchronize ??
-
-	ret_val += forward<<1,80>>(layer_list, no_layers, &labels[index*10], nodeArrays, weightArrays, biasArrays);
-
-	cudaDeviceSynchronize();
-
-	return ret_val;
-}
-
-
-__global__ void gradient_descent(float cost, float** weightArrayPtrs, float** biasArrayPtrs, int no_weights)
-{
-
-}
-
 __global__ float forward(Layer* layer_list, int no_layers, float* inputPicture, float* labels,
 					float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs)
 {
