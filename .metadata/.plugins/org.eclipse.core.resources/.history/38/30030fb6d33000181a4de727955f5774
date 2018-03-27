@@ -23,17 +23,11 @@ void fullyConnected(float* inputPtr, float* outputPtr, float* weightPtr, float* 
 		int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y);
 
 float forward(Layer* layer_list, int no_layers, float* labels,
-		float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs,
-		int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
-		int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y);
+			float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs);
 
 float train(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
-			float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs,
-			int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
-			int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y);
+			float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs);
 void gradient_descent(float cost, float** weightArrayPtrs, float** biasArrayPtrs, int no_weights);
-
-float get_cost(float *output, float *labels, int size);
 
 } /* end namespace cuda */
 

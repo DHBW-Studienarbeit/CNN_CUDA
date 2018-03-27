@@ -8,8 +8,6 @@
 #include <cuda.h>
 #include <curand.h>
 #include <cublas_v2.h>
-#include <cooperative_groups.h>
-#include "mathematics.h"
 
 
 namespace cuda {
@@ -75,7 +73,6 @@ __global__ void loadPicture(float* arrayPtr, float* picturePtr)
 			}
 		}
 	}
-	__syncthreads();
 }
 
 /**
@@ -308,50 +305,24 @@ __global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightP
 __global__ float train(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
 			float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs,
 			int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
-			int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y, int* biasMatrixDims_x,
-			int* biasMatrixDims_y)
+			int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y)
 {
-	cudaError_t cuda_error = cudaSuccess;
 	int index = threadIdx.x;
-	__shared__ float ret_val = 0.0;
+	float ret_val = 0.0;
 
-	/* copying nodes, weights and biases for each picture-parallel thread to prevent race conditions */
-	float** nodeArrays, weightArrays, biasArrays;
-
-	for(int i = 0; i < no_node_matrices; i++)
-	{
-		cuda_error |= cudaMalloc((void**) &nodeArrays[i], nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float));
-		cuda_error |= cudaMemcpy((void*) nodeArrays[i], (void*) nodeArrayPtrs[i], nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float), cudaMemcpyDeviceToDevice);
-	}
-
-	for(int i = 0; i < no_weight_matrices; i++)
-	{
-		cuda_error |= cudaMalloc((void**) &weightArrays[i], weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float));
-		cuda_error |= cudaMemcpy((void*) weightArrays[i], (void*) weightArrayPtrs[i], weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float), cudaMemcpyDeviceToDevice);
-		cuda_error |= cudaMalloc((void**) &biasArrays[i], biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float));
-		cuda_error |= cudaMemcpy((void*) biasArrays[i], (void*) biasArrayPtrs[i], biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float), cudaMemcpyDeviceToDevice);
-	}
+	//TODO: copy nodes, weights, and biases to prevent race conditions
 
 	if(index < batch_size)
 	{
-		loadPicture<<1,80>>(nodeArrays[0], &inputPictures[index*784]);
-		/* blocks until all threads finish */
 
-		/* forward splits up into 80 parallel threads in each layer task */
+
+
+		loadPicture<<1,80>>(nodeArrays[0], &inputPictures[index*784]);
+		cudaDeviceSynchronize(); /* blocks until all threads finish */
+
 		ret_val += forward<<1,1>>(layer_list, no_layers, &labels[index*10], nodeArrays, weightArrays, biasArrays);
 
-		__syncthreads();
-	}
-
-	for(int i = 0; i < no_node_matrices; i++)
-	{
-		cuda_error |= cudaFree((void*)nodeArrays[i]);
-	}
-
-	for(int i = 0; i < no_weight_matrices; i++)
-	{
-		cuda_error |= cudaFree((void*) weightArrays[i]);
-		cuda_error |= cudaFree((void*) biasArrays[i]);
+		cudaDeviceSynchronize();
 	}
 
 	return ret_val;

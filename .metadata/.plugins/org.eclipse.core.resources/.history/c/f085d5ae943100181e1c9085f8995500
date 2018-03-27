@@ -75,7 +75,7 @@ __global__ void loadPicture(float* arrayPtr, float* picturePtr)
 			}
 		}
 	}
-	__syncthreads();
+	cooperative_groups::this_thread_block().sync();
 }
 
 /**
@@ -313,7 +313,7 @@ __global__ float train(Layer* layer_list, int no_layers, float* inputPictures, i
 {
 	cudaError_t cuda_error = cudaSuccess;
 	int index = threadIdx.x;
-	__shared__ float ret_val = 0.0;
+	float ret_val = 0.0;
 
 	/* copying nodes, weights and biases for each picture-parallel thread to prevent race conditions */
 	float** nodeArrays, weightArrays, biasArrays;
@@ -340,18 +340,7 @@ __global__ float train(Layer* layer_list, int no_layers, float* inputPictures, i
 		/* forward splits up into 80 parallel threads in each layer task */
 		ret_val += forward<<1,1>>(layer_list, no_layers, &labels[index*10], nodeArrays, weightArrays, biasArrays);
 
-		__syncthreads();
-	}
-
-	for(int i = 0; i < no_node_matrices; i++)
-	{
-		cuda_error |= cudaFree((void*)nodeArrays[i]);
-	}
-
-	for(int i = 0; i < no_weight_matrices; i++)
-	{
-		cuda_error |= cudaFree((void*) weightArrays[i]);
-		cuda_error |= cudaFree((void*) biasArrays[i]);
+		cooperative_groups::this_thread_block().sync();
 	}
 
 	return ret_val;

@@ -33,8 +33,6 @@ float train(Layer* layer_list, int no_layers, float* inputPictures, int batch_si
 			int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y);
 void gradient_descent(float cost, float** weightArrayPtrs, float** biasArrayPtrs, int no_weights);
 
-float get_cost(float *output, float *labels, int size);
-
 } /* end namespace cuda */
 
 #endif /* CUDA_KERNELS_H_ */
