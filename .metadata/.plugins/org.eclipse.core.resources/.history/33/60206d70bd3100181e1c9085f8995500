@@ -39,7 +39,7 @@ private:
 
 	Layer* device_layer_list; /* stored as array at GPU memory*/
 
-	/** Arrays of pointer to allocated memory for matrices on GPU memory  */
+	/** Arrays of pointer to allocated memory for matrices on CUDA */
 	float **nodeArrayPtrs;
 	float **weightArrayPtrs;
 	float **biasArrayPtrs;

@@ -82,16 +82,4 @@ __device__ void get_cost_derivatives(float *output, float *labels, float *deriva
 	}
 }
 
-__device__ void hadamard_product(float* a, float* b, float* out, int size)
-{
-	int index = threadIdx.x;
-	int stride = blockDim.x;
-
-	for(int i = index; i < size; i+=stride)
-	{
-		out[i] = a[i] * b[i];
-	}
-	__syncthreads();
-}
-
 } /* namespace mathematics */

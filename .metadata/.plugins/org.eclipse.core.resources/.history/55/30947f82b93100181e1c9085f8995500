@@ -38,13 +38,7 @@ void gradient_descent(float cost, float** weightArrayPtrs, float** biasArrayPtrs
 void backpropagate(Layer* layer_list, int no_layers, float* labels,
 		float** nodeArrayPtrs, float** weightArrayPtrs, int no_node_matrices, int no_weight_matrices,
 		int* nodeMatrixDims_x, int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y);
-void convolution_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivatives,
-						int node_index, int weight_index);
-void fullyConnected_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivatives,
-						int node_index, int weight_index);
-void maxPooling_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivatives,
-						int node_index, int weight_index);
-
+void convolution_back
 } /* end namespace cuda */
 
 #endif /* CUDA_KERNELS_H_ */
