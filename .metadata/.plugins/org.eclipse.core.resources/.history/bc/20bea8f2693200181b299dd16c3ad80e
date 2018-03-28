@@ -687,15 +687,12 @@ __device__ void convolution_back(float** nodeArrayPtrs, float** weightArrayPtrs,
 //		node_index-=no_feature_maps_conv;
 //	}
 }
-
-
 __device__ void fullyConnected_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivatives,
-						int node_index, int weight_index, int prev_nodeDim_x, int weightDim_x, int weightDim_y)
+						int node_index, int weight_index)
 {
 	int index = threadIdx.x;
 	int stride = blockDim.x;
 
-	cudaError_t cuda_error = cudaSuccess;
 	cublasStatus_t cublasState;
 	cublasHandle_t cublasHandle;
 	cublasCreate(&cublasHandle);
@@ -710,11 +707,94 @@ __device__ void fullyConnected_back(float** nodeArrayPtrs, float** weightArrayPt
 				(const float*) &nodeArrayPtrs[node_index+1][i], prev_nodeDim_x,
 				(const float*) &weightArrayPtrs[weight_index+1][i], weightDim_x,
 				&result);
-		nodeDerivates[node_index][i] = result * mathematics::sigmoid_backward_derivated_once(nodeArrayPtrs[node_index][i]);
+		nodeDerivates[node_index][i] = result * sig_deriv_z[i];
 	}
+
+
+//	/* multiplication with weights */
+//	cublasState = cublasSgemm(cublasHandle, CUBLAS_OP_N, CUBLAS_OP_N, inputDim_x, weightDim_x,
+//			inputDim_y, alpha_ptr, (const float*) inputPtr, inputDim_x,
+//			(const float*) weightPtr, weightDim_x, beta_ptr, outputPtr, inputDim_x);
+//
+//	/* adding the bias */
+//	cublasState |= cublasSaxpy(cublasHandle, weightDim_y, alpha_ptr,
+//					(const float*) biasPtr, 1, (const float*) outputPtr, 1);
+//
+//
+//	for(int i = 0; i < weightDim_y; i++)
+//	{
+//		outputPtr[i] = sigmoid_once(outputPtr[i]);
+//	}
 
 	cublasDestroy(cublasHandle);
 
+
+//	MaxPooling_Layer* last_layer = (MaxPooling_Layer*) &layer_list[i-1];
+//	Matrix* full_pool_matrix = new Matrix(last_layer->getSize(), 1);
+//	Matrix* full_pool_matrix_deriv = new Matrix(last_layer->getSize(), 1);
+//	int no_feature_maps = last_layer->getNoFeatures();
+//	int y_size = last_layer->getYSize();
+//	int x_size = last_layer->getXSize();
+//	int temp_node_index = node_index - no_feature_maps;
+//
+//
+//	for(int j = 0; j < no_feature_maps; j++)
+//	{
+//		for(int k = 0; k < y_size; k++)
+//		{
+//			for(int l = 0; l < x_size; l++)
+//			{
+//				full_pool_matrix->set(j*y_size*x_size + k * x_size + l, 0,
+//						node_list->at(temp_node_index)->get(k, l));
+//			}
+//		}
+//		temp_node_index++;
+//	}
+//
+//	layer_list->at(i)->backpropagate(full_pool_matrix,
+//			node_list->at(node_index),
+//			full_pool_matrix_deriv,
+//			node_deriv_list->at(node_index),
+//			weight_list->at(weight_index),
+//			bias_list->at(bias_index),
+//			weight_deriv_list->at(weight_index),
+//			bias_deriv_list->at(bias_index) );
+//
+//	temp_node_index = node_index - no_feature_maps;
+//	for(int j = 0; j < no_feature_maps; j++)
+//	{
+//		for(int k = 0; k < y_size; k++)
+//		{
+//			for(int l = 0; l < x_size; l++)
+//			{
+//				node_list->at(temp_node_index)->set(k, l,
+//						full_pool_matrix_deriv->get(j*y_size*x_size + k * x_size + l, 0));
+//			}
+//		}
+//		temp_node_index++;
+//	}
+//
+//	delete full_pool_matrix;
+//	delete full_pool_matrix_deriv;
+//
+//	node_index--;
+//	bias_index--;
+//	weight_index--;
+//}
+//else if (layer_list[i-1].getLayerType() == FULLY_CONNECTED_LAYER)
+//{
+//	layer_list->at(i)->backpropagate(node_list->at(node_index-1),
+//			node_list->at(node_index),
+//			node_deriv_list->at(node_index-1),
+//			node_deriv_list->at(node_index),
+//			weight_list->at(weight_index),
+//			bias_list->at(bias_index),
+//			weight_deriv_list->at(weight_index),
+//			bias_deriv_list->at(bias_index) );
+//	node_index--;
+//	bias_index--;
+//	weight_index--;
+//}
 }
 __device__ void maxPooling_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivatives,
 						int node_index, int weight_index)

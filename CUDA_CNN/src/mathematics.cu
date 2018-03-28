@@ -74,6 +74,7 @@ __device__ float get_cost(float *output, float *labels, int size)
 	return ret;
 }
 
+/* quadratic cost function derivated */
 __device__ void get_cost_derivatives(float *output, float *labels, float *derivatives, int size)
 {
 	for(; size>0; size--, output++, labels++, derivatives++)

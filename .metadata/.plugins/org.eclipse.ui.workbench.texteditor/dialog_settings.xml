@@ -2,36 +2,36 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="291" key="DIALOG_WIDTH"/>
-		<item value="259" key="DIALOG_Y_ORIGIN"/>
-		<item value="488" key="DIALOG_HEIGHT"/>
-		<item value="782" key="DIALOG_X_ORIGIN"/>
+		<item value="346" key="DIALOG_Y_ORIGIN"/>
+		<item value="973" key="DIALOG_X_ORIGIN"/>
+		<item value="516" key="DIALOG_HEIGHT"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="biasMatrixDi" key="selection"/>
+		<item value="train(" key="selection"/>
 		<list key="findhistory">
+			<item value="train("/>
+			<item value="weight"/>
+			<item value="cudaMalloc"/>
 			<item value="biasMatrixDi"/>
 			<item value="train"/>
-			<item value="cudaMalloc"/>
 			<item value="ArrayLengths"/>
 			<item value="ArrayLenghts"/>
 			<item value="Matrix"/>
-			<item value="Array"/>
-			<item value="node"/>
 		</list>
 		<list key="replacehistory">
+			<item value="bias"/>
 			<item value="cudaFree"/>
 			<item value="cudaMemcpy"/>
 			<item value="MatrixDims_y"/>
 			<item value="MatrixDims_x"/>
 			<item value="DeviceMatrix"/>
 			<item value="DeviceArray"/>
-			<item value="bias"/>
 			<item value="weight"/>
 		</list>
 	</section>
