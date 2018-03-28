@@ -1057,12 +1057,12 @@ float Network::test()
 //
 //}
 
-void Network::reset_backprop_state(void)
-{
-	int no_layers = weight_deriv_list->size();
-	for(int i = 0; i < no_layers; i++)
-	{
-		weight_deriv_list->at(i)->set_all_equal(0.0);
-		bias_deriv_list->at(i)->set_all_equal(0.0);
-	}
-}
+//void Network::reset_backprop_state(void)
+//{
+//	int no_layers = weight_deriv_list->size();
+//	for(int i = 0; i < no_layers; i++)
+//	{
+//		weight_deriv_list->at(i)->set_all_equal(0.0);
+//		bias_deriv_list->at(i)->set_all_equal(0.0);
+//	}
+//}
