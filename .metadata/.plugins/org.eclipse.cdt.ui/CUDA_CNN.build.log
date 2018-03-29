@@ -1,115 +1,32 @@
-08:16:47 **** Build of configuration Debug for project CUDA_CNN ****
+14:24:02 **** Incremental Build of configuration Debug for project CUDA_CNN ****
 make all 
-Building file: ../src/CUDA_CNN.cu
-Invoking: NVCC Compiler
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/CUDA_CNN.d" "../src/CUDA_CNN.cu"
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/CUDA_CNN.o" "../src/CUDA_CNN.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/CUDA_CNN.cu
- 
-Building file: ../src/ConvLayer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/ConvLayer.d" "../src/ConvLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/ConvLayer.o" "../src/ConvLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/ConvLayer.cu
- 
-Building file: ../src/DropoutLayer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/DropoutLayer.d" "../src/DropoutLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/DropoutLayer.o" "../src/DropoutLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/DropoutLayer.cu
- 
-Building file: ../src/FullyConnectedLayer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/FullyConnectedLayer.d" "../src/FullyConnectedLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/FullyConnectedLayer.o" "../src/FullyConnectedLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/FullyConnectedLayer.cu
- 
-Building file: ../src/InputLayer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/InputLayer.d" "../src/InputLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/InputLayer.o" "../src/InputLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/InputLayer.cu
- 
-Building file: ../src/Layer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Layer.d" "../src/Layer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Layer.o" "../src/Layer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/Layer.cu
- 
-Building file: ../src/MaxPoolingLayer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/MaxPoolingLayer.d" "../src/MaxPoolingLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/MaxPoolingLayer.o" "../src/MaxPoolingLayer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/MaxPoolingLayer.cu
- 
 Building file: ../src/Network.cu
 Invoking: NVCC Compiler
 /usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Network.d" "../src/Network.cu"
 nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
 /usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Network.o" "../src/Network.cu"
 nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/Network.cu
- 
-Building file: ../src/Picture.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Picture.d" "../src/Picture.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Picture.o" "../src/Picture.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/Picture.cu
- 
-Building file: ../src/PictureContainer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/PictureContainer.d" "../src/PictureContainer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/PictureContainer.o" "../src/PictureContainer.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/PictureContainer.cu
- 
-Building file: ../src/mathematics.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/mathematics.d" "../src/mathematics.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/mathematics.o" "../src/mathematics.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/mathematics.cu
- 
-Building file: ../src/matrix.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/matrix.d" "../src/matrix.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/matrix.o" "../src/matrix.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/matrix.cu
- 
-Building file: ../src/testfile.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/testfile.d" "../src/testfile.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/testfile.o" "../src/testfile.cu"
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building: ../src/testfile.cu
- 
-Building target: CUDA_CNN
-Invoking: NVCC Linker
-/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60 -link -o  "CUDA_CNN"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/mathematics.o ./src/matrix.o ./src/testfile.o   
-nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
-Finished building target: CUDA_CNN
- 
+/usr/local/cuda-8.0/bin/..//include/cuda_fp16.h(3068): error: more than one instance of overloaded function "isinf" matches the argument list:
+            function "isinf(float)"
+            function "std::isinf(float)"
+            argument types are: (float)
 
-08:17:07 Build Finished (took 20s.197ms)
+/usr/local/cuda-8.0/bin/..//include/cuda_fp16.h(3079): error: more than one instance of overloaded function "isinf" matches the argument list:
+            function "isinf(float)"
+            function "std::isinf(float)"
+            argument types are: (float)
+
+../src/Network.cu(48): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(131): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(493): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(533): warning: variable "cuda_error" was set but never used
+
+2 errors detected in the compilation of "/tmp/tmpxft_000026b5_00000000-9_Network.compute_60.cpp1.ii".
+make: *** [src/Network.o] Fehler 2
+src/subdir.mk:57: die Regel für Ziel „src/Network.o“ scheiterte
+
+14:24:03 Build Finished (took 907ms)
 

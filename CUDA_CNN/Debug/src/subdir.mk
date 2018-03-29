@@ -14,6 +14,7 @@ CU_SRCS += \
 ../src/Network.cu \
 ../src/Picture.cu \
 ../src/PictureContainer.cu \
+../src/cuda_kernels.cu \
 ../src/mathematics.cu \
 ../src/matrix.cu \
 ../src/testfile.cu 
@@ -29,6 +30,7 @@ CU_DEPS += \
 ./src/Network.d \
 ./src/Picture.d \
 ./src/PictureContainer.d \
+./src/cuda_kernels.d \
 ./src/mathematics.d \
 ./src/matrix.d \
 ./src/testfile.d 
@@ -44,6 +46,7 @@ OBJS += \
 ./src/Network.o \
 ./src/Picture.o \
 ./src/PictureContainer.o \
+./src/cuda_kernels.o \
 ./src/mathematics.o \
 ./src/matrix.o \
 ./src/testfile.o 

@@ -1,0 +1,562 @@
+/*
+ * network.cpp
+ *
+ *  Created on: 23.11.2017
+ *      Author:
+ *
+ *  This is the implementation of the Network class
+ */
+
+#include "Network.h"
+#include <math.h>
+#include <limits>
+#include <iostream>
+#include <cublas_v2.h>
+#include <cuda.h>
+#include "cuda_kernels.h"
+
+
+
+Network::Network()
+{
+	layer_list = new vector<Layer*>();
+
+	nodeArrayPtrs = nullptr;
+	weightArrayPtrs = nullptr;
+	biasArrayPtrs = nullptr;
+	nodeDerivArrayPtrs = nullptr;
+	weightDerivArrayPtrs = nullptr;
+	biasDerivArrayPtrs = nullptr;
+
+	nodeArrayLengths = nullptr;
+	weightArrayLengths = nullptr;
+	biasArrayLengths = nullptr;
+
+	no_node_matrices = 0;
+	no_weight_matrices = 0;
+	no_bias_matrices = 0;
+
+	train_picture_container = new PictureContainer("./train", 55);
+	test_picture_container = new PictureContainer("./test", 10);
+}
+
+Network::~Network()
+{
+	cudaError_t cuda_error = cudaSuccess;
+
+	for(unsigned int i = 0; i < layer_list->size(); i++)
+	{
+		delete layer_list->at(i);
+	}
+
+
+	delete layer_list;
+
+	for(int i = 0; i < no_node_matrices; i++)
+	{
+		cuda_error = cudaFree(nodeArrayPtrs[i]);
+		cuda_error = cudaFree(nodeDerivArrayPtrs[i]);
+	}
+
+	for(int i = 0; i < no_weight_matrices; i++)
+	{
+		cuda_error = cudaFree((void*)weightArrayPtrs[i]);
+		cuda_error = cudaFree((void*)weightDerivArrayPtrs[i]);
+	}
+
+	for(int i = 0; i < no_bias_matrices; i++)
+	{
+		cuda_error = cudaFree((void*)biasArrayPtrs[i]);
+		cuda_error = cudaFree((void*)biasDerivArrayPtrs[i]);
+	}
+
+	cuda_error = cudaFree((void**) nodeDeviceArrayLengths);
+	cuda_error = cudaFree((void**) weightDeviceArrayLengths);
+	cuda_error = cudaFree((void**) biasDeviceArrayLengths);
+	cuda_error = cudaFree((void**) nodeDerivDeviceArrayLengths);
+	cuda_error = cudaFree((void**) weightDerivDeviceArrayLengths);
+	cuda_error = cudaFree((void**) biasDerivDeviceArrayLengths);
+
+	cuda_error = cudaFree((void**) nodeDeviceMatrixDims_x);
+	cuda_error = cudaFree((void**) weightDeviceMatrixDims_x);
+	cuda_error = cudaFree((void**) biasDeviceMatrixDims_x);
+	cuda_error = cudaFree((void**) nodeDerivDeviceMatrixDims_x);
+	cuda_error = cudaFree((void**) weightDerivDeviceMatrixDims_x);
+	cuda_error = cudaFree((void**) biasDerivDeviceMatrixDims_x);
+
+	cuda_error = cudaFree((void**) nodeDeviceMatrixDims_y);
+	cuda_error = cudaFree((void**) weightDeviceMatrixDims_y);
+	cuda_error = cudaFree((void**) biasDeviceMatrixDims_y);
+	cuda_error = cudaFree((void**) nodeDerivDeviceMatrixDims_y);
+	cuda_error = cudaFree((void**) weightDerivDeviceMatrixDims_y);
+	cuda_error = cudaFree((void**) biasDerivDeviceMatrixDims_y);
+
+	free(nodeArrayPtrs);
+	free(weightArrayPtrs);
+	free(biasArrayPtrs);
+	free(nodeDerivArrayPtrs);
+	free(weightDerivArrayPtrs);
+	free(biasArrayPtrs);
+
+	free(nodeArrayLengths);
+	free(weightArrayLengths);
+	free(biasArrayLengths);
+
+	free(nodeMatrixDims_x);
+	free(weightMatrixDims_x);
+	free(biasMatrixDims_x);
+
+	free(nodeMatrixDims_y);
+	free(weightMatrixDims_y);
+	free(biasMatrixDims_y);
+}
+
+void Network::add_Layer(Layer* layer)
+{
+	layer_list->push_back(layer);
+}
+
+/**
+ * This function sets up all Layers contained in layer_list as matrices
+ * Make sure that your network is clear before you generate a new network
+ *
+ * <return> bool - indicates if initialization of the network was successful.
+ * It can fail if your layers are not sorted in an expected manner </return>
+ */
+bool Network::generate_network()
+{
+	int node_index=0;
+	int bias_index=0;
+	int weight_index=0;
+
+
+
+	/* transfer layer_list to GPU memory */
+	Layer* layer_array = (Layer*) malloc(layer_list->size()*sizeof(Layer));
+	cuda_error = cudaMalloc((void**) &device_layer_list, layer_list->size()*sizeof(Layer));
+
+
+	for(unsigned int i = 0; i < layer_list->size(); i++)
+	{
+		Layer* layer = layer_list->at(i);
+		layer_array[i] = *layer;
+		switch(layer->getLayerType())
+		{
+			case INPUT_LAYER:
+			{
+				Input_Layer* input_layer = (Input_Layer*) layer;
+				input_layer->setNodeIndex(node_index);
+				/* allocate memory for pointers at host and memory for  node array *
+				 * on GPU device
+				 */
+				nodeArrayPtrs = (float**) malloc(sizeof(float*));
+				cuda_error = cudaMalloc((void**) nodeArrayPtrs[0], input_layer->getRows()*input_layer->getCols() * sizeof(float));
+
+				/* save array dimensions */
+				nodeArrayLengths = (int*) malloc(sizeof(int));
+				nodeMatrixDims_x = (int*) malloc(sizeof(int));
+				nodeMatrixDims_y = (int*) malloc(sizeof(int));
+
+				nodeArrayLengths[0] = input_layer->getRows()*input_layer->getCols();
+				nodeMatrixDims_x[0] = input_layer->getRows();
+				nodeMatrixDims_y[0] = input_layer->getCols();
+
+				no_node_matrices++;
+				node_index++;
+				break;
+			}
+			case CONV_LAYER:
+			{
+				Conv_Layer* conv_layer = (Conv_Layer*) layer;
+				conv_layer->setBiasIndex(bias_index);
+				conv_layer->setNodeIndex(node_index);
+				conv_layer->setWeightIndex(weight_index);
+				if((layer_list->at(i-1)->getLayerType() == INPUT_LAYER))
+				{
+					Input_Layer* last_layer = (Input_Layer*) layer_list->at(i-1);
+					int prev_dim_x = last_layer->getCols();
+					int prev_dim_y = last_layer->getRows();
+
+					int dim_x = (prev_dim_x - conv_layer->getXReceptive() + 1) / conv_layer->getStepSize();
+					int dim_y = (prev_dim_y - conv_layer->getYReceptive() + 1) / conv_layer->getStepSize();
+
+					conv_layer->setXSize(dim_x);
+					conv_layer->setYSize(dim_y);
+
+					/** adding a pointer to the pointer array be reallocating and resizing the array 		   *
+					 * 	weight/bias array ptrs are not allocated yet, because previous layer was a input layer */
+					nodeArrayPtrs   = (float**) realloc(nodeArrayPtrs, (node_index+1)*sizeof(float*));
+					weightArrayPtrs = (float**) malloc(sizeof(float*));
+					biasArrayPtrs   = (float**) malloc(sizeof(float*));
+
+					/** allocating memory on GPU device for the matrices */
+					cuda_error = cudaMalloc((void**) nodeArrayPtrs[node_index], dim_x*dim_y*conv_layer->getNoFeatureMaps()*sizeof(float));
+					cuda_error = cudaMalloc((void**) weightArrayPtrs[weight_index], conv_layer->getXReceptive()*conv_layer->getYReceptive()*
+															conv_layer->getNoFeatureMaps()*sizeof(float));
+					cuda_error = cudaMalloc((void**) biasArrayPtrs[bias_index], dim_x*dim_y*conv_layer->getNoFeatureMaps()*sizeof(float));
+
+					/* save array dimensions */
+					nodeArrayLengths = (int*) realloc(nodeArrayLengths, (node_index+1)*sizeof(int));
+					nodeMatrixDims_x = (int*) realloc(nodeMatrixDims_x, (node_index+1)*sizeof(int));
+					nodeMatrixDims_y = (int*) realloc(nodeMatrixDims_y, (node_index+1)*sizeof(int));
+
+					nodeArrayLengths[node_index] = dim_x * dim_y * conv_layer->getNoFeatureMaps();
+					nodeMatrixDims_x[node_index] = dim_x * dim_y;
+					nodeMatrixDims_y[node_index] = conv_layer->getNoFeatureMaps();
+
+					weightArrayLengths = (int*) realloc(weightArrayLengths, (weight_index+1)*sizeof(int));
+					weightMatrixDims_x = (int*) realloc(weightMatrixDims_x, (weight_index+1)*sizeof(int));
+					weightMatrixDims_y = (int*) realloc(weightMatrixDims_y, (weight_index+1)*sizeof(int));
+
+					weightArrayLengths[weight_index] = conv_layer->getXReceptive()*conv_layer->getYReceptive()*
+															conv_layer->getNoFeatureMaps();
+					weightMatrixDims_x[weight_index] = conv_layer->getXReceptive()*conv_layer->getYReceptive();
+					weightMatrixDims_y[weight_index] = conv_layer->getNoFeatureMaps();
+
+
+					biasArrayLengths = (int*) realloc(biasArrayLengths, (bias_index+1)*sizeof(int));
+					biasMatrixDims_x = (int*) realloc(biasMatrixDims_x, (bias_index+1)*sizeof(int));
+					biasMatrixDims_y = (int*) realloc(biasMatrixDims_y, (bias_index+1)*sizeof(int));
+
+					biasArrayLengths[bias_index] = dim_x * dim_y * conv_layer->getNoFeatureMaps();
+					biasMatrixDims_x[bias_index] = dim_x * dim_y;
+					biasMatrixDims_y[bias_index] = conv_layer->getNoFeatureMaps();
+
+
+					weight_index++;
+					bias_index++;
+					node_index++;
+					no_node_matrices++;
+					no_weight_matrices++;
+					no_bias_matrices++;
+
+					conv_layer->setSize(conv_layer->getNoFeatureMaps()*dim_x*dim_y);
+				}
+				else if((layer_list->at(i-1)->getLayerType() == POOLING_LAYER))
+				{
+					MaxPooling_Layer* last_layer = (MaxPooling_Layer*) (layer_list->at(i-1));
+
+					int prev_dim_x = last_layer->getXSize();
+					int prev_dim_y = last_layer->getYSize();
+					int prev_no_features = last_layer->getNoFeatures();
+
+					int dim_x = (prev_dim_x - conv_layer->getXReceptive() + 1) / conv_layer->getStepSize();
+					int dim_y = (prev_dim_y - conv_layer->getYReceptive() + 1) / conv_layer->getStepSize();
+
+					conv_layer->setXSize(dim_x);
+					conv_layer->setYSize(dim_y);
+
+					/** adding a pointer to the pointer arrays be reallocating and resizing the arrays 		   */
+					nodeArrayPtrs   = (float**) realloc(nodeArrayPtrs, (node_index+1)*sizeof(float*));
+					weightArrayPtrs = (float**) realloc(weightArrayPtrs, (weight_index+1)*sizeof(float*));
+					biasArrayPtrs   = (float**) realloc(biasArrayPtrs, (bias_index+1)*sizeof(float*));
+
+					/** allocating memory on GPU device for the matrices */
+					cuda_error = cudaMalloc((void**) nodeArrayPtrs[node_index], dim_x*dim_y*conv_layer->getNoFeatureMaps()*sizeof(float));
+					cuda_error = cudaMalloc((void**) weightArrayPtrs[weight_index], conv_layer->getXReceptive()*conv_layer->getYReceptive()*
+							prev_no_features * conv_layer->getNoFeatureMaps()*sizeof(float));
+					cuda_error = cudaMalloc((void**) biasArrayPtrs[bias_index], dim_x*dim_y*conv_layer->getNoFeatureMaps()*sizeof(float));
+
+
+					/* save array dimensions */
+					nodeArrayLengths = (int*) realloc(nodeArrayLengths, (node_index+1)*sizeof(int));
+					nodeMatrixDims_x = (int*) realloc(nodeMatrixDims_x, (node_index+1)*sizeof(int));
+					nodeMatrixDims_y = (int*) realloc(nodeMatrixDims_y, (node_index+1)*sizeof(int));
+
+					nodeArrayLengths[node_index] = dim_x * dim_y * conv_layer->getNoFeatureMaps();
+					nodeMatrixDims_x[node_index] = dim_x * dim_y;
+					nodeMatrixDims_y[node_index] = conv_layer->getNoFeatureMaps();
+
+					weightArrayLengths = (int*) realloc(weightArrayLengths, (weight_index+1)*sizeof(int));
+					weightMatrixDims_x = (int*) realloc(weightMatrixDims_x, (weight_index+1)*sizeof(int));
+					weightMatrixDims_y = (int*) realloc(weightMatrixDims_y, (weight_index+1)*sizeof(int));
+
+					weightArrayLengths[weight_index] = conv_layer->getXReceptive()*conv_layer->getYReceptive()*
+														prev_no_features * conv_layer->getNoFeatureMaps();
+					weightMatrixDims_x[weight_index] = conv_layer->getXReceptive()*conv_layer->getYReceptive()*prev_no_features;
+					weightMatrixDims_y[weight_index] = conv_layer->getNoFeatureMaps();
+
+
+					biasArrayLengths = (int*) realloc(biasArrayLengths, (bias_index+1)*sizeof(int));
+					biasMatrixDims_x = (int*) realloc(biasMatrixDims_x, (bias_index+1)*sizeof(int));
+					biasMatrixDims_y = (int*) realloc(biasMatrixDims_y, (bias_index+1)*sizeof(int));
+
+					biasArrayLengths[bias_index] = dim_x * dim_y * conv_layer->getNoFeatureMaps();
+					biasMatrixDims_x[bias_index] = dim_x * dim_y;
+					biasMatrixDims_y[bias_index] = conv_layer->getNoFeatureMaps();
+
+					node_index++;
+					weight_index++;
+					bias_index++;
+
+					no_node_matrices++;
+					no_weight_matrices++;
+					no_bias_matrices++;
+
+					conv_layer->setSize(conv_layer->getNoFeatureMaps()*dim_x*dim_y);
+				}
+				else
+				{
+					return false;
+				}
+				break;
+			}
+			case POOLING_LAYER:
+			{
+				MaxPooling_Layer* pooling_layer = (MaxPooling_Layer*) layer;
+				pooling_layer->setNodeIndex(node_index);
+				if((layer_list->at(i-1)->getLayerType() == CONV_LAYER))
+				{
+					Conv_Layer* last_layer = (Conv_Layer*) layer_list->at(i-1);
+					int prev_no_features = last_layer->getNoFeatureMaps();
+					int prev_dim_x = last_layer->getXSize();
+					int prev_dim_y = last_layer->getYSize();
+					int pool_dim_x = (prev_dim_x / pooling_layer->getXReceptive());
+					int pool_dim_y = (prev_dim_y / pooling_layer->getYReceptive());
+					int new_no_cols, new_no_rows;
+
+					pooling_layer->setXSize(pool_dim_x);
+					pooling_layer->setYSize(pool_dim_y);
+					pooling_layer->setSize(pool_dim_x*pool_dim_y);
+
+					if(layer_list->at(i+1)->getLayerType() == CONV_LAYER)
+					{
+						Conv_Layer *next_layer = (Conv_Layer*) layer_list->at(i+1);
+
+						int dim_x = (pool_dim_x - next_layer->getXReceptive() + 1) / next_layer->getStepSize();
+						int dim_y = (pool_dim_y - next_layer->getYReceptive() + 1) / next_layer->getStepSize();
+
+						new_no_cols = next_layer->getXReceptive()*next_layer->getYReceptive()*last_layer->getNoFeatureMaps();
+						new_no_rows = dim_x*dim_y;
+					}
+					else if (layer_list->at(i+1)->getLayerType() == FULLY_CONNECTED_LAYER)
+					{
+						new_no_cols = (last_layer->getXSize()/pooling_layer->getXReceptive()) * (last_layer->getYSize()/pooling_layer->getYReceptive()) *
+								last_layer->getNoFeatureMaps();
+						new_no_rows = 1;
+					}
+
+					/** adding a pointer to the pointer array be reallocating and resizing the array 		   */
+					nodeArrayPtrs = (float**) realloc(nodeArrayPtrs, (node_index+1) * sizeof(float*));
+					cuda_error = cudaMalloc((void**) nodeArrayPtrs[node_index], new_no_rows * new_no_cols * sizeof(float));
+
+					/* save array dimensions */
+					nodeArrayLengths = (int*) realloc(nodeArrayLengths, (node_index+1)*sizeof(int));
+					nodeMatrixDims_x = (int*) realloc(nodeMatrixDims_x, (node_index+1)*sizeof(int));
+					nodeMatrixDims_y = (int*) realloc(nodeMatrixDims_y, (node_index+1)*sizeof(int));
+
+					nodeArrayLengths[node_index] = new_no_rows * new_no_cols;
+					nodeMatrixDims_x[node_index] = new_no_rows;
+					nodeMatrixDims_y[node_index] = new_no_cols;
+
+
+
+					node_index++;
+					no_node_matrices++;
+
+					pooling_layer->setSize(pool_dim_x*pool_dim_y*prev_no_features);
+				}
+				else
+				{
+					return false;
+				}
+				break;
+			}
+			case FULLY_CONNECTED_LAYER:
+			{
+				FullyConnected_Layer* fullyConn_layer = (FullyConnected_Layer*) layer;
+				fullyConn_layer->setBiasIndex(bias_index);
+				fullyConn_layer->setNodeIndex(node_index);
+				fullyConn_layer->setWeightIndex(weight_index);
+
+				/** adding a pointer to the pointer arrays be reallocating and resizing the arrays 		   */
+				nodeArrayPtrs   = (float**) realloc(nodeArrayPtrs, (node_index+1)*sizeof(float*));
+				weightArrayPtrs = (float**) realloc(weightArrayPtrs, (weight_index+1)*sizeof(float*));
+				biasArrayPtrs   = (float**) realloc(biasArrayPtrs, (bias_index+1)*sizeof(float*));
+
+				/** allocating memory on GPU device for the matrices */
+				cuda_error = cudaMalloc((void**) nodeArrayPtrs[node_index], fullyConn_layer->getSize()*sizeof(float));
+				cuda_error = cudaMalloc((void**) weightArrayPtrs[weight_index], layer_list->at(i-1)->getSize()*fullyConn_layer->getSize()*sizeof(float));
+				cuda_error = cudaMalloc((void**) biasArrayPtrs[bias_index], fullyConn_layer->getSize()*sizeof(float));
+
+
+				/* save array dimensions */
+				nodeArrayLengths = (int*) realloc(nodeArrayLengths, (node_index+1)*sizeof(int));
+				nodeMatrixDims_x = (int*) realloc(nodeMatrixDims_x, (node_index+1)*sizeof(int));
+				nodeMatrixDims_y = (int*) realloc(nodeMatrixDims_y, (node_index+1)*sizeof(int));
+
+				nodeArrayLengths[node_index] = fullyConn_layer->getSize();
+				nodeMatrixDims_x[node_index] = 1;
+				nodeMatrixDims_y[node_index] = fullyConn_layer->getSize();
+
+				weightArrayLengths = (int*) realloc(weightArrayLengths, (weight_index+1)*sizeof(int));
+				weightMatrixDims_x = (int*) realloc(weightMatrixDims_x, (weight_index+1)*sizeof(int));
+				weightMatrixDims_y = (int*) realloc(weightMatrixDims_y, (weight_index+1)*sizeof(int));
+
+				weightArrayLengths[weight_index] = layer_list->at(i-1)->getSize()*fullyConn_layer->getSize();
+				weightMatrixDims_x[weight_index] = layer_list->at(i-1)->getSize();
+				weightMatrixDims_y[weight_index] = fullyConn_layer->getSize();
+
+
+				biasArrayLengths = (int*) realloc(biasArrayLengths, (bias_index+1)*sizeof(int));
+				biasMatrixDims_x = (int*) realloc(biasMatrixDims_x, (bias_index+1)*sizeof(int));
+				biasMatrixDims_y = (int*) realloc(biasMatrixDims_y, (bias_index+1)*sizeof(int));
+
+				biasArrayLengths[bias_index] = fullyConn_layer->getSize();
+				biasMatrixDims_x[bias_index] = 1;
+				biasMatrixDims_y[bias_index] = fullyConn_layer->getSize();
+
+				node_index++;
+				weight_index++;
+				bias_index++;
+
+				no_node_matrices++;
+				no_weight_matrices++;
+				no_bias_matrices++;
+
+				break;
+			}
+			case DROPOUT_LAYER:
+			{
+				//TODO not implemented yet
+				break;
+			}
+			default:
+			{
+				break;
+			}
+		}
+	}
+
+	/* allocate memory on GPU device for array lengths and matrix dimensions */
+
+	cuda_error = cudaMalloc((void**) nodeDeviceArrayLengths, no_node_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) weightDeviceArrayLengths, no_weight_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) biasDeviceArrayLengths, no_bias_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) nodeDerivDeviceArrayLengths, no_node_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) weightDerivDeviceArrayLengths, no_weight_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) biasDerivDeviceArrayLengths, no_bias_matrices * sizeof(int));
+
+	cuda_error = cudaMalloc((void**) nodeDeviceMatrixDims_x, no_node_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) weightDeviceMatrixDims_x, no_weight_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) biasDeviceMatrixDims_x, no_bias_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) nodeDerivDeviceMatrixDims_x, no_node_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) weightDerivDeviceMatrixDims_x, no_weight_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) biasDerivDeviceMatrixDims_x, no_bias_matrices * sizeof(int));
+
+	cuda_error = cudaMalloc((void**) nodeDeviceMatrixDims_y, no_node_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) weightDeviceMatrixDims_y, no_weight_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) biasDeviceMatrixDims_y, no_bias_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) nodeDerivDeviceMatrixDims_y, no_node_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) weightDerivDeviceMatrixDims_y, no_weight_matrices * sizeof(int));
+	cuda_error = cudaMalloc((void**) biasDerivDeviceMatrixDims_y, no_bias_matrices * sizeof(int));
+
+	/* transfer host data to device memory */
+
+	cuda_error = cudaMemcpy(nodeDeviceArrayLengths, nodeArrayLengths, no_node_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(weightDeviceArrayLengths, weightArrayLengths, no_weight_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(biasDeviceArrayLengths, biasArrayLengths, no_bias_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(nodeDerivDeviceArrayLengths, nodeArrayLengths, no_node_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(weightDerivDeviceArrayLengths, weightArrayLengths, no_weight_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(biasDerivDeviceArrayLengths, biasArrayLengths, no_bias_matrices * sizeof(int), cudaMemcpyHostToDevice);
+
+	cuda_error = cudaMemcpy(nodeDeviceMatrixDims_x, nodeMatrixDims_x, no_node_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(weightDeviceMatrixDims_x, weightMatrixDims_x, no_weight_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(biasDeviceMatrixDims_x, biasMatrixDims_x, no_bias_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(nodeDerivDeviceMatrixDims_x, nodeMatrixDims_x, no_node_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(weightDerivDeviceMatrixDims_x, weightMatrixDims_x, no_weight_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(biasDerivDeviceMatrixDims_x, biasMatrixDims_x, no_bias_matrices * sizeof(int), cudaMemcpyHostToDevice);
+
+	cuda_error = cudaMemcpy(nodeDeviceMatrixDims_y, nodeMatrixDims_y, no_node_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(weightDeviceMatrixDims_y, weightMatrixDims_y, no_weight_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(biasDeviceMatrixDims_y, biasMatrixDims_y, no_bias_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(nodeDerivDeviceMatrixDims_y, nodeMatrixDims_y, no_node_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(weightDerivDeviceMatrixDims_y, weightMatrixDims_y, no_weight_matrices * sizeof(int), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(biasDerivDeviceMatrixDims_y, biasMatrixDims_y, no_bias_matrices * sizeof(int), cudaMemcpyHostToDevice);
+
+	cuda_error = cudaMemcpy(device_layer_list, layer_array, layer_list->size()*sizeof(Layer), cudaMemcpyHostToDevice);
+
+	/* initializes matrices with uniform pseudo-random values between 0.0 and 1.0 */
+	cuda::init<<<1,16>>>(nodeArrayPtrs, node_index, nodeDeviceArrayLengths);
+	cuda::init<<<1,16>>>(weightArrayPtrs, weight_index, weightDeviceArrayLengths);
+	cuda::init<<<1,16>>>(biasArrayPtrs, bias_index, biasDeviceArrayLengths);
+
+	cudaDeviceSynchronize();
+
+	return true;
+}
+
+bool Network::train(int batch_size, int no_iterations)
+{
+	cudaError_t cuda_error = cudaSuccess;
+	float* devicePictureAddr, *deviceLabelAddr;
+	int outer_loop = NO_DATA_D/batch_size;
+
+	bool ret_val = false;
+
+	for(int l = 0; l < no_iterations; l++)
+	{
+		for(int j = 0; j < outer_loop; j++)
+		{
+			/* allocate device memory for a batch of input pictures */
+			cuda_error = cudaMalloc((void**) &devicePictureAddr, batch_size * 784 * sizeof(float));
+			cuda_error = cudaMalloc((void**) &deviceLabelAddr, batch_size * 10 * sizeof(float));
+
+			/* transfer picture data to device */
+			for(int i = 0; i < batch_size; i++)
+			{
+				Picture* picture = train_picture_container->get_nextpicture();
+
+				cuda_error = cudaMemcpy(&devicePictureAddr[i*784], picture->get_input(), 784 * sizeof(float), cudaMemcpyHostToDevice);
+				cuda_error = cudaMemcpy(&deviceLabelAddr[i*10], picture->get_output(), 10 * sizeof(float), cudaMemcpyHostToDevice);
+
+
+			}
+//			train(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
+//						float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs,
+//						int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
+//						int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y,
+//						int *biasMatrixDims_x, int* biasMatrixDims_y, float* cost_sum);
+			cuda::train<<<5,32>>>(device_layer_list, layer_list->size(), devicePictureAddr, batch_size, deviceLabelAddr,
+					nodeArrayPtrs, weightArrayPtrs, biasArrayPtrs, no_node_matrices, no_weight_matrices, no_bias_matrices,
+					nodeDeviceMatrixDims_x, nodeDeviceMatrixDims_y, weightDeviceMatrixDims_x,
+					weightDeviceMatrixDims_y, biasDeviceMatrixDims_x, biasDeviceMatrixDims_y);
+		}
+	}
+	return ret_val;
+}
+
+float Network::test()
+{
+	int batch_size = 150;
+	int correct_detections = 0;
+	int correct_per_batch = 0;
+	float* devicePictureAddr, *deviceLabelAddr;
+
+
+	for(int i = 0; i < NO_TEST_FILES_D; i++)
+	{
+		for(int j = 0; j < NO_PICS_PER_FILE_D; j++)
+		{
+			/* allocate device memory for a batch of input pictures */
+			cuda_error = cudaMalloc((void**) &devicePictureAddr, batch_size * 784 * sizeof(float));
+
+			/* transfer picture data to device */
+			for(int i = 0; i < batch_size; i++)
+			{
+				Picture* picture = train_picture_container->get_nextpicture();
+
+				cuda_error = cudaMemcpy(&devicePictureAddr[i*784], picture->get_input(), 784 * sizeof(float), cudaMemcpyHostToDevice);
+
+			}
+
+			cuda::test<<<5,32>>>(device_layer_list, layer_list->size(), devicePictureAddr, batch_size, deviceLabelAddr,
+					nodeArrayPtrs, weightArrayPtrs, biasArrayPtrs, no_node_matrices, no_weight_matrices, no_bias_matrices, nodeDeviceMatrixDims_x,
+					nodeDeviceMatrixDims_y, weightDeviceMatrixDims_x,
+					weightDeviceMatrixDims_y, biasDeviceMatrixDims_x, biasDeviceMatrixDims_y, &correct_per_batch);
+			correct_detections += correct_per_batch;
+		}
+	}
+	return (float)correct_detections/(NO_PICS_PER_FILE_D*NO_TEST_FILES_D);
+}
+

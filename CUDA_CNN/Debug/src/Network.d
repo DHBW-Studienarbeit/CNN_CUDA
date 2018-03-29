@@ -220,4 +220,10 @@ src/Network.o : ../src/Network.cu \
     /usr/include/c++/5/bits/basic_ios.tcc \
     /usr/include/c++/5/bits/ostream.tcc \
     /usr/include/c++/5/istream \
-    /usr/include/c++/5/bits/istream.tcc
+    /usr/include/c++/5/bits/istream.tcc \
+    /usr/local/cuda-8.0/bin/..//include/cublas_v2.h \
+    /usr/local/cuda-8.0/bin/..//include/cublas_api.h \
+    /usr/local/cuda-8.0/bin/..//include/cuComplex.h \
+    /usr/local/cuda-8.0/bin/..//include/cuda_fp16.h \
+    ../src/cuda_kernels.h \
+    /usr/local/cuda-8.0/bin/..//include/curand.h
