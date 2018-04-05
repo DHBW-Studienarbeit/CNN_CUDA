@@ -31,14 +31,6 @@ public:
 	int  getStepSize();
 	int  getNoFeatureMaps();
 
-	void backpropagate( Matrix* inputs,
-								Matrix* activations,
-								Matrix* input_derivations,
-								Matrix* activation_derivations,
-								Matrix* weights,
-								Matrix* biases,
-								Matrix* weight_derivations,
-								Matrix* bias_derivations);
 };
 
 #endif /* CONVLAYER_HPP_ */

@@ -11,8 +11,6 @@
 
 #include <iostream>
 #include <string>
-#include "./testfile.h"
-#include "matrix.h"
 #include "Network.h"
 
 #define PICTURE_SIZE_D			28
@@ -51,7 +49,7 @@ int main(int argc, char **argv) {
 	if(correct_net)
 	{
 		std::cout << "Generation was successful! Start training..." << std::endl;
-		train_success = network->train(BATCH_SIZE_D, NO_ITERATIONS_D);
+		train_success = network->train(150, NO_ITERATIONS_D);
 	}
 	else
 	{

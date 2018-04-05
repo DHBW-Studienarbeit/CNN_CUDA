@@ -21,7 +21,7 @@
 					<folderInfo id="com.nvidia.cuda.ide.eight_zero.configuration.debug.72583266." name="/" resourcePath="">
 						<toolChain id="com.nvidia.cuda.tools.toolchain.eight_zero.exe.debug.1144387280" name="CUDA Toolkit 8.0" nonInternalBuilderId="com.nvidia.cuda.ide.builder" superClass="com.nvidia.cuda.tools.toolchain.eight_zero.exe.debug">
 							<targetPlatform archList="all" binaryParser="com.nvidia.cuda.ide.elf;com.nvidia.cuda.ide.macho;com.nvidia.cuda.ide.cubin" id="com.nvidia.cuda.ide.targetPlatform.1309777883" isAbstract="false" name="Debug Platform" osList="linux,macosx" superClass="com.nvidia.cuda.ide.targetPlatform"/>
-							<builder buildPath="${workspace_loc:/CUDA_CNN}/Debug" id="com.nvidia.cuda.ide.builder.768124036" keepEnvironmentInBuildfile="false" name="CUDA Toolkit 8.0 Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.nvidia.cuda.ide.builder"/>
+							<builder buildPath="${workspace_loc:/CUDA_CNN}/Debug" id="com.nvidia.cuda.ide.builder.768124036" keepEnvironmentInBuildfile="false" name="CUDA Toolkit 8.0 Builder" parallelBuildOn="true" parallelizationNumber="optimal" stopOnErr="false" superClass="com.nvidia.cuda.ide.builder"/>
 							<tool id="nvcc.compiler.base.761039522" name="NVCC Compiler" superClass="nvcc.compiler.base">
 								<option id="nvcc.compiler.deviceDebug.1958295929" name="Generate device debug information (-G)" superClass="nvcc.compiler.deviceDebug" value="true" valueType="boolean"/>
 								<option id="nvcc.compiler.option.level.305005590" name="Generate host debug information (-g)" superClass="nvcc.compiler.option.level" value="true" valueType="boolean"/>
@@ -29,21 +29,18 @@
 								<option id="nvcc.compiler.pic.1073192820" name="Position Independent Code (-fPIC)" superClass="nvcc.compiler.pic"/>
 								<option id="nvcc.compiler.cpp11option.1301848199" name="Enable C++11 support (-std=c++11)" superClass="nvcc.compiler.cpp11option" value="false" valueType="boolean"/>
 								<option id="nvcc.compiler.option.lineinfo.1921291992" name="Generate line-number information for device code (-lineinfo)" superClass="nvcc.compiler.option.lineinfo" value="false" valueType="boolean"/>
-								<option id="nvcc.compiler.include.paths.1919137870" name="Include paths (-I)" superClass="nvcc.compiler.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="/usr/local/cuda/include"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CUDA_CNN}&quot;"/>
-								</option>
+								<option id="nvcc.compiler.include.paths.1919137870" name="Include paths (-I)" superClass="nvcc.compiler.include.paths"/>
 								<inputType id="nvcc.compiler.input.cu.1114966861" superClass="nvcc.compiler.input.cu"/>
 								<inputType id="nvcc.compiler.input.cpp.609740065" superClass="nvcc.compiler.input.cpp"/>
 								<inputType id="nvcc.compiler.input.c.1785244734" superClass="nvcc.compiler.input.c"/>
 							</tool>
 							<tool id="nvcc.linker.base.1182052947" name="NVCC Linker" superClass="nvcc.linker.base">
 								<option id="nvcc.linker.option.libs.176850128" name="Libraries (-l)" superClass="nvcc.linker.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="cublas"/>
+									<listOptionValue builtIn="false" value="cublas_device"/>
+									<listOptionValue builtIn="false" value="curand"/>
 								</option>
-								<option id="nvcc.linker.option.paths.1919619081" name="Library search path (-L)" superClass="nvcc.linker.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="/usr/local/cuda/lib"/>
-								</option>
+								<option id="nvcc.linker.option.paths.1919619081" name="Library search path (-L)" superClass="nvcc.linker.option.paths"/>
+								<option id="nvcc.linker.option.cudart.1798342348" name="CUDA Runtime Library:" superClass="nvcc.linker.option.cudart" value="nvcc.linker.option.cudart.static" valueType="enumerated"/>
 								<inputType id="nvcc.linker.input.1912629156" superClass="nvcc.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -55,8 +52,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.nvidia.cuda.ide.eight_zero.configuration.debug.72583266.161157474" name="testfile.h" rcbsApplicability="disable" resourcePath="src/testfile.h" toolsToInvoke=""/>
-					<fileInfo id="com.nvidia.cuda.ide.eight_zero.configuration.debug.72583266.1631406775" name="matrix.h" rcbsApplicability="disable" resourcePath="src/matrix.h" toolsToInvoke=""/>
 					<sourceEntries>
 						<entry excluding="testfile.h|testfile.cu|matrix.h|matrix.cu" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>

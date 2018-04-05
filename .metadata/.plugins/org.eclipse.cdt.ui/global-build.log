@@ -1,191 +1,644 @@
-10:23:56 **** Build of configuration Debug for project CUDA_CNN ****
-make -j8 all 
-Building file: ../src/CUDA_CNN.cu
-Building file: ../src/ConvLayer.cu
-Building file: ../src/DropoutLayer.cu
-Building file: ../src/FullyConnectedLayer.cu
-Building file: ../src/InputLayer.cu
-Invoking: NVCC Compiler
-Building file: ../src/Layer.cu
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/CUDA_CNN.d" "../src/CUDA_CNN.cu"
-Invoking: NVCC Compiler
-Invoking: NVCC Compiler
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/ConvLayer.d" "../src/ConvLayer.cu"
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/DropoutLayer.d" "../src/DropoutLayer.cu"
-Building file: ../src/MaxPoolingLayer.cu
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/FullyConnectedLayer.d" "../src/FullyConnectedLayer.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/InputLayer.d" "../src/InputLayer.cu"
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Layer.d" "../src/Layer.cu"
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/MaxPoolingLayer.d" "../src/MaxPoolingLayer.cu"
-Building file: ../src/Network.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Network.d" "../src/Network.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/DropoutLayer.o" "../src/DropoutLayer.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/MaxPoolingLayer.o" "../src/MaxPoolingLayer.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/ConvLayer.o" "../src/ConvLayer.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/FullyConnectedLayer.o" "../src/FullyConnectedLayer.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Layer.o" "../src/Layer.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/InputLayer.o" "../src/InputLayer.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/CUDA_CNN.o" "../src/CUDA_CNN.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Network.o" "../src/Network.cu"
-../src/Network.cu(48): warning: variable "cuda_error" was set but never used
-
-../src/Network.cu(131): warning: variable "cuda_error" was set but never used
-
-../src/Network.cu(493): warning: variable "cuda_error" was set but never used
-
-../src/Network.cu(644): warning: variable "cuda_error" was set but never used
-
-Finished building: ../src/DropoutLayer.cu
+11:30:52 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+Building target: CUDA_CNN
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "CUDA_CNN"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/cuda_kernels.o ./src/mathematics.o   -lcublas_device -lcurand
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+Finished building target: CUDA_CNN
  
-Building file: ../src/Picture.cu
-Finished building: ../src/ConvLayer.cu
- 
-Building file: ../src/PictureContainer.cu
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/PictureContainer.d" "../src/PictureContainer.cu"
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Picture.d" "../src/Picture.cu"
-Finished building: ../src/FullyConnectedLayer.cu
- 
+11:31:02 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+make: Für das Ziel „all“ ist nichts zu tun.
+11:35:32 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+make: Für das Ziel „all“ ist nichts zu tun.
+11:40:36 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
 Building file: ../src/cuda_kernels.cu
 Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/cuda_kernels.d" "../src/cuda_kernels.cu"
-Finished building: ../src/Layer.cu
- 
-Building file: ../src/mathematics.cu
-Finished building: ../src/MaxPoolingLayer.cu
- 
-Invoking: NVCC Compiler
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/mathematics.d" "../src/mathematics.cu"
-Finished building: ../src/InputLayer.cu
- 
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/mathematics.o" "../src/mathematics.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/cuda_kernels.o" "../src/cuda_kernels.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/PictureContainer.o" "../src/PictureContainer.cu"
-/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Picture.o" "../src/Picture.cu"
-../src/Network.cu(48): warning: variable "cuda_error" was set but never used
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/cuda_kernels.d" "../src/cuda_kernels.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/cuda_kernels.o" "../src/cuda_kernels.cu"
+../src/cuda_kernels.cu(93): warning: variable "cublasState" was set but never used
 
-../src/Network.cu(131): warning: variable "cuda_error" was set but never used
+../src/cuda_kernels.cu(99): warning: variable "alpha_ptr" was declared but never referenced
 
-../src/Network.cu(493): warning: variable "cuda_error" was set but never used
+../src/cuda_kernels.cu(100): warning: variable "beta_ptr" was declared but never referenced
 
-../src/Network.cu(644): warning: variable "cuda_error" was set but never used
+../src/cuda_kernels.cu(102): warning: variable "output_size" was declared but never referenced
 
-../src/cuda_kernels.cu(27): warning: variable "curand_state" was set but never used
+../src/cuda_kernels.cu(137): warning: variable "dimSquare" was declared but never referenced
 
-../src/cuda_kernels.cu(96): warning: variable "cublasState" was set but never used
+../src/cuda_kernels.cu(143): warning: variable "cuda_error" was set but never used
 
-../src/cuda_kernels.cu(102): warning: variable "alpha_ptr" was declared but never referenced
+../src/cuda_kernels.cu(226): warning: variable "cublasState" was set but never used
 
-../src/cuda_kernels.cu(103): warning: variable "beta_ptr" was declared but never referenced
+../src/cuda_kernels.cu(232): warning: variable "alpha_ptr" was declared but never referenced
 
-../src/cuda_kernels.cu(105): warning: variable "output_size" was declared but never referenced
+../src/cuda_kernels.cu(233): warning: variable "beta_ptr" was declared but never referenced
 
-../src/cuda_kernels.cu(140): warning: variable "dimSquare" was declared but never referenced
-Finished building: ../src/CUDA_CNN.cu
+../src/cuda_kernels.cu(261): warning: variable "cuda_error" was declared but never referenced
 
-../src/cuda_kernels.cu(146): warning: variable "cuda_error" was set but never used
- 
+../src/cuda_kernels.cu(381): warning: variable "cuda_error" was declared but never referenced
 
-../src/cuda_kernels.cu(229): warning: variable "cublasState" was set but never used
+../src/cuda_kernels.cu(508): warning: variable "convDim_x" was declared but never referenced
 
-../src/cuda_kernels.cu(235): warning: variable "alpha_ptr" was declared but never referenced
+../src/cuda_kernels.cu(509): warning: variable "convDim_y" was declared but never referenced
 
-../src/cuda_kernels.cu(236): warning: variable "beta_ptr" was declared but never referenced
+../src/cuda_kernels.cu(618): warning: variable "nextDim_x" was declared but never referenced
 
-../src/cuda_kernels.cu(264): warning: variable "cuda_error" was declared but never referenced
+../src/cuda_kernels.cu(619): warning: variable "nextDim_y" was declared but never referenced
 
-../src/cuda_kernels.cu(384): warning: variable "cuda_error" was declared but never referenced
+../src/cuda_kernels.cu(684): warning: variable "cublasState" was set but never used
 
-../src/cuda_kernels.cu(511): warning: variable "convDim_x" was declared but never referenced
+../src/cuda_kernels.cu(690): warning: variable "alpha_ptr" was declared but never referenced
 
-../src/cuda_kernels.cu(512): warning: variable "convDim_y" was declared but never referenced
+../src/cuda_kernels.cu(691): warning: variable "beta_ptr" was declared but never referenced
 
-../src/cuda_kernels.cu(621): warning: variable "nextDim_x" was declared but never referenced
+../src/cuda_kernels.cu(736): warning: variable "cuda_error" was declared but never referenced
 
-../src/cuda_kernels.cu(622): warning: variable "nextDim_y" was declared but never referenced
+../src/cuda_kernels.cu(737): warning: variable "cublasState" was set but never used
 
-../src/cuda_kernels.cu(685): warning: variable "cublasState" was set but never used
+../src/cuda_kernels.cu(778): warning: variable "dimSquare" was declared but never referenced
 
-../src/cuda_kernels.cu(691): warning: variable "alpha_ptr" was declared but never referenced
+../src/cuda_kernels.cu(784): warning: variable "cuda_error" was set but never used
 
-../src/cuda_kernels.cu(692): warning: variable "beta_ptr" was declared but never referenced
+../src/cuda_kernels.cu(93): warning: variable "cublasState" was set but never used
 
-../src/cuda_kernels.cu(737): warning: variable "cuda_error" was declared but never referenced
+../src/cuda_kernels.cu(99): warning: variable "alpha_ptr" was declared but never referenced
 
-../src/cuda_kernels.cu(738): warning: variable "cublasState" was set but never used
+../src/cuda_kernels.cu(100): warning: variable "beta_ptr" was declared but never referenced
 
-../src/cuda_kernels.cu(779): warning: variable "dimSquare" was declared but never referenced
+../src/cuda_kernels.cu(102): warning: variable "output_size" was declared but never referenced
 
-../src/cuda_kernels.cu(785): warning: variable "cuda_error" was set but never used
+../src/cuda_kernels.cu(137): warning: variable "dimSquare" was declared but never referenced
 
-Finished building: ../src/mathematics.cu
- 
-../src/cuda_kernels.cu(27): warning: variable "curand_state" was set but never used
+../src/cuda_kernels.cu(143): warning: variable "cuda_error" was set but never used
 
-../src/cuda_kernels.cu(96): warning: variable "cublasState" was set but never used
+../src/cuda_kernels.cu(226): warning: variable "cublasState" was set but never used
 
-../src/cuda_kernels.cu(102): warning: variable "alpha_ptr" was declared but never referenced
+../src/cuda_kernels.cu(232): warning: variable "alpha_ptr" was declared but never referenced
 
-../src/cuda_kernels.cu(103): warning: variable "beta_ptr" was declared but never referenced
+../src/cuda_kernels.cu(233): warning: variable "beta_ptr" was declared but never referenced
 
-../src/cuda_kernels.cu(105): warning: variable "output_size" was declared but never referenced
+../src/cuda_kernels.cu(261): warning: variable "cuda_error" was declared but never referenced
 
-../src/cuda_kernels.cu(140): warning: variable "dimSquare" was declared but never referenced
+../src/cuda_kernels.cu(381): warning: variable "cuda_error" was declared but never referenced
 
-../src/cuda_kernels.cu(146): warning: variable "cuda_error" was set but never used
+../src/cuda_kernels.cu(508): warning: variable "convDim_x" was declared but never referenced
 
-../src/cuda_kernels.cu(229): warning: variable "cublasState" was set but never used
+../src/cuda_kernels.cu(509): warning: variable "convDim_y" was declared but never referenced
 
-../src/cuda_kernels.cu(235): warning: variable "alpha_ptr" was declared but never referenced
+../src/cuda_kernels.cu(618): warning: variable "nextDim_x" was declared but never referenced
 
-../src/cuda_kernels.cu(236): warning: variable "beta_ptr" was declared but never referenced
+../src/cuda_kernels.cu(619): warning: variable "nextDim_y" was declared but never referenced
 
-../src/cuda_kernels.cu(264): warning: variable "cuda_error" was declared but never referenced
+../src/cuda_kernels.cu(684): warning: variable "cublasState" was set but never used
 
-../src/cuda_kernels.cu(384): warning: variable "cuda_error" was declared but never referenced
+../src/cuda_kernels.cu(690): warning: variable "alpha_ptr" was declared but never referenced
 
-../src/cuda_kernels.cu(511): warning: variable "convDim_x" was declared but never referenced
+../src/cuda_kernels.cu(691): warning: variable "beta_ptr" was declared but never referenced
 
-../src/cuda_kernels.cu(512): warning: variable "convDim_y" was declared but never referenced
+../src/cuda_kernels.cu(736): warning: variable "cuda_error" was declared but never referenced
 
-../src/cuda_kernels.cu(621): warning: variable "nextDim_x" was declared but never referenced
+../src/cuda_kernels.cu(737): warning: variable "cublasState" was set but never used
 
-../src/cuda_kernels.cu(622): warning: variable "nextDim_y" was declared but never referenced
+../src/cuda_kernels.cu(778): warning: variable "dimSquare" was declared but never referenced
 
-../src/cuda_kernels.cu(685): warning: variable "cublasState" was set but never used
+../src/cuda_kernels.cu(784): warning: variable "cuda_error" was set but never used
 
-../src/cuda_kernels.cu(691): warning: variable "alpha_ptr" was declared but never referenced
-
-../src/cuda_kernels.cu(692): warning: variable "beta_ptr" was declared but never referenced
-
-../src/cuda_kernels.cu(737): warning: variable "cuda_error" was declared but never referenced
-
-../src/cuda_kernels.cu(738): warning: variable "cublasState" was set but never used
-
-../src/cuda_kernels.cu(779): warning: variable "dimSquare" was declared but never referenced
-
-../src/cuda_kernels.cu(785): warning: variable "cuda_error" was set but never used
-
-Finished building: ../src/Network.cu
- 
-Finished building: ../src/PictureContainer.cu
- 
-Finished building: ../src/Picture.cu
- 
 Finished building: ../src/cuda_kernels.cu
  
 Building target: CUDA_CNN
 Invoking: NVCC Linker
-/usr/local/cuda-8.0/bin/nvcc --cudart static -L/usr/local/cuda/lib --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "CUDA_CNN"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/cuda_kernels.o ./src/mathematics.o   -lcublas
-nvlink error   : Undefined reference to 'cublasCreate_v2' in './src/cuda_kernels.o'
-nvlink error   : Undefined reference to 'cublasSdot_v2' in './src/cuda_kernels.o'
-nvlink error   : Undefined reference to 'cublasDestroy_v2' in './src/cuda_kernels.o'
-nvlink error   : Undefined reference to '_ZN4cuda19fullyConnected_backEPPfS1_S1_S1_ii' in './src/cuda_kernels.o'
-make: *** [CUDA_CNN] Fehler 255
-makefile:59: die Regel für Ziel „CUDA_CNN“ scheiterte
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "CUDA_CNN"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/cuda_kernels.o ./src/mathematics.o   -lcublas_device -lcurand
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+Finished building target: CUDA_CNN
+ 
+11:41:13 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+make: Für das Ziel „all“ ist nichts zu tun.
+11:41:37 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+make: Für das Ziel „all“ ist nichts zu tun.
+11:43:00 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+make: Für das Ziel „all“ ist nichts zu tun.
+11:46:23 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+Building file: ../src/Network.cu
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Network.d" "../src/Network.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Network.o" "../src/Network.cu"
+../src/Network.cu(48): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(131): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(493): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(644): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(48): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(131): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(493): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(644): warning: variable "cuda_error" was set but never used
+
+Finished building: ../src/Network.cu
+ 
+Building target: CUDA_CNN
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "CUDA_CNN"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/cuda_kernels.o ./src/mathematics.o   -lcublas_device -lcurand
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+Finished building target: CUDA_CNN
+ 
+11:55:34 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+Building file: ../src/Network.cu
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Network.d" "../src/Network.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Network.o" "../src/Network.cu"
+../src/Network.cu(48): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(131): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(493): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(644): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(48): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(131): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(493): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(644): warning: variable "cuda_error" was set but never used
+
+Finished building: ../src/Network.cu
+ 
+Building target: CUDA_CNN
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "CUDA_CNN"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/cuda_kernels.o ./src/mathematics.o   -lcublas_device -lcurand
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+Finished building target: CUDA_CNN
+ 
+11:55:42 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+make: Für das Ziel „all“ ist nichts zu tun.
+11:59:22 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+make: Für das Ziel „all“ ist nichts zu tun.
+12:04:24 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+Building file: ../src/CUDA_CNN.cu
+Invoking: NVCC Compiler
+Building file: ../src/Network.cu
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/CUDA_CNN.d" "../src/CUDA_CNN.cu"
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Network.d" "../src/Network.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/CUDA_CNN.o" "../src/CUDA_CNN.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Network.o" "../src/Network.cu"
+../src/Network.cu(48): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(131): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(493): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(644): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(48): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(131): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(493): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(644): warning: variable "cuda_error" was set but never used
+
+Finished building: ../src/CUDA_CNN.cu
+ 
+Finished building: ../src/Network.cu
+ 
+Building target: CUDA_CNN
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "CUDA_CNN"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/cuda_kernels.o ./src/mathematics.o   -lcublas_device -lcurand
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+Finished building target: CUDA_CNN
+ 
+12:06:46 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+Building file: ../src/cuda_kernels.cu
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/cuda_kernels.d" "../src/cuda_kernels.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/cuda_kernels.o" "../src/cuda_kernels.cu"
+../src/cuda_kernels.cu(93): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(99): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(100): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(102): warning: variable "output_size" was declared but never referenced
+
+../src/cuda_kernels.cu(137): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(143): warning: variable "cuda_error" was set but never used
+
+../src/cuda_kernels.cu(226): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(232): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(233): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(261): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(387): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(514): warning: variable "convDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(515): warning: variable "convDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(624): warning: variable "nextDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(625): warning: variable "nextDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(690): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(696): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(697): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(742): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(743): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(784): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(790): warning: variable "cuda_error" was set but never used
+
+../src/cuda_kernels.cu(93): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(99): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(100): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(102): warning: variable "output_size" was declared but never referenced
+
+../src/cuda_kernels.cu(137): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(143): warning: variable "cuda_error" was set but never used
+
+../src/cuda_kernels.cu(226): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(232): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(233): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(261): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(387): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(514): warning: variable "convDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(515): warning: variable "convDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(624): warning: variable "nextDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(625): warning: variable "nextDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(690): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(696): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(697): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(742): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(743): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(784): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(790): warning: variable "cuda_error" was set but never used
+
+Finished building: ../src/cuda_kernels.cu
+ 
+Building target: CUDA_CNN
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "CUDA_CNN"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/cuda_kernels.o ./src/mathematics.o   -lcublas_device -lcurand
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+Finished building target: CUDA_CNN
+ 
+12:07:27 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+Building file: ../src/cuda_kernels.cu
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/cuda_kernels.d" "../src/cuda_kernels.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/cuda_kernels.o" "../src/cuda_kernels.cu"
+../src/cuda_kernels.cu(93): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(99): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(100): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(102): warning: variable "output_size" was declared but never referenced
+
+../src/cuda_kernels.cu(137): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(143): warning: variable "cuda_error" was set but never used
+
+../src/cuda_kernels.cu(226): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(232): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(233): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(261): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(387): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(514): warning: variable "convDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(515): warning: variable "convDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(624): warning: variable "nextDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(625): warning: variable "nextDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(690): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(696): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(697): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(742): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(743): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(784): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(790): warning: variable "cuda_error" was set but never used
+
+../src/cuda_kernels.cu(93): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(99): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(100): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(102): warning: variable "output_size" was declared but never referenced
+
+../src/cuda_kernels.cu(137): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(143): warning: variable "cuda_error" was set but never used
+
+../src/cuda_kernels.cu(226): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(232): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(233): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(261): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(387): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(514): warning: variable "convDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(515): warning: variable "convDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(624): warning: variable "nextDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(625): warning: variable "nextDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(690): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(696): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(697): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(742): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(743): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(784): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(790): warning: variable "cuda_error" was set but never used
+
+Finished building: ../src/cuda_kernels.cu
+ 
+Building target: CUDA_CNN
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "CUDA_CNN"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/cuda_kernels.o ./src/mathematics.o   -lcublas_device -lcurand
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+Finished building target: CUDA_CNN
+ 
+12:12:15 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+make -k -j8 all 
+make: Für das Ziel „all“ ist nichts zu tun.

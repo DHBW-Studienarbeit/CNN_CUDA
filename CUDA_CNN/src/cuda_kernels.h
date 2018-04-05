@@ -59,7 +59,7 @@ __device__ void backpropagate(Layer* layer_list, int no_layers, float* labels,
 __global__ void convolution_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
 						int node_index, int weight_index, int prev_nodeDim_x, int weightDim_x, int weightDim_y, LAYER_TYPE prevLayer);
 __global__ void fullyConnected_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
-						int node_index, int weight_index);
+						int node_index, int weight_index, int prev_nodeDim_x, int weightDim_x, int weightDim_y);
 __global__ void maxPooling_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
 		int node_index, int weight_index,
 		int x_receptive, int y_receptive,

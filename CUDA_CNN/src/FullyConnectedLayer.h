@@ -14,16 +14,6 @@ class FullyConnected_Layer: public Layer {
 public:
 	FullyConnected_Layer(int size);
 	virtual ~FullyConnected_Layer();
-
-	void backpropagate( Matrix* inputs,
-								Matrix* activations,
-								Matrix* input_derivations,
-								Matrix* activation_derivations,
-								Matrix* weights,
-								Matrix* biases,
-								Matrix* weight_derivations,
-								Matrix* bias_derivations);
-
 };
 
 #endif /* FULLYCONNECTEDLAYER_HPP_ */

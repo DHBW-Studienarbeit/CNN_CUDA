@@ -1,0 +1,158 @@
+11:09:24 **** Incremental Build of configuration Debug for project test_link ****
+make all 
+Building file: ../src/MaxPoolingLayer.cu
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/MaxPoolingLayer.d" "../src/MaxPoolingLayer.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/MaxPoolingLayer.o" "../src/MaxPoolingLayer.cu"
+Finished building: ../src/MaxPoolingLayer.cu
+ 
+Building file: ../src/Network.cu
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Network.d" "../src/Network.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Network.o" "../src/Network.cu"
+../src/Network.cu(48): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(131): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(493): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(644): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(48): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(131): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(493): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(644): warning: variable "cuda_error" was set but never used
+
+Finished building: ../src/Network.cu
+ 
+Building file: ../src/Picture.cu
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Picture.d" "../src/Picture.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Picture.o" "../src/Picture.cu"
+Finished building: ../src/Picture.cu
+ 
+Building file: ../src/PictureContainer.cu
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/PictureContainer.d" "../src/PictureContainer.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/PictureContainer.o" "../src/PictureContainer.cu"
+Finished building: ../src/PictureContainer.cu
+ 
+Building file: ../src/cuda_kernels.cu
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/cuda_kernels.d" "../src/cuda_kernels.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/cuda_kernels.o" "../src/cuda_kernels.cu"
+../src/cuda_kernels.cu(27): warning: variable "curand_state" was set but never used
+
+../src/cuda_kernels.cu(96): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(102): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(103): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(105): warning: variable "output_size" was declared but never referenced
+
+../src/cuda_kernels.cu(140): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(146): warning: variable "cuda_error" was set but never used
+
+../src/cuda_kernels.cu(229): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(235): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(236): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(264): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(384): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(511): warning: variable "convDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(512): warning: variable "convDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(621): warning: variable "nextDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(622): warning: variable "nextDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(684): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(690): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(691): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(736): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(737): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(778): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(784): warning: variable "cuda_error" was set but never used
+
+../src/cuda_kernels.cu(27): warning: variable "curand_state" was set but never used
+
+../src/cuda_kernels.cu(96): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(102): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(103): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(105): warning: variable "output_size" was declared but never referenced
+
+../src/cuda_kernels.cu(140): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(146): warning: variable "cuda_error" was set but never used
+
+../src/cuda_kernels.cu(229): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(235): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(236): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(264): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(384): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(511): warning: variable "convDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(512): warning: variable "convDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(621): warning: variable "nextDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(622): warning: variable "nextDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(684): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(690): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(691): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(736): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(737): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(778): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(784): warning: variable "cuda_error" was set but never used
+
+Finished building: ../src/cuda_kernels.cu
+ 
+Building file: ../src/mathematics.cu
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/mathematics.d" "../src/mathematics.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/mathematics.o" "../src/mathematics.cu"
+Finished building: ../src/mathematics.cu
+ 
+Building target: test_link
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "test_link"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/cuda_kernels.o ./src/help.o ./src/mathematics.o ./src/test_link.o   -lcublas
+nvlink error   : Undefined reference to 'cublasCreate_v2' in './src/cuda_kernels.o'
+nvlink error   : Undefined reference to 'cublasSdot_v2' in './src/cuda_kernels.o'
+nvlink error   : Undefined reference to 'cublasDestroy_v2' in './src/cuda_kernels.o'
+nvlink error   : Undefined reference to '_ZN4cuda19fullyConnected_backEPPfS1_S1_S1_ii' in './src/cuda_kernels.o'
+make: *** [test_link] Fehler 255
+makefile:59: die Regel für Ziel „test_link“ scheiterte
+
+11:09:30 Build Finished (took 5s.616ms)
+

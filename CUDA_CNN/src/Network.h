@@ -14,7 +14,6 @@
 
 #include <vector>
 #include "Layer.h"
-#include "matrix.h"
 #include "InputLayer.h"
 #include "ConvLayer.h"
 #include "DropoutLayer.h"

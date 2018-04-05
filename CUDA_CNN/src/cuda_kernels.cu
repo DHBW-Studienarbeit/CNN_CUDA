@@ -18,22 +18,19 @@ namespace cuda {
 
 void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLengths)
 {
-	int index = blockIdx.x * blockDim.x + threadIdx.x;
-	int stride = blockDim.x * gridDim.x;
-
-	for(int i = index; i < no_node_matrices; i+=stride)
-	{
-		curandGenerator_t generator;
-		curandStatus_t curand_state;
-
-		curand_state = curandCreateGenerator(&generator, CURAND_RNG_PSEUDO_DEFAULT);
-
-		curand_state = curandSetPseudoRandomGeneratorSeed(generator, (unsigned long long) clock());
-
-		curand_state = curandGenerateUniform(generator, nodeArrayPtrs[i], arrayLengths[i]);
-
-		curand_state = curandDestroyGenerator(generator);
-	}
+//	for(int i = 0; i < no_node_matrices; i++)
+//	{
+//		curandGenerator_t generator;
+//		curandStatus_t curand_state;
+//
+//		curand_state = curandCreateGenerator(&generator, CURAND_RNG_PSEUDO_DEFAULT);
+//
+//		curand_state = curandSetPseudoRandomGeneratorSeed(generator, (unsigned long long) clock());
+//
+//		curand_state = curandGenerateUniform(generator, nodeArrayPtrs[i], arrayLengths[i]);
+//
+//		curand_state = curandDestroyGenerator(generator);
+//	}
 }
 
 /**
@@ -274,6 +271,12 @@ __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, in
 	{
 		/* copying nodes, weights and biases for each picture-parallel thread to prevent race conditions */
 		float** nodeArrays, **weightArrays, **biasArrays, **nodeDerivArrays, **weightDerivArrays;
+
+		nodeArrays = (float**) malloc(no_node_matrices*sizeof(float*));
+		weightArrays = (float**) malloc(no_weight_matrices*sizeof(float*));
+		biasArrays = (float**) malloc(no_bias_matrices*sizeof(float*));
+		nodeDerivArrays = (float**) malloc(no_node_matrices*sizeof(float*));
+		weightDerivArrays = (float**) malloc(no_weight_matrices*sizeof(float*));
 
 		for(int i = 0; i < no_node_matrices; i++)
 		{
@@ -637,13 +640,15 @@ __device__ void backpropagate(Layer* layer_list, int no_layers, float* labels,
 
 			if (layer_list[i-1].type == POOLING_LAYER)
 			{
+//				__global__ void fullyConnected_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
+//						int node_index, int weight_index, int prev_nodeDim_x, int weightDim_x, int weightDim_y)
 				cuda::fullyConnected_back<<<1,80>>>(nodeArrayPtrs, weightArrayPtrs, nodeDerivArrayPtrs,
-						weightDerivArrayPtrs, node_index, weight_index);
+						weightDerivArrayPtrs, node_index, weight_index, nodeMatrixDims_x[node_index-1],
+						weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
 				node_index--;
 				weight_index--;
 				bias_index--;
 			}
-			fullyConnected_back
 			break;
 		case CONV_LAYER:
 

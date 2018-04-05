@@ -1,0 +1,861 @@
+/*
+ * cuda_kernels.cu
+ *
+ *  Created on: 09.03.2018
+ *      Author: benjamin
+ */
+#include "cuda_kernels.h"
+#include "Layer.h"
+#include "Picture.h"
+#include "ConvLayer.h"
+#include "MaxPoolingLayer.h"
+#include "FullyConnectedLayer.h"
+#include <cuda_runtime.h>
+#include <curand.h>
+#include <cublas_v2.h>
+
+namespace cuda {
+
+void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLengths)
+{
+//	for(int i = 0; i < no_node_matrices; i++)
+//	{
+//		curandGenerator_t generator;
+//		curandStatus_t curand_state;
+//
+//		curand_state = curandCreateGenerator(&generator, CURAND_RNG_PSEUDO_DEFAULT);
+//
+//		curand_state = curandSetPseudoRandomGeneratorSeed(generator, (unsigned long long) clock());
+//
+//		curand_state = curandGenerateUniform(generator, nodeArrayPtrs[i], arrayLengths[i]);
+//
+//		curand_state = curandDestroyGenerator(generator);
+//	}
+}
+
+/**
+ * This function loads a MNIST-Picture into the Network
+ * <detail>	Use this function with 80 Threads to enable 150 parallel pictures </detail>
+ * <param> float * arrayPtr	-	destination array </param>
+ * <param> float* picturePtr	-	source array </param>
+ * <return> void </return>
+ */
+__global__ void loadPicture(float* arrayPtr, float* picturePtr)
+{
+//	/* column major */
+//	for(int i = index; i < 24; i+=stride) /* rows in original row-major picture */
+//	{
+//		for(int j = 0; j < 24; j++) /* columns in original row-major picture */
+//		{
+//			for(int k = 0; k < 5; k++) /* convolutional kernel rows in original picture */
+//			{
+//				for(int l = 0; l < 5; l++) /* convolutional kernel columns in original picture */
+//				{
+//					arrayPtr[(k*5+l)*576+i*24+j] = picturePtr[(i+k)*24+j+l];
+//				}
+//			}
+//		}
+//	}
+	int index = threadIdx.x;
+	int stride = blockDim.x;
+
+	int size =  576; /*24²*/
+
+	for(int n = index; n < size; n+=stride)
+	{
+		int i = n/24; /* rows in original row-major picture */
+		int j = n%24; /* columns in original row-major picture */
+
+		for(int k = 0; k < 5; k++) /* convolutional kernel rows in original picture */
+		{
+			for(int l = 0; l < 5; l++) /* convolutional kernel columns in original picture */
+			{
+				arrayPtr[(k*5+l)*576+i*24+j] = picturePtr[(i+k)*24+j+l];
+			}
+		}
+	}
+	__syncthreads();
+}
+
+/**
+ * This function implements the convolutional layer as a matrix multiplication
+ * <detail> The function splits up this matrix operation in single vector dot products.
+ * It has to be called with 80 Threads in one block to fit picture parallelism conditions </detail>
+ * <param> </param>
+ * <return> void </return>
+ */
+__global__ void convolution(float* inputPtr, float* outputPtr, float* weightPtr, float* biasPtr,
+		int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y)
+{
+	int index = threadIdx.x;
+	int stride = blockDim.x;
+
+	cublasStatus_t cublasState = CUBLAS_STATUS_SUCCESS;
+	cublasHandle_t cublasHandle;
+	cublasCreate(&cublasHandle);
+
+	const float alpha = 1.0f;
+	const float beta = 0.0f;
+	const float* alpha_ptr = &alpha;
+	const float* beta_ptr = &beta;
+
+	int output_size = inputDim_x * weightDim_y;
+
+	for(int i = index; i < weightDim_y; i+= stride) /* parallelize over features (columns of weight matrix) */
+	{
+		float result = 0.0;
+		for(int j = 0; j < inputDim_x; j++) /* perform vector dot product for every point in an output feature */
+		{
+			/* matrices are ordered as column-major */
+			cublasState = cublasSdot(cublasHandle, weightDim_x,
+										(const float*) &inputPtr[j], inputDim_x,
+										(const float*) &weightPtr[i*weightDim_x], 1,
+										&result);
+			outputPtr[i*weightDim_y+j] = mathematics::sigmoid_once(result + biasPtr[i*weightDim_y+j]);
+		}
+	}
+	cublasDestroy(cublasHandle);
+}
+
+/**
+ * This function realizes maxPooling after a convolutional layer
+ * <detail> The function resorts the output array to fit the conditions of the next layer operation.
+ * It has to be called with 80 Threads in one block to fit the 600 pictures parallel condition.
+ * It is parallelized over the feature maps. </detail>
+ * <param>
+ * </param>
+ * <return> void </return>
+ */
+__global__ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, int y_receptive,
+							int inputDim_x, int inputDim_y, int convDim_x, int convDim_y,
+							int nextDim_x, int nextDim_y, int nextReceptive_x,
+							int nextReceptive_y, LAYER_TYPE nextLayerType)
+{
+	int index = threadIdx.x;
+	int stride = blockDim.x;
+
+	int dimSquare = nextDim_x * nextDim_y;
+	int pooling_x = convDim_x / x_receptive;
+	int pooling_y = convDim_y / y_receptive;
+	int poolDim_y = pooling_x * pooling_y;
+
+	float* pooling_mat; /* store pooled values and resort afterwards */
+	cudaError_t cuda_error = cudaSuccess;
+
+	cuda_error = cudaMalloc((void**)&pooling_mat, pooling_x*pooling_y*inputDim_y*sizeof(float));
+
+
+	/* feature maps sorted linear in array because of column major ordering */
+	for(int i = index; i < inputDim_y; i+=stride)
+	{
+		/* pooling in x and y dimension of a single feature map as a two dimensional array *
+		 * of "pixels"
+		 */
+		for(int j = 0; j < convDim_y; j+=y_receptive)
+		{
+			for(int k = 0; k < convDim_x; k+=x_receptive)
+			{
+				float max_val = 0.0f; /* declared here to prevent using same value in different threads */
+				int index = 0;
+				/* finding max value out of kernel */
+				for(int l = 0; l < y_receptive; l++)
+				{
+					for(int m = 0; m < x_receptive; m++)
+					{
+						index = i*inputDim_y+(j*convDim_x+l)+(k*y_receptive+m);
+						if(max_val <= inputPtr[index])
+						{
+							max_val = inputPtr[index];
+						}
+					}
+				}
+
+				pooling_mat[i*poolDim_y+(j/y_receptive)*pooling_y + (k/x_receptive)] =
+						max_val;
+			}
+		}
+	}
+
+	/* resort matrix to fit conditions of next layer operation */
+	/* column major */
+	if(nextLayerType == CONV_LAYER)
+	{
+		int size = nextDim_x*nextDim_y;
+
+		for(int n = index; n < size; n+=stride)
+		{
+			int i = n/nextDim_y;
+			int j = n%nextDim_y;
+			for(int k = 0; k < inputDim_y; k++) /* number features of last layer */
+			{
+				for(int l = 0; l < nextReceptive_y; l++) /* convolutional kernel of each feature */
+				{
+					for(int m = 0; m < nextReceptive_x; m++)
+					{
+						/* pooling_mat sorted in column major */
+						outputPtr[(k*nextReceptive_x*nextReceptive_y + l*nextReceptive_x+m)*nextDim_x*nextDim_y+i*nextDim_y+j] =
+								pooling_mat[(k*poolDim_y)+(i+l)*nextDim_x+j+m];
+
+					}
+				}
+			}
+		}
+	}
+	else if(nextLayerType == FULLY_CONNECTED_LAYER)
+	{
+		/* no additional sorting needed
+		 * data is already correctly sorted in memory
+		 * that way, the user can just switch from a (m*n)x(f)-Matrix to a 1x(m*n*f)-Matrix
+		 */
+		int size = inputDim_y*poolDim_y;
+		for(int i = index; i < size; i+=stride)
+		{
+			outputPtr[i] = pooling_mat[i];
+		}
+	}
+
+	cuda_error = cudaFree(pooling_mat);
+}
+
+__global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightPtr, float* biasPtr,
+							int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y)
+{
+	int index = threadIdx.x;
+	int stride = blockDim.x;
+
+	cublasStatus_t cublasState;
+	cublasHandle_t cublasHandle;
+	cublasCreate(&cublasHandle);
+
+	const float alpha = 1.0f;
+	const float beta = 0.0f;
+	const float* alpha_ptr = &alpha;
+	const float* beta_ptr = &beta;
+
+	for(int i = index; i < weightDim_y; i+= stride) /* parallelize over output nodes (columns of weight matrix) */
+	{
+		float result = 0.0;
+		/* matrices are ordered as column-major */
+		cublasState = cublasSdot(cublasHandle, weightDim_x,
+				(const float*) &inputPtr[i], inputDim_x,
+				(const float*) &weightPtr[i*weightDim_x], 1,
+				&result);
+		outputPtr[i] = mathematics::sigmoid_once(result + biasPtr[i]);
+	}
+	cublasDestroy(cublasHandle);
+}
+
+/**
+ * This function paralellizes the training over a batch of input pictures
+ * <details> The number of threads should be equal to the batch_size </details>
+ * <params> </params>
+ * <return> cost sum over batch </return>
+ */
+__global__ void train(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
+			float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs, float** nodeDerivatePtrs,
+			float** weightDerivPtrs, float** biasDerivPtrs,
+			int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
+			int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y, int* biasMatrixDims_x,
+			int* biasMatrixDims_y)
+{
+	cudaError_t cuda_error = cudaSuccess;
+	int index = blockDim.x*blockIdx.x + threadIdx.x;
+
+	__shared__ float ret_val;
+	__shared__ int add_count;
+
+	ret_val = 0.0;
+	add_count = 0;
+
+	if(index < batch_size)
+	{
+		/* copying nodes, weights and biases for each picture-parallel thread to prevent race conditions */
+		float** nodeArrays, **weightArrays, **biasArrays, **nodeDerivArrays, **weightDerivArrays;
+
+		for(int i = 0; i < no_node_matrices; i++)
+		{
+			nodeArrays[i] = (float*) malloc(nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float));
+//			cuda_error = cudaMemcpy((void*) nodeArrays[i], (void*) nodeArrayPtrs[i], nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float), cudaMemcpyDeviceToDevice);
+			nodeDerivArrays[i] = (float*) malloc(nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float));
+//			cuda_error = cudaMemcpy((void*) nodeDerivArrays[i], (void*) nodeDerivatePtrs[i], nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float), cudaMemcpyDeviceToDevice);
+		}
+
+		for(int i = 0; i < no_weight_matrices; i++)
+		{
+			weightArrays[i] = (float*) malloc(weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float));
+			memcpy((void*) weightArrays[i], (void*) weightArrayPtrs[i], weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float));
+			weightDerivArrays[i] = (float*) malloc(weightMatrixDims_x[i]*weightMatrixDims_x[i]*sizeof(float));
+			biasArrays[i] = (float*) malloc(biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float));
+			memcpy((void*) biasArrays[i], (void*) biasArrayPtrs[i], biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float));
+		}
+
+
+		loadPicture<<<1,80>>>(nodeArrays[0], &inputPictures[index*784]);
+		/* blocks until all threads finish */
+
+		/* forward splits up into 80 parallel threads in each layer task */
+		ret_val += forward(layer_list, no_layers, &labels[index*10], nodeArrays, weightArrays, biasArrays,
+				no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
+				nodeMatrixDims_y, weightMatrixDims_x, weightMatrixDims_y);
+
+		__syncthreads();
+
+//		Layer* layer_list, int no_layers, float* labels,
+//				float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivArrayPtrs, float** weightDerivArrayPtrs,
+//				int no_node_matrices, int no_weight_matrices, int no_bias_matrices,
+//				int* nodeMatrixDims_x, int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y
+		backpropagate(layer_list, no_layers, &labels[index*10], nodeArrays, weightArrays,
+				nodeDerivArrays, weightDerivArrays, no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
+				nodeMatrixDims_y, weightMatrixDims_x, weightMatrixDims_y);
+		__syncthreads();
+
+		while(add_count < batch_size)
+		{
+			if(index == add_count)
+			{
+				if(index == 0)
+				{
+					for(int i = 0; i < no_weight_matrices; i++)
+					{
+						int weightArrayLength = weightMatrixDims_x[i]*weightMatrixDims_y[i];
+						int biasArrayLength = biasMatrixDims_x[i] * biasMatrixDims_y[i];
+						for(int j = 0; j < weightArrayLength; j++)
+						{
+							weightDerivPtrs[i][j] = weightDerivArrays[i][j];
+						}
+						for(int j = 0; j < biasArrayLength; j++)
+						{
+							biasDerivPtrs[i][j] = nodeDerivArrays[i][j];
+						}
+					}
+				}
+				else
+				{
+					for(int i = 0; i < no_weight_matrices; i++)
+					{
+						int weightArrayLength = weightMatrixDims_x[i]*weightMatrixDims_y[i];
+						int biasArrayLength = biasMatrixDims_x[i] * biasMatrixDims_y[i];
+						for(int j = 0; j < weightArrayLength; j++)
+						{
+							weightDerivPtrs[i][j] += weightDerivArrays[i][j];
+						}
+						for(int j = 0; j < biasArrayLength; j++)
+						{
+							biasDerivPtrs[i][j] += nodeDerivArrays[i][j];
+						}
+					}
+				}
+			}
+			__syncthreads();
+		}
+//		float** weightArrayPtrs, float** biasArrayPtrs,
+//				float** weightDerivArrayPtrs, float** biasDerivArrayPtrs,
+//				int* weightDims_x, int* weightDims_y, int* biasDims_x, int *biasDims_y,
+//				int no_weights, int batch_size
+		gradient_descent<<<1,80>>>(weightArrayPtrs, biasArrayPtrs, weightDerivPtrs, biasDerivPtrs,
+				weightMatrixDims_x, weightMatrixDims_y,
+				biasMatrixDims_x, biasMatrixDims_y, no_weight_matrices, batch_size);
+
+		for(int i = 0; i < no_node_matrices; i++)
+		{
+			free((void*)nodeArrays[i]);
+			free((void*)nodeDerivArrays[i]);
+		}
+
+		for(int i = 0; i < no_weight_matrices; i++)
+		{
+			free((void*) weightArrays[i]);
+			free((void*) biasArrays[i]);
+		}
+	}
+
+}
+
+__global__ void test(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
+		float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs,
+		int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
+		int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y,
+		int *biasMatrixDims_x, int* biasMatrixDims_y, int* ret_val)
+{
+	__shared__ int correct_detections;
+	cudaError_t cuda_error = cudaSuccess;
+	correct_detections = 0;
+	int correct_index, calculated_index;
+	int index = blockDim.x*blockIdx.x + threadIdx.x;
+	float max_val = 0.0f;
+
+	if(index < batch_size)
+	{
+		/* copying nodes, weights and biases for each picture-parallel thread to prevent race conditions */
+		float** nodeArrays, **weightArrays, **biasArrays, **nodeDerivArrays, **weightDerivArrays;
+
+		for(int i = 0; i < no_node_matrices; i++)
+		{
+			nodeArrays[i] = (float*) malloc(nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float));
+			nodeDerivArrays[i] = (float*) malloc(nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float));
+		}
+
+		for(int i = 0; i < no_weight_matrices; i++)
+		{
+			weightArrays[i] = (float*) malloc(weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float));
+			memcpy((void*) weightArrays[i], (void*) weightArrayPtrs[i], weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float));
+			weightDerivArrays[i] = (float*) malloc(weightMatrixDims_x[i]*weightMatrixDims_x[i]*sizeof(float));
+			biasArrays[i] = (float*) malloc(biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float));
+			memcpy((void*) biasArrays[i], (void*) biasArrayPtrs[i], biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float));
+		}
+
+
+		loadPicture<<<1,80>>>(nodeArrays[0], &inputPictures[index*784]);
+		/* blocks until all threads finish */
+
+		/* forward splits up into 80 parallel threads in each layer task */
+		forward(layer_list, no_layers, &labels[index*10], nodeArrays, weightArrays, biasArrays,
+				no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
+				nodeMatrixDims_y, weightMatrixDims_x, weightMatrixDims_y);
+
+		for(int k = 0; k < OUTPUT_SIZE; k++)
+		{
+			if(labels[index*10+k] == 1.0f)
+			{
+				correct_index = k;
+			}
+
+			if(nodeArrays[no_layers-1][k] > max_val)
+			{
+				calculated_index = k;
+				max_val = nodeArrays[no_layers-1][k];
+			}
+		}
+
+		if(correct_index == calculated_index)
+		{
+			correct_detections++;
+		}
+		__syncthreads();
+	}
+	__syncthreads();
+	*ret_val = correct_detections;
+}
+
+__global__ void gradient_descent(float** weightArrayPtrs, float** biasArrayPtrs,
+					float** weightDerivArrayPtrs, float** biasDerivArrayPtrs,
+					int* weightDims_x, int* weightDims_y, int* biasDims_x, int *biasDims_y,
+					int no_weights, int batch_size)
+{
+	int index = threadIdx.x;
+	int stride = blockDim.x;
+
+	for(int i = 0; i < no_weights; i++)
+	{
+		int weightArrayLength = weightDims_x[i]*weightDims_y[i];
+		int biasArrayLength = biasDims_x[i] * biasDims_y[i];
+		for(int j = index; j < weightArrayLength; j+=stride)
+		{
+			weightArrayPtrs[i][j] = weightArrayPtrs[i][j] - (LEARNING_RATE*(weightDerivArrayPtrs[i][j]/batch_size));
+		}
+		for(int k = index; k < biasArrayLength; k+=stride)
+		{
+			biasArrayPtrs[i][k] = biasArrayPtrs[i][k] - (LEARNING_RATE*(biasDerivArrayPtrs[i][k]/batch_size));
+		}
+	}
+}
+
+/**
+ * This function is the parallel implementation of forwarding in the CNN
+ *
+ * <params> </params>
+ * <return> cost of this input </return>
+ */
+__device__ float forward(Layer* layer_list, int no_layers, float* labels,
+					float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs,
+					int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
+					int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y)
+{
+
+	/* Indices to iterate through weight_list, node_list and bias_list */
+		int weight_index = 0;
+		int bias_index = 0;
+		int node_index = 0;
+
+		for(int i = 0; i < no_layers; i++)
+		{
+			switch (layer_list[i].type)
+			{
+				case INPUT_LAYER:
+				{
+					/* nothing to do, picture already loaded */
+					node_index++;
+					break;
+				}
+				case CONV_LAYER:
+				{
+					cuda::convolution<<<1,80>>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
+							biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
+							weightMatrixDims_y[weight_index]);
+					weight_index++;
+					bias_index++;
+					node_index++;
+
+					break;
+				}
+				case POOLING_LAYER:
+				{
+					MaxPooling_Layer* pooling_layer = (MaxPooling_Layer*) &layer_list[i];
+					Conv_Layer* last_layer = (Conv_Layer*) &layer_list[i-1];
+
+					int x_receptive = pooling_layer->x_receptive;
+					int y_receptive = pooling_layer->y_receptive;
+					int convDim_x = last_layer->x_size;
+					int convDim_y = last_layer->y_size;
+
+					if(layer_list[i+1].type == CONV_LAYER)
+					{
+						Conv_Layer* next_layer = (Conv_Layer*) &layer_list[i+1];
+						Conv_Layer* prevLayer = (Conv_Layer*) &layer_list[i-1];
+						int nextDim_x = next_layer->x_size;
+						int nextDim_y = next_layer->y_size;
+						int nextReceptive_x = next_layer->x_receptive;
+						int nextReceptive_y = next_layer->y_receptive;
+
+						cuda::maxPooling<<<1,80>>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
+													y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
+													prevLayer->x_size, prevLayer->y_size,	nextDim_x, nextDim_y,
+													nextReceptive_x, nextReceptive_y, CONV_LAYER);
+
+
+					}
+					else if(layer_list[i+1].type == FULLY_CONNECTED_LAYER)
+					{
+						Conv_Layer* prevLayer = (Conv_Layer*) &layer_list[i-1];
+						int nextDim_x = 0;
+						int nextDim_y = 0;
+						int nextReceptive_x = 0;
+						int nextReceptive_y = 0;
+
+						cuda::maxPooling<<<1,80>>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], x_receptive,
+								y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
+								prevLayer->x_size, prevLayer->y_size, nextDim_x, nextDim_y, nextReceptive_x,
+								nextReceptive_y, FULLY_CONNECTED_LAYER);
+					}
+					else
+					{
+						return -1.0f;
+					}
+
+					node_index++;
+
+					break;
+				}
+				case FULLY_CONNECTED_LAYER:
+				{
+					cuda::fullyConnected<<<1,80>>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index],
+							weightArrayPtrs[weight_index], biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
+							weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
+
+
+					node_index++;
+					weight_index++;
+					bias_index++;
+
+					break;
+				}
+				case DROPOUT_LAYER:
+				{
+					break;
+				}
+				default:
+				{
+					return -1.0f;
+				}
+			}
+		}
+
+		return mathematics::get_cost(nodeArrayPtrs[node_index-1], labels, OUTPUT_SIZE);
+}
+
+
+__device__ void backpropagate(Layer* layer_list, int no_layers, float* labels,
+		float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivArrayPtrs, float** weightDerivArrayPtrs,
+		int no_node_matrices, int no_weight_matrices, int no_bias_matrices,
+		int* nodeMatrixDims_x, int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y)
+{
+	/* Indices to iterate backwards through weight_list, node_list and bias_list */
+	// derivation indexes are equal to corresponding indexes
+	int weight_index = no_weight_matrices-1;
+	int bias_index = no_bias_matrices-1;
+	int node_index = no_node_matrices-1;
+
+	/* prepare derivation of last layer's activation */
+	mathematics::get_cost_derivatives(nodeArrayPtrs[node_index], labels,
+			nodeDerivArrayPtrs[node_index],	10);
+	node_index--;
+	weight_index--;
+
+	/* actual backpropagation */
+	for(int i = no_layers-1; i > 0; i--)
+	{
+		switch (layer_list[i].type)
+		{
+		case INPUT_LAYER:
+			/* nothing to do here */
+			break;
+		case POOLING_LAYER:
+
+			if (layer_list[i + 1].type == CONV_LAYER)
+			{
+				Conv_Layer* nextLayer = (Conv_Layer*) &layer_list[i+1];
+				Conv_Layer* prevLayer = (Conv_Layer*) &layer_list[i-1];
+				cuda::maxPooling_back<<<1,80>>>(nodeArrayPtrs, weightArrayPtrs, nodeDerivArrayPtrs,
+						weightDerivArrayPtrs, node_index, weight_index, nextLayer->x_receptive,
+						nextLayer->y_receptive, nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index],
+						prevLayer->x_receptive, prevLayer->y_receptive, nodeMatrixDims_x[node_index+1],
+						nodeMatrixDims_y[node_index+1], nextLayer->x_receptive,
+						nextLayer->y_receptive, CONV_LAYER);
+			}
+			else if(layer_list[i+1].type == FULLY_CONNECTED_LAYER)
+			{
+				Conv_Layer* prevLayer = (Conv_Layer*) &layer_list[i-1];
+				int nextDim_x = 0;
+				int nextDim_y = 0;
+				int nextReceptive_x = 0;
+				int nextReceptive_y = 0;
+
+				cuda::maxPooling_back<<<1,80>>>(nodeArrayPtrs, weightArrayPtrs, nodeDerivArrayPtrs,
+						weightDerivArrayPtrs, node_index, weight_index, nextReceptive_x,
+						nextReceptive_y, nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index],
+						prevLayer->x_size, prevLayer->y_size, nodeMatrixDims_x[node_index+1],
+						nodeMatrixDims_y[node_index+1], nextReceptive_x,
+						nextReceptive_y, CONV_LAYER);
+			}
+
+			node_index--;
+			break;
+		case FULLY_CONNECTED_LAYER:
+
+			if (layer_list[i-1].type == POOLING_LAYER)
+			{
+//				__global__ void fullyConnected_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
+//						int node_index, int weight_index, int prev_nodeDim_x, int weightDim_x, int weightDim_y)
+				cuda::fullyConnected_back<<<1,80>>>(nodeArrayPtrs, weightArrayPtrs, nodeDerivArrayPtrs,
+						weightDerivArrayPtrs, node_index, weight_index, nodeMatrixDims_x[node_index-1],
+						weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
+				node_index--;
+				weight_index--;
+				bias_index--;
+			}
+			break;
+		case CONV_LAYER:
+
+			if(layer_list[i-1].type == INPUT_LAYER)
+			{
+//				float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
+//										int node_index, int weight_index, int prev_nodeDim_x, int weightDim_x, int weightDim_y
+				cuda::convolution_back<<<1,80>>>(nodeArrayPtrs, weightArrayPtrs, nodeDerivArrayPtrs,
+						weightDerivArrayPtrs, node_index, weight_index, nodeMatrixDims_x[node_index-1],
+						weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index], INPUT_LAYER);
+				weight_index--;
+				bias_index--;
+				node_index--;
+			}
+			else if (layer_list[i-1].type == POOLING_LAYER)
+			{
+				cuda::convolution_back<<<1,80>>>(nodeArrayPtrs, weightArrayPtrs, nodeDerivArrayPtrs,
+						weightDerivArrayPtrs, node_index, weight_index, nodeMatrixDims_x[node_index-1],
+						weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index], POOLING_LAYER);
+				weight_index--;
+				bias_index--;
+				node_index--;
+			}
+
+			break;
+		case DROPOUT_LAYER:
+			//not implemented
+			break;
+		}
+	}
+}
+__global__ void convolution_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
+						int node_index, int weight_index, int prev_nodeDim_x, int weightDim_x, int weightDim_y,
+						LAYER_TYPE prevLayer)
+{
+	int index = threadIdx.x;
+	int stride = blockDim.x;
+
+	cublasStatus_t cublasState = CUBLAS_STATUS_SUCCESS;
+	cublasHandle_t cublasHandle;
+	cublasCreate(&cublasHandle);
+
+	const float alpha = 1.0f;
+	const float beta = 0.0f;
+	const float* alpha_ptr = &alpha;
+	const float* beta_ptr = &beta;
+
+	/* calculate \delta_l */
+	for(int i = index; i < weightDim_x; i+= stride) /* parallelize over rows weight matrix  */
+	{
+		float result = 0.0;
+		for(int j = 0; j < prev_nodeDim_x; j++) /* perform vector dot product for every point in an output feature */
+		{
+			/* matrices are ordered as column-major */
+			cublasState = cublasSdot(cublasHandle, weightDim_y,
+					(const float*) &nodeDerivates[node_index+1][j], prev_nodeDim_x,
+					(const float*) &weightArrayPtrs[weight_index+1][i], weightDim_x,
+					&result);
+			nodeDerivates[node_index][i*prev_nodeDim_x+j] = result *
+					mathematics::sigmoid_backward_derivated_once(nodeArrayPtrs[node_index][i*prev_nodeDim_x+j]);
+		}
+	}
+
+	if(prevLayer != INPUT_LAYER)
+	{
+		/* calculate dC/dw */
+		for(int k = index; k < weightDim_x; k+=stride) /* parallelize over columns of node matrix */
+		{
+			for(int l = 0; l < weightDim_y; l++)
+			{
+				float result = 0.0f;
+				/* matrices are ordered as column-major */
+				cublasState = cublasSdot(cublasHandle, prev_nodeDim_x,
+						(const float*) &nodeArrayPtrs[node_index-1][k*prev_nodeDim_x], 1,
+						(const float*) &nodeDerivates[weight_index][l*prev_nodeDim_x], 1,
+						&result);
+				weightDerivates[weight_index][l*weightDim_x+k] = result;
+			}
+		}
+	}
+
+	cublasDestroy(cublasHandle);
+}
+
+__global__ void fullyConnected_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
+						int node_index, int weight_index, int prev_nodeDim_x, int weightDim_x, int weightDim_y)
+{
+	int index = threadIdx.x;
+	int stride = blockDim.x;
+
+	cudaError_t cuda_error = cudaSuccess;
+	cublasStatus_t cublasState;
+	cublasHandle_t cublasHandle;
+	cublasCreate(&cublasHandle);
+
+	/* calculate \delta_l */
+	for(int i = index; i < weightDim_x; i+= stride) /* parallelize over pooling nodes (rows of weight matrix) */
+	{
+		float result = 0.0;
+		/* matrices are ordered as column-major */
+		cublasState = cublasSdot(cublasHandle, weightDim_y,
+				(const float*) &nodeDerivates[node_index+1][i], prev_nodeDim_x,
+				(const float*) &weightArrayPtrs[weight_index+1][i*weightDim_y], 1,
+				&result);
+		nodeDerivates[node_index][i] = result * mathematics::sigmoid_backward_derivated_once(nodeArrayPtrs[node_index][i]);
+	}
+
+	/* calculate dC/dw */
+	for(int k = index; k < weightDim_x; k+=stride)
+	{
+		for(int j = 0; j < weightDim_y; j++)
+		{
+			/* matrices are ordered as column-major */
+			weightDerivates[weight_index][j*weightDim_x+k] = nodeArrayPtrs[node_index-1][k]*nodeDerivates[node_index][j];
+		}
+	}
+
+	cublasDestroy(cublasHandle);
+
+}
+__global__ void maxPooling_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates,
+		float** weightDerivates, int node_index, int weight_index,
+		int x_receptive, int y_receptive,
+		int inputDim_x, int inputDim_y, int convDim_x, int convDim_y,
+		int nextDim_x, int nextDim_y, int nextReceptive_x,
+		int nextReceptive_y, LAYER_TYPE nextLayerType)
+{
+	int index = threadIdx.x;
+	int stride = blockDim.x;
+
+	/* recreate pooling matrix */
+
+	int dimSquare = nextDim_x * nextDim_y;
+	int pooling_x = convDim_x / x_receptive;
+	int pooling_y = convDim_y / y_receptive;
+	int poolDim_y = pooling_x * pooling_y;
+
+	float* pooling_mat; /* store pooled values and resort afterwards */
+	cudaError_t cuda_error = cudaSuccess;
+
+	cuda_error = cudaMalloc((void**)&pooling_mat, pooling_x*pooling_y*inputDim_y*sizeof(float));
+
+	/* recreate pooling matrix */
+	if(nextLayerType == CONV_LAYER)
+	{
+		int size = nextDim_x*nextDim_y;
+
+		for(int n = index; n < size; n+=stride)
+		{
+			int i = n/nextDim_y;
+			int j = n%nextDim_y;
+			for(int k = 0; k < inputDim_y; k++) /* number features of last layer */
+			{
+				for(int l = 0; l < nextReceptive_y; l++) /* convolutional kernel of each feature */
+				{
+					for(int m = 0; m < nextReceptive_x; m++)
+					{
+						/* pooling_mat sorted in column major */
+
+						pooling_mat[(k*poolDim_y)+(i+l)*nextDim_x+j+m] =
+								nodeDerivates[node_index+1][(k*nextReceptive_x*nextReceptive_y + l*nextReceptive_x+m)*nextDim_x*nextDim_y+i*nextDim_y+j];
+
+					}
+				}
+			}
+		}
+	}
+	else if(nextLayerType == FULLY_CONNECTED_LAYER)
+	{
+		/* no additional sorting needed
+		 * data is already correctly sorted in memory
+		 * that way, the user can just switch from a (m*n)x(f)-Matrix to a 1x(m*n*f)-Matrix
+		 */
+		int size = inputDim_y*poolDim_y;
+		for(int i = index; i < size; i+=stride)
+		{
+			pooling_mat[i] = nodeDerivates[node_index+1][i];
+		}
+	}
+
+	/* backpropagate error */
+	/* feature maps sorted linear in array because of column major ordering */
+	for(int i = index; i < inputDim_y; i+=stride)
+	{
+		/* pooling in x and y dimension of a single feature map as a two dimensional array *
+		 * of "pixels"
+		 */
+		for(int j = 0; j < convDim_y; j+=y_receptive)
+		{
+			for(int k = 0; k < convDim_x; k+=x_receptive)
+			{
+				float max_val = 0.0f; /* declared here to prevent using same value in different threads */
+				int index = 0;
+				int max_index = 0;
+				/* finding max value out of kernel */
+				for(int l = 0; l < y_receptive; l++)
+				{
+					for(int m = 0; m < x_receptive; m++)
+					{
+						index = i*inputDim_y+(j*convDim_x+l)+(k*y_receptive+m);
+						if(max_val <= nodeArrayPtrs[node_index][index])
+						{
+							max_val = nodeArrayPtrs[node_index][index];
+							max_index = index;
+						}
+						nodeDerivates[node_index][index] = 0; /* just one out of 4 is going to be backpropagated */
+					}
+				}
+				nodeDerivates[node_index][max_index] = pooling_mat[i*poolDim_y+(j/y_receptive)*pooling_y + (k/x_receptive)];
+			}
+		}
+	}
+}
+
+} /* end namespace cuda */
+

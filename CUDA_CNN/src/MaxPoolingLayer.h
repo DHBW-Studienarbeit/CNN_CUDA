@@ -29,15 +29,6 @@ public:
 	int  getXReceptive();
 	int  getYReceptive();
 
-	void backpropagate( Matrix* inputs,
-								Matrix* activations,
-								Matrix* input_derivations,
-								Matrix* activation_derivations,
-								Matrix* weights,
-								Matrix* biases,
-								Matrix* weight_derivations,
-								Matrix* bias_derivations);
-
 };
 
 #endif /* MAXPOOLINGLAYER_HPP_ */
