@@ -15,14 +15,14 @@ public:
 	FullyConnected_Layer(int size);
 	virtual ~FullyConnected_Layer();
 
-	virtual void backpropagate( Matrix* inputs,
+	void backpropagate( Matrix* inputs,
 								Matrix* activations,
 								Matrix* input_derivations,
 								Matrix* activation_derivations,
 								Matrix* weights,
 								Matrix* biases,
 								Matrix* weight_derivations,
-								Matrix* bias_derivations ) override;
+								Matrix* bias_derivations);
 
 };
 

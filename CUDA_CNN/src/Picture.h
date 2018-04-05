@@ -15,8 +15,8 @@
 
 class Picture {
 private:
-	float input_data[INPUT_SIZE] = {0.0};
-	float output_data[OUTPUT_SIZE] = {0.0};
+	float input_data[INPUT_SIZE];
+	float output_data[OUTPUT_SIZE];
 public:
 	Picture(std::string *line);
 	Picture();

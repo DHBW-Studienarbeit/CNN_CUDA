@@ -18,7 +18,7 @@
 <definedSymbol symbol="__CUDA_FTZ=0"/>
 <definedSymbol symbol="__CUDA_PREC_SQRT=1"/>
 <definedSymbol symbol="__CUDACC__="/>
-<definedSymbol symbol="__CUDA_ARCH__=200"/>
+<definedSymbol symbol="__CUDA_ARCH__=600"/>
 <definedSymbol symbol="__CUDANVVM__="/>
 <definedSymbol symbol="__DRIVER_TYPES_H__="/>
 <definedSymbol symbol="CUDA_DOUBLE_MATH_FUNCTIONS="/>
@@ -310,7 +310,7 @@
 <definedSymbol symbol="__CUDA_FTZ=0"/>
 <definedSymbol symbol="__CUDA_PREC_SQRT=1"/>
 <definedSymbol symbol="__CUDACC__="/>
-<definedSymbol symbol="__CUDA_ARCH__=200"/>
+<definedSymbol symbol="__CUDA_ARCH__=600"/>
 <definedSymbol symbol="__CUDANVVM__="/>
 <definedSymbol symbol="__DRIVER_TYPES_H__="/>
 <definedSymbol symbol="CUDA_DOUBLE_MATH_FUNCTIONS="/>
@@ -602,7 +602,7 @@
 <definedSymbol symbol="__CUDA_FTZ=0"/>
 <definedSymbol symbol="__CUDA_PREC_SQRT=1"/>
 <definedSymbol symbol="__CUDACC__="/>
-<definedSymbol symbol="__CUDA_ARCH__=200"/>
+<definedSymbol symbol="__CUDA_ARCH__=600"/>
 <definedSymbol symbol="__CUDANVVM__="/>
 <definedSymbol symbol="__DRIVER_TYPES_H__="/>
 <definedSymbol symbol="CUDA_DOUBLE_MATH_FUNCTIONS="/>

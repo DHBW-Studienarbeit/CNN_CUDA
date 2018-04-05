@@ -12,7 +12,7 @@
 
 class Conv_Layer: public Layer {
 
-private:
+public:
 	int x_receptive;
 	int y_receptive;
 	int step_size;
@@ -31,14 +31,14 @@ public:
 	int  getStepSize();
 	int  getNoFeatureMaps();
 
-	virtual void backpropagate( Matrix* inputs,
+	void backpropagate( Matrix* inputs,
 								Matrix* activations,
 								Matrix* input_derivations,
 								Matrix* activation_derivations,
 								Matrix* weights,
 								Matrix* biases,
 								Matrix* weight_derivations,
-								Matrix* bias_derivations ) override;
+								Matrix* bias_derivations);
 };
 
 #endif /* CONVLAYER_HPP_ */

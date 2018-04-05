@@ -3,36 +3,36 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="291" key="DIALOG_WIDTH"/>
 		<item value="346" key="DIALOG_Y_ORIGIN"/>
-		<item value="544" key="DIALOG_HEIGHT"/>
 		<item value="973" key="DIALOG_X_ORIGIN"/>
+		<item value="628" key="DIALOG_HEIGHT"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="train(" key="selection"/>
+		<item value=".type" key="selection"/>
 		<list key="findhistory">
-			<item value="for(int i = index; i &lt; weightDim_x; i+= stride) /* parallelize over pooling nodes (rows of weight matrix) */"/>
-			<item value="train("/>
-			<item value="weight"/>
-			<item value="cudaMalloc"/>
-			<item value="biasMatrixDi"/>
-			<item value="train"/>
-			<item value="ArrayLengths"/>
-			<item value="ArrayLenghts"/>
+			<item value=".getLayerType()"/>
+			<item value="cuda_error |= "/>
+			<item value="nullptr"/>
+			<item value="sizeof("/>
+			<item value="&gt;&gt;"/>
+			<item value="&lt;&lt;"/>
+			<item value="cuda_error |="/>
+			<item value="forward"/>
 		</list>
 		<list key="replacehistory">
+			<item value=".type"/>
+			<item value="cuda_error = "/>
+			<item value="NULL"/>
+			<item value="std::sizeof("/>
+			<item value="&gt;&gt;&gt;"/>
+			<item value="&lt;&lt;&lt;"/>
+			<item value="cuda_error ="/>
 			<item value="bias"/>
-			<item value="cudaFree"/>
-			<item value="cudaMemcpy"/>
-			<item value="MatrixDims_y"/>
-			<item value="MatrixDims_x"/>
-			<item value="DeviceMatrix"/>
-			<item value="DeviceArray"/>
-			<item value="weight"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">

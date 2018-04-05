@@ -24,16 +24,16 @@ Network::Network()
 {
 	layer_list = new vector<Layer*>();
 
-	nodeArrayPtrs = nullptr;
-	weightArrayPtrs = nullptr;
-	biasArrayPtrs = nullptr;
-	nodeDerivArrayPtrs = nullptr;
-	weightDerivArrayPtrs = nullptr;
-	biasDerivArrayPtrs = nullptr;
+	nodeArrayPtrs = NULL;
+	weightArrayPtrs = NULL;
+	biasArrayPtrs = NULL;
+	nodeDerivArrayPtrs = NULL;
+	weightDerivArrayPtrs = NULL;
+	biasDerivArrayPtrs = NULL;
 
-	nodeArrayLengths = nullptr;
-	weightArrayLengths = nullptr;
-	biasArrayLengths = nullptr;
+	nodeArrayLengths = NULL;
+	weightArrayLengths = NULL;
+	biasArrayLengths = NULL;
 
 	no_node_matrices = 0;
 	no_weight_matrices = 0;
@@ -479,9 +479,9 @@ bool Network::generate_network()
 	cuda_error = cudaMemcpy(device_layer_list, layer_array, layer_list->size()*sizeof(Layer), cudaMemcpyHostToDevice);
 
 	/* initializes matrices with uniform pseudo-random values between 0.0 and 1.0 */
-	cuda::init<<<1,16>>>(nodeArrayPtrs, node_index, nodeDeviceArrayLengths);
-	cuda::init<<<1,16>>>(weightArrayPtrs, weight_index, weightDeviceArrayLengths);
-	cuda::init<<<1,16>>>(biasArrayPtrs, bias_index, biasDeviceArrayLengths);
+	cuda::init(nodeArrayPtrs, node_index, nodeDeviceArrayLengths);
+	cuda::init(weightArrayPtrs, weight_index, weightDeviceArrayLengths);
+	cuda::init(biasArrayPtrs, bias_index, biasDeviceArrayLengths);
 
 	cudaDeviceSynchronize();
 
@@ -514,17 +514,128 @@ bool Network::train(int batch_size, int no_iterations)
 
 
 			}
-//			train(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
-//						float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs,
-//						int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
-//						int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y,
-//						int *biasMatrixDims_x, int* biasMatrixDims_y, float* cost_sum);
+//			Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
+//					float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs, float** nodeDerivatePtrs,
+//					float** weightDerivPtrs, float** biasDerivPtrs,
+//					int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
+//					int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y, int* biasMatrixDims_x,
+//					int* biasMatrixDims_y
 			cuda::train<<<5,32>>>(device_layer_list, layer_list->size(), devicePictureAddr, batch_size, deviceLabelAddr,
-					nodeArrayPtrs, weightArrayPtrs, biasArrayPtrs, no_node_matrices, no_weight_matrices, no_bias_matrices,
+					nodeArrayPtrs, weightArrayPtrs, biasArrayPtrs, nodeDerivArrayPtrs, weightDerivArrayPtrs, biasDerivArrayPtrs,
+					no_node_matrices, no_weight_matrices, no_bias_matrices,
 					nodeDeviceMatrixDims_x, nodeDeviceMatrixDims_y, weightDeviceMatrixDims_x,
 					weightDeviceMatrixDims_y, biasDeviceMatrixDims_x, biasDeviceMatrixDims_y);
 		}
 	}
+
+//		/* copying nodes, weights and biases for each picture-parallel thread to prevent race conditions */
+//		float** nodeArrays, **weightArrays, **biasArrays, **nodeDerivArrays, **weightDerivArrays;
+//
+//		cuda_error = cudaMalloc((void**) nodeArrays, batch_size * no_node_matrices*sizeof(float*));
+//		cuda_error = cudaMalloc((void**) nodeDerivArrays, batch_size * no_node_matrices*sizeof(float*));
+//		cuda_error = cudaMalloc((void**) weightArrays, batch_size * no_weight_matrices*sizeof(float*));
+//		cuda_error = cudaMalloc((void**) weightDerivArrays, batch_size * no_weight_matrices*sizeof(float*));
+//		cuda_error = cudaMalloc((void**) biasArrays, batch_size * no_bias_matrices*sizeof(float*));
+//
+//
+//		for(int b = 0; b < batch_size; b++)
+//		{
+//			for(int i = 0; i < no_node_matrices; i++)
+//			{
+//				cuda_error = cudaMalloc((void**) &nodeArrays[b*no_node_matrices + i], nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float));
+//				cuda_error = cudaMalloc((void**) &nodeDerivArrays[b*no_node_matrices + i], nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float));
+//			}
+//
+//			for(int i = 0; i < no_weight_matrices; i++)
+//			{
+//				cuda_error = cudaMalloc((void**) &weightArrays[b*no_weight_matrices+i], weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float));
+//				cuda_error = cudaMemcpy((void*) weightArrays[b*no_weight_matrices + i], (void*) weightArrayPtrs[i], weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float), cudaMemcpyHostToDevice);
+//				cuda_error = cudaMalloc((void**) &weightDerivArrays[b*no_weight_matrices+i], weightMatrixDims_x[i]*weightMatrixDims_x[i]*sizeof(float));
+//				cuda_error = cudaMalloc((void**) &biasArrays[b*no_weight_matrices+i], biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float));
+//				cuda_error = cudaMemcpy((void*) biasArrays[b*no_weight_matrices +i], (void*) biasArrayPtrs[i], biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float), cudaMemcpyHostToDevice);
+//			}
+//
+//		}
+//			loadPicture<<<1,80>>>(nodeArrays[b*no_node_matrices], &inputPictures[index*784]);
+//			/* blocks until all threads finish */
+//
+//			/* forward splits up into 80 parallel threads in each layer task */
+//			ret_val += forward(layer_list, no_layers, &labels[index*10], nodeArrays, weightArrays, biasArrays,
+//					no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
+//					nodeMatrixDims_y, weightMatrixDims_x, weightMatrixDims_y);
+//
+//			__syncthreads();
+//
+//	//		Layer* layer_list, int no_layers, float* labels,
+//	//				float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivArrayPtrs, float** weightDerivArrayPtrs,
+//	//				int no_node_matrices, int no_weight_matrices, int no_bias_matrices,
+//	//				int* nodeMatrixDims_x, int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y
+//			backpropagate(layer_list, no_layers, &labels[index*10], nodeArrays, weightArrays,
+//					nodeDerivArrays, weightDerivArrays, no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
+//					nodeMatrixDims_y, weightMatrixDims_x, weightMatrixDims_y);
+//			__syncthreads();
+//
+//			while(add_count < batch_size)
+//			{
+//				if(index == add_count)
+//				{
+//					if(index == 0)
+//					{
+//						for(int i = 0; i < no_weight_matrices; i++)
+//						{
+//							int weightArrayLength = weightMatrixDims_x[i]*weightMatrixDims_y[i];
+//							int biasArrayLength = biasMatrixDims_x[i] * biasMatrixDims_y[i];
+//							for(int j = 0; j < weightArrayLength; j++)
+//							{
+//								weightDerivPtrs[i][j] = weightDerivArrays[i][j];
+//							}
+//							for(int j = 0; j < biasArrayLength; j++)
+//							{
+//								biasDerivPtrs[i][j] = nodeDerivArrays[i][j];
+//							}
+//						}
+//					}
+//					else
+//					{
+//						for(int i = 0; i < no_weight_matrices; i++)
+//						{
+//							int weightArrayLength = weightMatrixDims_x[i]*weightMatrixDims_y[i];
+//							int biasArrayLength = biasMatrixDims_x[i] * biasMatrixDims_y[i];
+//							for(int j = 0; j < weightArrayLength; j++)
+//							{
+//								weightDerivPtrs[i][j] += weightDerivArrays[i][j];
+//							}
+//							for(int j = 0; j < biasArrayLength; j++)
+//							{
+//								biasDerivPtrs[i][j] += nodeDerivArrays[i][j];
+//							}
+//						}
+//					}
+//				}
+//				__syncthreads();
+//			}
+//	//		float** weightArrayPtrs, float** biasArrayPtrs,
+//	//				float** weightDerivArrayPtrs, float** biasDerivArrayPtrs,
+//	//				int* weightDims_x, int* weightDims_y, int* biasDims_x, int *biasDims_y,
+//	//				int no_weights, int batch_size
+//			gradient_descent<<<1,80>>>(weightArrayPtrs, biasArrayPtrs, weightDerivPtrs, biasDerivPtrs,
+//					weightMatrixDims_x, weightMatrixDims_y,
+//					biasMatrixDims_x, biasMatrixDims_y, no_weight_matrices, batch_size);
+//
+//			for(int i = 0; i < no_node_matrices; i++)
+//			{
+//				cuda_error = cudaFree((void*)nodeArrays[i]);
+//				cuda_error = cudaFree((void*)nodeDerivArrays[i]);
+//			}
+//
+//			for(int i = 0; i < no_weight_matrices; i++)
+//			{
+//				cuda_error = cudaFree((void*) weightArrays[i]);
+//				cuda_error = cudaFree((void*) biasArrays[i]);
+//			}
+//		}
+
+
 	return ret_val;
 }
 

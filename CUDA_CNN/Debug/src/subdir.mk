@@ -15,9 +15,7 @@ CU_SRCS += \
 ../src/Picture.cu \
 ../src/PictureContainer.cu \
 ../src/cuda_kernels.cu \
-../src/mathematics.cu \
-../src/matrix.cu \
-../src/testfile.cu 
+../src/mathematics.cu 
 
 CU_DEPS += \
 ./src/CUDA_CNN.d \
@@ -31,9 +29,7 @@ CU_DEPS += \
 ./src/Picture.d \
 ./src/PictureContainer.d \
 ./src/cuda_kernels.d \
-./src/mathematics.d \
-./src/matrix.d \
-./src/testfile.d 
+./src/mathematics.d 
 
 OBJS += \
 ./src/CUDA_CNN.o \
@@ -47,17 +43,15 @@ OBJS += \
 ./src/Picture.o \
 ./src/PictureContainer.o \
 ./src/cuda_kernels.o \
-./src/mathematics.o \
-./src/matrix.o \
-./src/testfile.o 
+./src/mathematics.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
 src/%.o: ../src/%.cu
 	@echo 'Building file: $<'
 	@echo 'Invoking: NVCC Compiler'
-	/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "$(@:%.o=%.d)" "$<"
-	/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_20,code=compute_20 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_20,code=sm_20 -gencode arch=compute_60,code=sm_60  -x cu -o  "$@" "$<"
+	/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "$(@:%.o=%.d)" "$<"
+	/usr/local/cuda-8.0/bin/nvcc -I/usr/local/cuda/include -I"/home/benjamin/git/CNN_CUDA/CUDA_CNN" -G -g -O0 --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

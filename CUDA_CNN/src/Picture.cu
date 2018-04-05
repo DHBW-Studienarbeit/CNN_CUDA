@@ -27,12 +27,12 @@ Picture::Picture(std::string *line)
 	for(int i=0; i<INPUT_SIZE; i++)
 	{
 		std::getline(lineStream,cell, ',');
-		this->input_data[i] = std::stof(cell);
+		this->input_data[i] = atof(cell.c_str());
 	}
 	for(int i=0; i<OUTPUT_SIZE; i++)
 	{
 		std::getline(lineStream,cell, ',');
-		this->output_data[i] = (float)std::stod(cell);
+		this->output_data[i] = atof(cell.c_str());
 	}
 }
 

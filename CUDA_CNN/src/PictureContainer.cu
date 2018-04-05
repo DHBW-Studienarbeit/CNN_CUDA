@@ -7,6 +7,7 @@
 
 #include "PictureContainer.h"
 #include <fstream>
+#include <sstream>
 
 
 
@@ -16,6 +17,10 @@ PictureContainer::PictureContainer(std::string foldername, int num_of_files)
 	this->file_index = 0;
 	this->foldername = foldername;
 	this->num_of_files = num_of_files;
+	for(int i = 0; i < PICS_PER_FILE; i++)
+	{
+		images[i] = Picture();
+	}
 	load_pictures();
 }
 
@@ -24,8 +29,10 @@ PictureContainer::~PictureContainer() {
 }
 
 void PictureContainer::load_pictures() {
-	std::string csv_file = this->foldername + "/" + std::to_string(this->file_index) + ".csv";
-	std::ifstream infile(csv_file);
+	std::ostringstream ss;
+	ss << this->file_index;
+	std::string csv_file = this->foldername + "/" + ss.str() + ".csv";
+	std::ifstream infile(csv_file.c_str());
 	for(int i=0; i<PICS_PER_FILE; i++)
 	{
 		std::string line;

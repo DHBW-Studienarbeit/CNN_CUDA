@@ -11,7 +11,7 @@
 #include "Layer.h"
 
 class MaxPooling_Layer: public Layer {
-private:
+public:
 	int x_size;
 	int y_size;
 	int x_receptive;
@@ -29,14 +29,14 @@ public:
 	int  getXReceptive();
 	int  getYReceptive();
 
-	virtual void backpropagate( Matrix* inputs,
+	void backpropagate( Matrix* inputs,
 								Matrix* activations,
 								Matrix* input_derivations,
 								Matrix* activation_derivations,
 								Matrix* weights,
 								Matrix* biases,
 								Matrix* weight_derivations,
-								Matrix* bias_derivations ) override;
+								Matrix* bias_derivations);
 
 };
 

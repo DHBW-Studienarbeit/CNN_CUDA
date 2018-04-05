@@ -14,7 +14,7 @@
 
 class PictureContainer {
 private:
-	Picture images[PICS_PER_FILE] = { Picture() };
+	Picture images[PICS_PER_FILE];
 	int next_index;
 	int file_index;
 	int num_of_files;

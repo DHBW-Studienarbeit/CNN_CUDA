@@ -17,7 +17,8 @@ typedef enum {
 
 class Layer
 {
-private:
+public:
+
 	LAYER_TYPE type; /* type of this layer */
 	int no_nodes; /* combined number of nodes for this layer */
 	int node_index;/*index for first Matrix of this Layer in node_list*/
@@ -25,6 +26,9 @@ private:
 	int weight_index;/*index for first Matrix of this Layer in weight_list*/
 
 public:
+
+
+
 	Layer(int size, LAYER_TYPE layer_type);
 	Layer(LAYER_TYPE layer_type);
 	virtual ~Layer();
