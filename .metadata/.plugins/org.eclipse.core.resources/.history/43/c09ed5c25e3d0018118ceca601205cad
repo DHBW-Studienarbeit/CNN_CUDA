@@ -352,7 +352,7 @@ __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, in
 }
 
 __global__ void test(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
-		float*** nodeArrayPtrs, float*** weightArrayPtrs, float*** biasArrayPtrs,
+		float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs,
 		int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
 		int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y,
 		int *biasMatrixDims_x, int* biasMatrixDims_y, int* ret_val)
@@ -366,11 +366,30 @@ __global__ void test(Layer* layer_list, int no_layers, float* inputPictures, int
 
 	if(index < batch_size)
 	{
-		loadPicture<<<1,80>>>(nodeArrays[index][0], &inputPictures[index*784]);
+		/* copying nodes, weights and biases for each picture-parallel thread to prevent race conditions */
+		float** nodeArrays, **weightArrays, **biasArrays, **nodeDerivArrays, **weightDerivArrays;
+
+		for(int i = 0; i < no_node_matrices; i++)
+		{
+			nodeArrays[i] = (float*) malloc(nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float));
+			nodeDerivArrays[i] = (float*) malloc(nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float));
+		}
+
+		for(int i = 0; i < no_weight_matrices; i++)
+		{
+			weightArrays[i] = (float*) malloc(weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float));
+			memcpy((void*) weightArrays[i], (void*) weightArrayPtrs[i], weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float));
+			weightDerivArrays[i] = (float*) malloc(weightMatrixDims_x[i]*weightMatrixDims_x[i]*sizeof(float));
+			biasArrays[i] = (float*) malloc(biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float));
+			memcpy((void*) biasArrays[i], (void*) biasArrayPtrs[i], biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float));
+		}
+
+
+		loadPicture<<<1,80>>>(nodeArrays[0], &inputPictures[index*784]);
 		/* blocks until all threads finish */
 
 		/* forward splits up into 80 parallel threads in each layer task */
-		forward(layer_list, no_layers, &labels[index*10], nodeArrayPtrs[index], weightArrayPtrs[index], biasArrayPtrs[index],
+		forward(layer_list, no_layers, &labels[index*10], nodeArrays, weightArrays, biasArrays,
 				no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
 				nodeMatrixDims_y, weightMatrixDims_x, weightMatrixDims_y);
 
@@ -392,6 +411,7 @@ __global__ void test(Layer* layer_list, int no_layers, float* inputPictures, int
 		{
 			correct_detections++;
 		}
+		__syncthreads();
 	}
 	__syncthreads();
 	*ret_val = correct_detections;

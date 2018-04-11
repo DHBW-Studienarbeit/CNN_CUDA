@@ -607,45 +607,18 @@ bool Network::train(int batch_size, int no_iterations)
 float Network::test()
 {
 	cudaError_t cuda_error = cudaSuccess;
-	int batch_size = BATCH_SIZE;
+	int batch_size = 150;
 	int correct_detections = 0;
 	int correct_per_batch = 0;
 	float* devicePictureAddr, *deviceLabelAddr;
-
-	float*** nodeArrays, ***weightArrays, ***biasArrays;
-
-	cuda_error = cudaMalloc((void**) &nodeArrays, batch_size*sizeof(float**));
-	cuda_error = cudaMalloc((void**) &weightArrays, batch_size*sizeof(float**));
-	cuda_error = cudaMalloc((void**) &biasArrays, batch_size*sizeof(float**));
-
-	for(int i = 0; i < batch_size; i++)
-	{
-		/* copying nodes, weights and biases for each picture-parallel thread to prevent race conditions */
-
-		cuda_error = cudaMalloc((void**) &nodeArrays[i], no_node_matrices*sizeof(float*));
-		cuda_error = cudaMalloc((void**) &weightArrays[i], no_weight_matrices*sizeof(float*));
-		cuda_error = cudaMalloc((void**) &biasArrays[i], no_bias_matrices*sizeof(float*));
-
-		for(int j = 0; j < no_node_matrices; j++)
-		{
-			cuda_error = cudaMalloc((void**) &nodeArrays[i][j], nodeMatrixDims_x[j]*nodeMatrixDims_y[j]*sizeof(float));
-		}
-
-		for(int j = 0; j < no_weight_matrices; j++)
-		{
-			cuda_error = cudaMalloc((void**) &weightArrays[i][j], weightMatrixDims_x[j]*weightMatrixDims_y[j]*sizeof(float));
-			cuda_error = cudaMalloc((void**) &biasArrays[i][j], biasMatrixDims_x[j]*biasMatrixDims_y[j]*sizeof(float));
-
-		}
-	}
-
-	/* allocate device memory for a batch of input pictures */
-	cuda_error = cudaMalloc((void**) &devicePictureAddr, batch_size * 784 * sizeof(float));
 
 	for(int i = 0; i < NO_TEST_FILES_D; i++)
 	{
 		for(int j = 0; j < NO_PICS_PER_FILE_D; j++)
 		{
+			/* allocate device memory for a batch of input pictures */
+			cuda_error = cudaMalloc((void**) &devicePictureAddr, batch_size * 784 * sizeof(float));
+
 			/* transfer picture data to device */
 			for(int i = 0; i < batch_size; i++)
 			{
@@ -656,43 +629,12 @@ float Network::test()
 			}
 
 			cuda::test<<<5,32>>>(device_layer_list, layer_list->size(), devicePictureAddr, batch_size, deviceLabelAddr,
-					nodeArrays, weightArrays, biasArrays, no_node_matrices, no_weight_matrices, no_bias_matrices, nodeDeviceMatrixDims_x,
+					nodeArrayPtrs, weightArrayPtrs, biasArrayPtrs, no_node_matrices, no_weight_matrices, no_bias_matrices, nodeDeviceMatrixDims_x,
 					nodeDeviceMatrixDims_y, weightDeviceMatrixDims_x,
 					weightDeviceMatrixDims_y, biasDeviceMatrixDims_x, biasDeviceMatrixDims_y, &correct_per_batch);
 			correct_detections += correct_per_batch;
 		}
 	}
-
-	cuda_error = cudaFree((void*) devicePictureAddr);
-	cuda_error = cudaFree((void*) deviceLabelAddr);
-
-	for(int i = 0; i < batch_size; i++)
-	{
-		/* copying nodes, weights and biases for each picture-parallel thread to prevent race conditions */
-
-		for(int j = 0; j < no_node_matrices; j++)
-		{
-			cuda_error = cudaFree((void*) nodeArrays[i][j]);
-			cuda_error = cudaFree((void*) nodeDerivArrays[i][j]);
-		}
-
-		for(int j = 0; j < no_weight_matrices; j++)
-		{
-			cuda_error = cudaFree((void*) weightArrays[i][j]);
-
-			cuda_error = cudaFree((void*) weightDerivArrays[i][j]);
-
-			cuda_error = cudaFree((void*) biasArrays[i][j]);
-
-		}
-
-		cuda_error = cudaFree((void*) nodeArrays[i]);
-		cuda_error = cudaFree((void*) weightArrays[i]);
-		cuda_error = cudaFree((void*) biasAarrays[i]);
-		cuda_error = cudaFree((void*) nodeDerivArrays[i]);
-		cuda_error = cudaFree((void*) weightDerivArrays[i]);
-	}
-
 	return (float)correct_detections/(NO_PICS_PER_FILE_D*NO_TEST_FILES_D);
 }
 

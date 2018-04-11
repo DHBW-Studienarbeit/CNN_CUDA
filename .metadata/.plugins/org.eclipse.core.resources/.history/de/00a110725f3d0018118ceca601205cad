@@ -392,6 +392,7 @@ __global__ void test(Layer* layer_list, int no_layers, float* inputPictures, int
 		{
 			correct_detections++;
 		}
+		__syncthreads();
 	}
 	__syncthreads();
 	*ret_val = correct_detections;
