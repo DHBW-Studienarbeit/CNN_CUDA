@@ -252,9 +252,8 @@ __global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightP
  * <return> cost sum over batch </return>
  */
 __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
-			float*** nodeArrayPtrs, float*** weightArrayPtrs, float*** biasArrayPtrs, float*** nodeDerivatePtrs,
-			float*** weightDerivPtrs, float*** biasDerivPtrs, float** origWeightArrayPtrs, float** origBiasArrayPtrs,
-			float** origWeightDerivPtrs, float** origBiasDerivPtrs,
+			float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs, float** nodeDerivatePtrs,
+			float** weightDerivPtrs, float** biasDerivPtrs,
 			int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
 			int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y, int* biasMatrixDims_x,
 			int* biasMatrixDims_y)
@@ -270,11 +269,38 @@ __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, in
 
 	if(index < batch_size)
 	{
-		loadPicture<<<1,80>>>(nodeArrayPtrs[index][0], &inputPictures[index*784]);
+		/* copying nodes, weights and biases for each picture-parallel thread to prevent race conditions */
+		float** nodeArrays, **weightArrays, **biasArrays, **nodeDerivArrays, **weightDerivArrays;
+
+		nodeArrays = (float**) malloc(no_node_matrices*sizeof(float*));
+		weightArrays = (float**) malloc(no_weight_matrices*sizeof(float*));
+		biasArrays = (float**) malloc(no_bias_matrices*sizeof(float*));
+		nodeDerivArrays = (float**) malloc(no_node_matrices*sizeof(float*));
+		weightDerivArrays = (float**) malloc(no_weight_matrices*sizeof(float*));
+
+		for(int i = 0; i < no_node_matrices; i++)
+		{
+			nodeArrays[i] = (float*) malloc(nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float));
+//			cuda_error = cudaMemcpy((void*) nodeArrays[i], (void*) nodeArrayPtrs[i], nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float), cudaMemcpyDeviceToDevice);
+			nodeDerivArrays[i] = (float*) malloc(nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float));
+//			cuda_error = cudaMemcpy((void*) nodeDerivArrays[i], (void*) nodeDerivatePtrs[i], nodeMatrixDims_x[i]*nodeMatrixDims_y[i]*sizeof(float), cudaMemcpyDeviceToDevice);
+		}
+
+		for(int i = 0; i < no_weight_matrices; i++)
+		{
+			weightArrays[i] = (float*) malloc(weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float));
+			memcpy((void*) weightArrays[i], (void*) weightArrayPtrs[i], weightMatrixDims_x[i]*weightMatrixDims_y[i]*sizeof(float));
+			weightDerivArrays[i] = (float*) malloc(weightMatrixDims_x[i]*weightMatrixDims_x[i]*sizeof(float));
+			biasArrays[i] = (float*) malloc(biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float));
+			memcpy((void*) biasArrays[i], (void*) biasArrayPtrs[i], biasMatrixDims_x[i]*biasMatrixDims_y[i]*sizeof(float));
+		}
+
+
+		loadPicture<<<1,80>>>(nodeArrays[0], &inputPictures[index*784]);
 		/* blocks until all threads finish */
 
 		/* forward splits up into 80 parallel threads in each layer task */
-		ret_val += forward(layer_list, no_layers, &labels[index*10], nodeArrayPtrs[index], weightArrayPtrs[index], biasArrayPtrs[index],
+		ret_val += forward(layer_list, no_layers, &labels[index*10], nodeArrays, weightArrays, biasArrays,
 				no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
 				nodeMatrixDims_y, weightMatrixDims_x, weightMatrixDims_y);
 
@@ -284,8 +310,8 @@ __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, in
 //				float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivArrayPtrs, float** weightDerivArrayPtrs,
 //				int no_node_matrices, int no_weight_matrices, int no_bias_matrices,
 //				int* nodeMatrixDims_x, int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y
-		backpropagate(layer_list, no_layers, &labels[index*10], nodeArrayPtrs[index], weightArrayPtrs[index],
-				nodeDerivatePtrs[index], weightDerivPtrs[index], no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
+		backpropagate(layer_list, no_layers, &labels[index*10], nodeArrays, weightArrays,
+				nodeDerivArrays, weightDerivArrays, no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
 				nodeMatrixDims_y, weightMatrixDims_x, weightMatrixDims_y);
 		__syncthreads();
 
@@ -301,11 +327,11 @@ __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, in
 						int biasArrayLength = biasMatrixDims_x[i] * biasMatrixDims_y[i];
 						for(int j = 0; j < weightArrayLength; j++)
 						{
-							origWeightDerivPtrs[i][j] = weightDerivPtrs[index][i][j];
+							weightDerivPtrs[i][j] = weightDerivArrays[i][j];
 						}
 						for(int j = 0; j < biasArrayLength; j++)
 						{
-							origBiasDerivPtrs[i][j] = nodeDerivArrays[index][i][j];
+							biasDerivPtrs[i][j] = nodeDerivArrays[i][j];
 						}
 					}
 				}
@@ -317,11 +343,11 @@ __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, in
 						int biasArrayLength = biasMatrixDims_x[i] * biasMatrixDims_y[i];
 						for(int j = 0; j < weightArrayLength; j++)
 						{
-							origWeightDerivPtrs[i][j] += weightDerivArrays[index][i][j];
+							weightDerivPtrs[i][j] += weightDerivArrays[i][j];
 						}
 						for(int j = 0; j < biasArrayLength; j++)
 						{
-							origBiasDerivPtrs[i][j] += nodeDerivArrays[index][i][j];
+							biasDerivPtrs[i][j] += nodeDerivArrays[i][j];
 						}
 					}
 				}
@@ -332,7 +358,7 @@ __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, in
 //				float** weightDerivArrayPtrs, float** biasDerivArrayPtrs,
 //				int* weightDims_x, int* weightDims_y, int* biasDims_x, int *biasDims_y,
 //				int no_weights, int batch_size
-		gradient_descent<<<1,80>>>(origWeightArrayPtrs, origBiasArrayPtrs, origWeightDerivPtrs, origBiasDerivPtrs,
+		gradient_descent<<<1,80>>>(weightArrayPtrs, biasArrayPtrs, weightDerivPtrs, biasDerivPtrs,
 				weightMatrixDims_x, weightMatrixDims_y,
 				biasMatrixDims_x, biasMatrixDims_y, no_weight_matrices, batch_size);
 

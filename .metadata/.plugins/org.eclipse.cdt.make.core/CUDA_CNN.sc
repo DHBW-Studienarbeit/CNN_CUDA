@@ -11,6 +11,7 @@
 <includePath path="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
 <includePath path="/usr/include/x86_64-linux-gnu"/>
 <includePath path="/usr/include"/>
+<includePath path="/usr/local/cuda-8.0/include"/>
 <definedSymbol symbol="="/>
 <definedSymbol symbol="__CUDA_FTZ=0"/>
 <definedSymbol symbol="__CUDA_PREC_SQRT=1"/>
@@ -300,6 +301,7 @@
 <includePath path="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
 <includePath path="/usr/include/x86_64-linux-gnu"/>
 <includePath path="/usr/include"/>
+<includePath path="/usr/local/cuda-8.0/include"/>
 <definedSymbol symbol="="/>
 <definedSymbol symbol="__CUDA_FTZ=0"/>
 <definedSymbol symbol="__CUDA_PREC_SQRT=1"/>
@@ -589,6 +591,7 @@
 <includePath path="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
 <includePath path="/usr/include/x86_64-linux-gnu"/>
 <includePath path="/usr/include"/>
+<includePath path="/usr/local/cuda-8.0/include"/>
 <definedSymbol symbol="="/>
 <definedSymbol symbol="__CUDA_FTZ=0"/>
 <definedSymbol symbol="__CUDA_PREC_SQRT=1"/>

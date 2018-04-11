@@ -35,9 +35,8 @@ __device__ float forward(Layer* layer_list, int no_layers, float* labels,
 		int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y);
 
 __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
-		float*** nodeArrayPtrs, float*** weightArrayPtrs, float*** biasArrayPtrs, float*** nodeDerivatePtrs,
-		float*** weightDerivPtrs, float*** biasDerivPtrs, float** origWeightArrayPtrs, float** origBiasArrayPtrs,
-		float** origWeightDerivPtrs, float** origBiasDerivPtrs,
+		float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs, float** nodeDerivatePtrs,
+		float** weightDerivPtrs, float** biasDerivPtrs,
 		int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
 		int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y, int* biasMatrixDims_x,
 		int* biasMatrixDims_y);

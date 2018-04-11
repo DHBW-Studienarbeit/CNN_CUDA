@@ -562,9 +562,14 @@ bool Network::train(int batch_size, int no_iterations)
 
 
 			}
+//			Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
+//					float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs, float** nodeDerivatePtrs,
+//					float** weightDerivPtrs, float** biasDerivPtrs,
+//					int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
+//					int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y, int* biasMatrixDims_x,
+//					int* biasMatrixDims_y
 			cuda::train<<<1,150>>>(device_layer_list, layer_list->size(), devicePictureAddr, batch_size, deviceLabelAddr,
-					nodeArrays, weightArrays, biasArrays, nodeDerivArrays, weightDerivArrays, biasDerivArrays,
-					weightArrayPtrs, biasArrayPtrs, weightDerivArrayPtrs, biasDerivArrayPtrs,
+					nodeArrayPtrs, weightArrayPtrs, biasArrayPtrs, nodeDerivArrayPtrs, weightDerivArrayPtrs, biasDerivArrayPtrs,
 					no_node_matrices, no_weight_matrices, no_bias_matrices,
 					nodeDeviceMatrixDims_x, nodeDeviceMatrixDims_y, weightDeviceMatrixDims_x,
 					weightDeviceMatrixDims_y, biasDeviceMatrixDims_x, biasDeviceMatrixDims_y);
