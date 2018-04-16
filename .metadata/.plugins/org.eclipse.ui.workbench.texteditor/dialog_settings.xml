@@ -3,7 +3,7 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="291" key="DIALOG_WIDTH"/>
 		<item value="346" key="DIALOG_Y_ORIGIN"/>
-		<item value="628" key="DIALOG_HEIGHT"/>
+		<item value="656" key="DIALOG_HEIGHT"/>
 		<item value="973" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
@@ -13,26 +13,26 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="cublasCreate" key="selection"/>
+		<item value="load" key="selection"/>
 		<list key="findhistory">
+			<item value="load"/>
+			<item value="forward"/>
+			<item value="node_index"/>
+			<item value="2"/>
+			<item value="Arrays"/>
+			<item value="Arrays_"/>
 			<item value="cublasCreate"/>
 			<item value=".getLayerType()"/>
-			<item value="cuda_error |= "/>
-			<item value="nullptr"/>
-			<item value="sizeof("/>
-			<item value="&gt;&gt;"/>
-			<item value="&lt;&lt;"/>
-			<item value="cuda_error |="/>
 		</list>
 		<list key="replacehistory">
+			<item value="3"/>
+			<item value="DeviceArrays"/>
+			<item value="DeviceArrays_"/>
 			<item value=".type"/>
 			<item value="cuda_error = "/>
 			<item value="NULL"/>
 			<item value="std::sizeof("/>
 			<item value="&gt;&gt;&gt;"/>
-			<item value="&lt;&lt;&lt;"/>
-			<item value="cuda_error ="/>
-			<item value="bias"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">

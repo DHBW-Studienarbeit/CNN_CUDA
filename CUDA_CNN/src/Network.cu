@@ -498,41 +498,72 @@ bool Network::train(int batch_size, int no_iterations)
 
 	std::cout << "Copying network for training..." << std::endl;
 
-	float*** nodeArrays, ***weightArrays, ***biasArrays, ***nodeDerivArrays, ***weightDerivArrays;
+	float*** nodeArrays_3, ***weightArrays_3, ***biasArrays_3, ***nodeDerivArrays_3, ***weightDerivArrays_3;
 
-	cuda_error = cudaMalloc((void**) &nodeArrays, batch_size*sizeof(float**));
-	cuda_error = cudaMalloc((void**) &weightArrays, batch_size*sizeof(float**));
-	cuda_error = cudaMalloc((void**) &biasArrays, batch_size*sizeof(float**));
-	cuda_error = cudaMalloc((void**) &nodeDerivArrays, batch_size*sizeof(float**));
-	cuda_error = cudaMalloc((void**) &weightDerivArrays, batch_size*sizeof(float**));
+	float*** nodeDeviceArrays_3, ***weightDeviceArrays_3, ***biasDeviceArrays_3, ***nodeDerivDeviceArrays_3, ***weightDerivDeviceArrays_3;
+	float** nodeDeviceArrays_2, **weightDeviceArrays_2, **biasDeviceArrays_2, **nodeDerivDeviceArrays_2, **weightDerivDeviceArrays_2;
+
+	nodeArrays_3 = (float***) malloc(batch_size*sizeof(float**));
+	weightArrays_3 = (float***) malloc(batch_size*sizeof(float**));
+	biasArrays_3 = (float***) malloc(batch_size*sizeof(float**));
+	nodeDerivArrays_3 = (float***) malloc(batch_size*sizeof(float**));
+	weightDerivArrays_3 = (float***) malloc(batch_size*sizeof(float**));
+
+	cuda_error = cudaMalloc((void**) &nodeDeviceArrays_3, batch_size*sizeof(float**));
+	cuda_error = cudaMalloc((void**) &weightDeviceArrays_3, batch_size*sizeof(float**));
+	cuda_error = cudaMalloc((void**) &biasDeviceArrays_3, batch_size*sizeof(float**));
+	cuda_error = cudaMalloc((void**) &nodeDerivDeviceArrays_3, batch_size*sizeof(float**));
+	cuda_error = cudaMalloc((void**) &weightDerivDeviceArrays_3, batch_size*sizeof(float**));
 
 
 	for(int i = 0; i < batch_size; i++)
 	{
 		/* copying nodes, weights and biases for each picture-parallel thread to prevent race conditions */
 
-		cuda_error = cudaMalloc((void**) &nodeArrays[i], no_node_matrices*sizeof(float*));
-		cuda_error = cudaMalloc((void**) &weightArrays[i], no_weight_matrices*sizeof(float*));
-		cuda_error = cudaMalloc((void**) &biasAarrays[i], no_bias_matrices*sizeof(float*));
-		cuda_error = cudaMalloc((void**) &nodeDerivArrays[i], no_node_matrices*sizeof(float*));
-		cuda_error = cudaMalloc((void**) &weightDerivArrays[i], no_weight_matrices*sizeof(float*));
+		nodeArrays_3[i] = (float**) malloc(no_node_matrices*sizeof(float*));
+		weightArrays_3[i] = (float**) malloc(no_weight_matrices*sizeof(float*));
+		biasArrays_3[i] = (float**) malloc(no_bias_matrices*sizeof(float*));
+		nodeDerivArrays_3[i] = (float**) malloc(no_node_matrices*sizeof(float*));
+		weightDerivArrays_3[i] = (float**) malloc(no_weight_matrices*sizeof(float*));
+
+		cuda_error = cudaMalloc((void**) &nodeDeviceArrays_2, no_node_matrices*sizeof(float*));
+		cuda_error = cudaMalloc((void**) &weightDeviceArrays_2, no_weight_matrices*sizeof(float*));
+		cuda_error = cudaMalloc((void**) &biasDeviceArrays_2, no_bias_matrices*sizeof(float*));
+		cuda_error = cudaMalloc((void**) &nodeDerivDeviceArrays_2, no_node_matrices*sizeof(float*));
+		cuda_error = cudaMalloc((void**) &weightDerivDeviceArrays_2, no_weight_matrices*sizeof(float*));
+
 
 		for(int j = 0; j < no_node_matrices; j++)
 		{
-			cuda_error = cudaMalloc((void**) &nodeArrays[i][j], nodeMatrixDims_x[j]*nodeMatrixDims_y[j]*sizeof(float));
-			cuda_error = cudaMalloc((void**) &nodeDerivArrays[i][j], nodeMatrixDims_x[j]*nodeMatrixDims_y[j]*sizeof(float));
+			cuda_error = cudaMalloc((void**) &nodeArrays_3[i][j], nodeMatrixDims_x[j]*nodeMatrixDims_y[j]*sizeof(float));
+			cuda_error = cudaMalloc((void**) &nodeDerivArrays_3[i][j], nodeMatrixDims_x[j]*nodeMatrixDims_y[j]*sizeof(float));
 		}
 
 		for(int j = 0; j < no_weight_matrices; j++)
 		{
-			cuda_error = cudaMalloc((void**) &weightArrays[i][j], weightMatrixDims_x[j]*weightMatrixDims_y[j]*sizeof(float));
+			cuda_error = cudaMalloc((void**) &weightArrays_3[i][j], weightMatrixDims_x[j]*weightMatrixDims_y[j]*sizeof(float));
 
-			cuda_error = cudaMalloc((void**) &weightDerivArrays[i][j], weightMatrixDims_x[j]*weightMatrixDims_y[j]*sizeof(float));
+			cuda_error = cudaMalloc((void**) &weightDerivArrays_3[i][j], weightMatrixDims_x[j]*weightMatrixDims_y[j]*sizeof(float));
 
-			cuda_error = cudaMalloc((void**) &biasArrays[i][j], biasMatrixDims_x[j]*biasMatrixDims_y[j]*sizeof(float));
+			cuda_error = cudaMalloc((void**) &biasArrays_3[i][j], biasMatrixDims_x[j]*biasMatrixDims_y[j]*sizeof(float));
 
 		}
+
+		cuda_error = cudaMemcpy(nodeDeviceArrays_2, nodeArrays_3[i], no_node_matrices*sizeof(float*), cudaMemcpyHostToDevice);
+//		cuda::printPointers<<<1,1>>>(nodeDeviceArrays_2, no_weight_matrices);
+		cuda_error = cudaMemcpy(&nodeDeviceArrays_3[i], &nodeDeviceArrays_2, sizeof(float**), cudaMemcpyHostToDevice);
+//		cuda::printPointers<<<1,1>>>((float**)(nodeDeviceArrays_3+i), 1);
+		cuda_error = cudaMemcpy(weightDeviceArrays_2, weightArrays_3[i], no_weight_matrices*sizeof(float*), cudaMemcpyHostToDevice);
+		cuda_error = cudaMemcpy(&weightDeviceArrays_3[i], &weightDeviceArrays_2, sizeof(float**), cudaMemcpyHostToDevice);
+		cuda_error = cudaMemcpy(biasDeviceArrays_2, biasArrays_3[i], no_weight_matrices*sizeof(float*), cudaMemcpyHostToDevice);
+		cuda_error = cudaMemcpy(&biasDeviceArrays_3[i], &biasDeviceArrays_2, sizeof(float**), cudaMemcpyHostToDevice);
+		cuda_error = cudaMemcpy(weightDerivDeviceArrays_2, weightDerivArrays_3[i], no_weight_matrices*sizeof(float*), cudaMemcpyHostToDevice);
+		cuda_error = cudaMemcpy(&weightDerivDeviceArrays_3[i], &weightDerivDeviceArrays_2, sizeof(float**), cudaMemcpyHostToDevice);
+		cuda_error = cudaMemcpy(nodeDerivDeviceArrays_2, nodeDerivArrays_3[i], no_node_matrices*sizeof(float*), cudaMemcpyHostToDevice);
+		cuda_error = cudaMemcpy(&nodeDerivDeviceArrays_3[i], &nodeDerivDeviceArrays_2, sizeof(float**), cudaMemcpyHostToDevice);
 	}
+
+
 
 	/* allocate device memory for a batch of input pictures */
 	cuda_error = cudaMalloc((void**) &devicePictureAddr, batch_size * 784 * sizeof(float));
@@ -542,12 +573,13 @@ bool Network::train(int batch_size, int no_iterations)
 	{
 		for(int j = 0; j < outer_loop; j++)
 		{
+			/* copy weights and biases */
 			for(int i = 0; i < batch_size; i++)
 			{
 				for(int j = 0; j < no_weight_matrices; j++)
 				{
-					cuda_error = cudaMemcpy((void*) weightArrays[i][j], (void*) weightArrayPtrs[j], weightMatrixDims_x[j]*weightMatrixDims_y[j]*sizeof(float), cudaMemcpyDeviceToDevice);
-					cuda_error = cudaMemcpy((void*) biasArrays[i][j], (void*) biasArrayPtrs[j], biasMatrixDims_x[j]*biasMatrixDims_y[j]*sizeof(float), cudaMemcpyDeviceToDevice);
+					cuda_error = cudaMemcpy((void*) weightArrays_3[i][j], (void*) weightArrayPtrs[j], weightMatrixDims_x[j]*weightMatrixDims_y[j]*sizeof(float), cudaMemcpyDeviceToDevice);
+					cuda_error = cudaMemcpy((void*) biasArrays_3[i][j], (void*) biasArrayPtrs[j], biasMatrixDims_x[j]*biasMatrixDims_y[j]*sizeof(float), cudaMemcpyDeviceToDevice);
 
 				}
 			}
@@ -563,7 +595,7 @@ bool Network::train(int batch_size, int no_iterations)
 
 			}
 			cuda::train<<<1,150>>>(device_layer_list, layer_list->size(), devicePictureAddr, batch_size, deviceLabelAddr,
-					nodeArrays, weightArrays, biasArrays, nodeDerivArrays, weightDerivArrays, biasDerivArrays,
+					nodeDeviceArrays_3, weightDeviceArrays_3, biasDeviceArrays_3, nodeDerivDeviceArrays_3, weightDerivDeviceArrays_3,
 					weightArrayPtrs, biasArrayPtrs, weightDerivArrayPtrs, biasDerivArrayPtrs,
 					no_node_matrices, no_weight_matrices, no_bias_matrices,
 					nodeDeviceMatrixDims_x, nodeDeviceMatrixDims_y, weightDeviceMatrixDims_x,
@@ -580,26 +612,44 @@ bool Network::train(int batch_size, int no_iterations)
 
 		for(int j = 0; j < no_node_matrices; j++)
 		{
-			cuda_error = cudaFree((void*) nodeArrays[i][j]);
-			cuda_error = cudaFree((void*) nodeDerivArrays[i][j]);
+			cuda_error = cudaFree((void*) nodeArrays_3[i][j]);
+			cuda_error = cudaFree((void*) nodeDerivArrays_3[i][j]);
 		}
 
 		for(int j = 0; j < no_weight_matrices; j++)
 		{
-			cuda_error = cudaFree((void*) weightArrays[i][j]);
+			cuda_error = cudaFree((void*) weightArrays_3[i][j]);
 
-			cuda_error = cudaFree((void*) weightDerivArrays[i][j]);
+			cuda_error = cudaFree((void*) weightDerivArrays_3[i][j]);
 
-			cuda_error = cudaFree((void*) biasArrays[i][j]);
+			cuda_error = cudaFree((void*) biasArrays_3[i][j]);
 
 		}
 
-		cuda_error = cudaFree((void*) nodeArrays[i]);
-		cuda_error = cudaFree((void*) weightArrays[i]);
-		cuda_error = cudaFree((void*) biasAarrays[i]);
-		cuda_error = cudaFree((void*) nodeDerivArrays[i]);
-		cuda_error = cudaFree((void*) weightDerivArrays[i]);
+		free(nodeArrays_3[i]);
+		free(weightArrays_3[i]);
+		free(biasArrays_3[i]);
+		free(nodeDerivArrays_3[i]);
+		free(weightDerivArrays_3[i]);
 	}
+
+	cuda_error = cudaFree((void*) nodeDeviceArrays_2);
+	cuda_error = cudaFree((void*) weightDeviceArrays_2);
+	cuda_error = cudaFree((void*) biasDeviceArrays_2);
+	cuda_error = cudaFree((void*) nodeDerivDeviceArrays_2);
+	cuda_error = cudaFree((void*) weightDerivDeviceArrays_2);
+
+	cuda_error = cudaFree((void*) nodeDeviceArrays_3);
+	cuda_error = cudaFree((void*) weightDeviceArrays_3);
+	cuda_error = cudaFree((void*) biasDeviceArrays_3);
+	cuda_error = cudaFree((void*) nodeDerivDeviceArrays_3);
+	cuda_error = cudaFree((void*) weightDerivDeviceArrays_3);
+
+	free(nodeArrays_3);
+	free(weightArrays_3);
+	free(biasArrays_3);
+	free(nodeDerivArrays_3);
+	free(weightDerivArrays_3);
 
 	return ret_val;
 }
@@ -673,24 +723,18 @@ float Network::test()
 		for(int j = 0; j < no_node_matrices; j++)
 		{
 			cuda_error = cudaFree((void*) nodeArrays[i][j]);
-			cuda_error = cudaFree((void*) nodeDerivArrays[i][j]);
 		}
 
 		for(int j = 0; j < no_weight_matrices; j++)
 		{
 			cuda_error = cudaFree((void*) weightArrays[i][j]);
-
-			cuda_error = cudaFree((void*) weightDerivArrays[i][j]);
-
 			cuda_error = cudaFree((void*) biasArrays[i][j]);
 
 		}
 
 		cuda_error = cudaFree((void*) nodeArrays[i]);
 		cuda_error = cudaFree((void*) weightArrays[i]);
-		cuda_error = cudaFree((void*) biasAarrays[i]);
-		cuda_error = cudaFree((void*) nodeDerivArrays[i]);
-		cuda_error = cudaFree((void*) weightDerivArrays[i]);
+		cuda_error = cudaFree((void*) biasArrays[i]);
 	}
 
 	return (float)correct_detections/(NO_PICS_PER_FILE_D*NO_TEST_FILES_D);

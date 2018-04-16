@@ -1,6 +1,6 @@
-08:32:49 **** Build of configuration Debug for project CUDA_CNN ****
+17:10:49 **** Incremental Build of configuration Debug for project CUDA_CNN ****
 make -k -j8 all 
 make: Für das Ziel „all“ ist nichts zu tun.
 
-08:32:49 Build Finished (took 393ms)
+17:10:49 Build Finished (took 307ms)
 

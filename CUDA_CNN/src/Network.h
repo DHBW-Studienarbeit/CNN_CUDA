@@ -46,6 +46,8 @@ private:
 	float **weightDerivArrayPtrs;
 	float **biasDerivArrayPtrs;
 
+
+
 	/* Arrays of array lengths */
 	int *nodeArrayLengths;
 	int *weightArrayLengths;

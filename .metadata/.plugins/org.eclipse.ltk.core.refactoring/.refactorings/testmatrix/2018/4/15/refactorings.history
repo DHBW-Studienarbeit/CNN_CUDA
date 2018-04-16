@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;testmatrix/src/simpleCUBLAS.cpp&apos; to &apos;simpleCUBLAS.cu&apos;" description="Rename resource &apos;simpleCUBLAS.cpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/simpleCUBLAS.cpp" name="simpleCUBLAS.cu" stamp="1523545455030" updateReferences="true"/>
+</session>
