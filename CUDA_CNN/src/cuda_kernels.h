@@ -18,7 +18,7 @@
 
 namespace cuda {
 
-void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLengths);
+__global__ void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLengths);
 __global__ void loadPicture(float* arrayPtr, float* picturePtr);
 __global__ void convolution(float* inputPtr, float* outputPtr, float* weightPtr, float* biasPtr,
 		int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y);
@@ -69,6 +69,8 @@ __global__ void maxPooling_back(float** nodeArrayPtrs, float** weightArrayPtrs, 
 		int nextReceptive_y, LAYER_TYPE nextLayerType);
 
 __global__ void printPointers(float** ptrs, int length);
+
+__global__ void printMatrix(float* matrix, int dim_x, int dim_y);
 
 } /* end namespace cuda */
 

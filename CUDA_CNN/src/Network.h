@@ -46,7 +46,12 @@ private:
 	float **weightDerivArrayPtrs;
 	float **biasDerivArrayPtrs;
 
-
+	float **nodeDeviceArrayPtrs;
+	float **weightDeviceArrayPtrs;
+	float **biasDeviceArrayPtrs;
+	float **nodeDerivDeviceArrayPtrs;
+	float **weightDerivDeviceArrayPtrs;
+	float **biasDerivDeviceArrayPtrs;
 
 	/* Arrays of array lengths */
 	int *nodeArrayLengths;

@@ -20,7 +20,7 @@ __device__ void sigmoid_backward_derivated(float *activation, float *derivatives
 
 
 __device__ void softmax(float *in, float *out, int size);
-__device__ float cross_entropy(float *calculated, float *expected, int size);
+__device__ double cross_entropy(float *calculated, float *expected, int size);
 
 __device__ float get_cost(float *output, float *labels, int size);
 __device__ void get_cost_derivatives(float *output, float *labels, float *derivatives, int size);

@@ -53,24 +53,24 @@ __device__ void softmax(float *in, float *out, int size)
 }
 
 
-__device__ float cross_entropy(float *calculated, float *expected, int size)
+__device__ double cross_entropy(float *calculated, float *expected, int size)
 {
 	double sum=0;
 	for(; size>0; size--, expected++, calculated++)
 	{
 		sum += - (*expected) * log(*calculated);
 	}
-	return (float)sum;
+	return sum;
 }
 
 __device__ float get_cost(float *output, float *labels, int size)
 {
 	float normalized[10];
-	float ret;
+	double ret;
 	softmax(output, normalized, size);
 	ret = cross_entropy(normalized, labels, size);
 
-	return ret;
+	return (float) ret;
 }
 
 /* quadratic cost function derivated */

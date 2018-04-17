@@ -12,12 +12,13 @@
 #include "FullyConnectedLayer.h"
 #include <cuda_runtime.h>
 #include <curand.h>
+#include <curand_kernel.h>
 #include <cublas_v2.h>
 #include <stdio.h>
 
 namespace cuda {
 
-void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLengths)
+__global__ void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLengths)
 {
 //	for(int i = 0; i < no_node_matrices; i++)
 //	{
@@ -32,6 +33,25 @@ void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLengths)
 //
 //		curand_state = curandDestroyGenerator(generator);
 //	}
+
+	int index = threadIdx.x;
+	int stride = blockDim.x;
+
+	curandState_t curand_state;
+	curand_init((unsigned long long) clock(),
+				index,
+				0,
+				&curand_state);
+
+	for(int i = 0; i < no_node_matrices; i++)
+	{
+		for(int j = index; j < arrayLengths[i]; j+=stride)
+		{
+			nodeArrayPtrs[i][j] = curand_uniform(&curand_state);
+//			printf("%d,%d:%f\n", i, j, nodeArrayPtrs[i][j]);
+		}
+	}
+	__syncthreads();
 }
 
 /**
@@ -291,8 +311,8 @@ __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, in
 	if(index < batch_size)
 	{
 		loadPicture<<<1,80>>>(nodeArrayPtrs[index][0], &inputPictures[index*784]);
-		__syncthreads();
-		printPointers<<<1,1>>>(nodeArrayPtrs[index], 3);
+//		__syncthreads();
+//		printPointers<<<1,1>>>(nodeArrayPtrs[index], 3);
 		__syncthreads();
 		/* blocks until all threads finish */
 
@@ -301,8 +321,10 @@ __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, in
 				no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
 				nodeMatrixDims_y, weightMatrixDims_x, weightMatrixDims_y);
 
+
 		__syncthreads();
 		cudaDeviceSynchronize();
+		printf("Forward Retval: %f\n", ret_val);
 
 //		Layer* layer_list, int no_layers, float* labels,
 //				float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivArrayPtrs, float** weightDerivArrayPtrs,
@@ -350,10 +372,11 @@ __global__ void train(Layer* layer_list, int no_layers, float* inputPictures, in
 						}
 					}
 				}
+				add_count++;
 			}
-			__syncthreads();
-			cudaDeviceSynchronize();
 		}
+		__syncthreads();
+		cudaDeviceSynchronize();
 		gradient_descent<<<1,80>>>(origWeightArrayPtrs, origBiasArrayPtrs, origWeightDerivPtrs, origBiasDerivPtrs,
 				weightMatrixDims_x, weightMatrixDims_y,
 				biasMatrixDims_x, biasMatrixDims_y, no_weight_matrices, batch_size);
@@ -538,7 +561,7 @@ __device__ float forward(Layer* layer_list, int no_layers, float* labels,
 			}
 		}
 
-		printPointers<<<1,1>>>(nodeArrayPtrs, 3);
+//		printPointers<<<1,1>>>(nodeArrayPtrs, 3);
 
 		cudaDeviceSynchronize();
 
@@ -852,6 +875,18 @@ __global__ void printPointers(float** ptrs, int length)
 	for(int i = 0; i < length; i++)
 	{
 		printf("Ausgabe: %p\n", ptrs[i]);
+	}
+}
+
+__global__ void printMatrix(float* matrix, int dim_x, int dim_y)
+{
+	for(int i = 0; i < dim_y; i++)
+	{
+		for(int j = 0; j < dim_x; j++)
+		{
+			printf("%f ", matrix[i*dim_x+j]);
+		}
+		printf("\n");
 	}
 }
 
