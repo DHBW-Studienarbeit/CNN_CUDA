@@ -26,7 +26,7 @@
 #define NO_DATA_D	55000
 #define NO_TEST_FILES_D	 10000
 #define NO_PICS_PER_FILE_D	1000
-#define LEARNING_RATE 0.5f
+//#define LEARNING_RATE 0.01f
 #define BATCH_SIZE 150
 
 using namespace std;
@@ -36,7 +36,7 @@ class Network {
 private:
 	vector<Layer*>* layer_list;
 
-	Layer* device_layer_list; /* stored as array at GPU memory*/
+	LAYER_STRUCT* device_layer_list; /* stored as array at GPU memory*/
 
 	/** Arrays of pointer to allocated memory for matrices on GPU memory  */
 	float **nodeArrayPtrs;

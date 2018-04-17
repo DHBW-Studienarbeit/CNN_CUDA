@@ -14,7 +14,7 @@
 #include "mathematics.h"
 #include "Layer.h"
 
-#define LEARNING_RATE 0.5f
+#define LEARNING_RATE 0.01f
 
 namespace cuda {
 
@@ -29,19 +29,19 @@ __global__ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, i
 __global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightPtr, float* biasPtr,
 		int inputDim_x, int inputDim_y, int weightDim_x, int weightDim_y);
 
-__device__ float forward(Layer* layer_list, int no_layers, float* labels,
+__device__ float forward(LAYER_STRUCT* layer_list, int no_layers, float* labels,
 		float** nodeArrayPtrs, float** weightArrayPtrs, float** biasArrayPtrs,
 		int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
 		int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y);
 
-__global__ void train(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
+__global__ void train(LAYER_STRUCT* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
 		float*** nodeArrayPtrs, float*** weightArrayPtrs, float*** biasArrayPtrs, float*** nodeDerivatePtrs,
 		float*** weightDerivPtrs, float** origWeightArrayPtrs, float** origBiasArrayPtrs,
 		float** origWeightDerivPtrs, float** origBiasDerivPtrs,
 		int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
 		int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y, int* biasMatrixDims_x,
 		int* biasMatrixDims_y);
-__global__ void test(Layer* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
+__global__ void test(LAYER_STRUCT* layer_list, int no_layers, float* inputPictures, int batch_size, float* labels,
 		float*** nodeArrayPtrs, float*** weightArrayPtrs, float*** biasArrayPtrs,
 		int no_node_matrices, int no_weight_matrices, int no_bias_matrices, int* nodeMatrixDims_x,
 		int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y,
@@ -53,7 +53,7 @@ __global__ void gradient_descent(float** weightArrayPtrs, float** biasArrayPtrs,
 
 
 /******* backpropagation tasks *********/
-__device__ void backpropagate(Layer* layer_list, int no_layers, float* labels,
+__device__ void backpropagate(LAYER_STRUCT* layer_list, int no_layers, float* labels,
 		float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivArrayPtrs, float** weightDerivArrayPtrs,
 		int no_node_matrices, int no_weight_matrices, int no_bias_matrices,
 		int* nodeMatrixDims_x, int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y);

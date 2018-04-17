@@ -1,0 +1,1 @@
+CompilerOracle: exclude java/lang/reflect/Array.newInstance

@@ -134,14 +134,13 @@ bool Network::generate_network()
 	int weight_index=0;
 
 	/* transfer layer_list to GPU memory */
-	Layer* layer_array = (Layer*) malloc(layer_list->size()*sizeof(Layer));
-	cuda_error = cudaMalloc((void**) &device_layer_list, layer_list->size()*sizeof(Layer));
+	LAYER_STRUCT* layer_array = (LAYER_STRUCT*) malloc(layer_list->size()*sizeof(LAYER_STRUCT));
+	cuda_error = cudaMalloc((void**) &device_layer_list, layer_list->size()*sizeof(LAYER_STRUCT));
 
 
 	for(unsigned int i = 0; i < layer_list->size(); i++)
 	{
 		Layer* layer = layer_list->at(i);
-		layer_array[i] = *layer;
 		switch(layer->getLayerType())
 		{
 			case INPUT_LAYER:
@@ -165,6 +164,16 @@ bool Network::generate_network()
 
 				no_node_matrices++;
 				node_index++;
+
+				/* copy operation for LAYER_STRUCT array on GPU memory */
+				layer_array[i].type = input_layer->getLayerType();
+				layer_array[i].x_size = input_layer->getRows();
+				layer_array[i].y_size = input_layer->getCols();
+				layer_array[i].x_receptive = 0;
+				layer_array[i].y_receptive = 0;
+				layer_array[i].no_feature_maps = 0;
+				layer_array[i].step_size = 0;
+				layer_array[i].size = input_layer->getSize();
 				break;
 			}
 			case CONV_LAYER:
@@ -311,6 +320,16 @@ bool Network::generate_network()
 				{
 					return false;
 				}
+
+				/* copy operation for LAYER_STRUCT array on GPU memory */
+				layer_array[i].type = conv_layer->getLayerType();
+				layer_array[i].x_size = conv_layer->getXSize();
+				layer_array[i].y_size = conv_layer->getYSize();
+				layer_array[i].x_receptive = conv_layer->getXReceptive();
+				layer_array[i].y_receptive = conv_layer->getYReceptive();
+				layer_array[i].no_feature_maps = conv_layer->getNoFeatureMaps();
+				layer_array[i].step_size = conv_layer->getStepSize();
+				layer_array[i].size = conv_layer->getSize();
 				break;
 			}
 			case POOLING_LAYER:
@@ -372,6 +391,15 @@ bool Network::generate_network()
 				{
 					return false;
 				}
+				/* copy operation for LAYER_STRUCT array on GPU memory */
+				layer_array[i].type = pooling_layer->getLayerType();
+				layer_array[i].x_size = pooling_layer->getXSize();
+				layer_array[i].y_size = pooling_layer->getYSize();
+				layer_array[i].x_receptive = pooling_layer->getXReceptive();
+				layer_array[i].y_receptive = pooling_layer->getYReceptive();
+				layer_array[i].no_feature_maps = pooling_layer->getNoFeatures();
+				layer_array[i].step_size = 0;
+				layer_array[i].size = pooling_layer->getSize();
 				break;
 			}
 			case FULLY_CONNECTED_LAYER:
@@ -428,6 +456,16 @@ bool Network::generate_network()
 				no_node_matrices++;
 				no_weight_matrices++;
 				no_bias_matrices++;
+
+				/* copy operation for LAYER_STRUCT array on GPU memory */
+				layer_array[i].type = fullyConn_layer->getLayerType();
+				layer_array[i].x_size = 1;
+				layer_array[i].y_size = fullyConn_layer->getSize();
+				layer_array[i].x_receptive = 0;
+				layer_array[i].y_receptive = 0;
+				layer_array[i].no_feature_maps = 0;
+				layer_array[i].step_size = 0;
+				layer_array[i].size = fullyConn_layer->getSize();
 
 				break;
 			}
@@ -508,7 +546,7 @@ bool Network::generate_network()
 	cuda_error = cudaMemcpy(weightDerivDeviceMatrixDims_y, weightMatrixDims_y, no_weight_matrices * sizeof(int), cudaMemcpyHostToDevice);
 	cuda_error = cudaMemcpy(biasDerivDeviceMatrixDims_y, biasMatrixDims_y, no_bias_matrices * sizeof(int), cudaMemcpyHostToDevice);
 
-	cuda_error = cudaMemcpy(device_layer_list, layer_array, layer_list->size()*sizeof(Layer), cudaMemcpyHostToDevice);
+	cuda_error = cudaMemcpy(device_layer_list, layer_array, layer_list->size()*sizeof(LAYER_STRUCT), cudaMemcpyHostToDevice);
 
 	/* initializes matrices with uniform pseudo-random values between 0.0 and 1.0 */
 	cuda::init<<<1,80>>>(nodeDeviceArrayPtrs, no_node_matrices, nodeDeviceArrayLengths);
@@ -534,6 +572,8 @@ bool Network::generate_network()
 //	cuda::printMatrix<<<1,1>>>(biasArrayPtrs[0], biasMatrixDims_x[0], biasMatrixDims_y[0]);
 
 	cudaDeviceSynchronize();
+
+	free(layer_array);
 
 	return true;
 }
@@ -627,8 +667,8 @@ bool Network::train(int batch_size, int no_iterations)
 				for(int j = 0; j < no_weight_matrices; j++)
 				{
 					cuda_error = cudaMemcpy((void*) weightArrays_3[i][j], (void*) weightArrayPtrs[j], weightMatrixDims_x[j]*weightMatrixDims_y[j]*sizeof(float), cudaMemcpyDeviceToDevice);
-//					cuda::printMatrix<<<1,1>>>(weightArrays_3[i][j], weightMatrixDims_x[j], weightMatrixDims_y[j]);
-//					cudaDeviceSynchronize();
+					if(j==0){cuda::printMatrix<<<1,1>>>(weightArrayPtrs[j], weightMatrixDims_x[j], weightMatrixDims_y[j]);
+					cudaDeviceSynchronize();}
 //					cuda::printMatrix<<<1,1>>>(weightArrayPtrs[j], weightMatrixDims_x[j], weightMatrixDims_y[j]);
 //					cudaDeviceSynchronize();
 					cuda_error = cudaMemcpy((void*) biasArrays_3[i][j], (void*) biasArrayPtrs[j], biasMatrixDims_x[j]*biasMatrixDims_y[j]*sizeof(float), cudaMemcpyDeviceToDevice);
@@ -645,13 +685,15 @@ bool Network::train(int batch_size, int no_iterations)
 				Picture* picture = train_picture_container->get_nextpicture();
 
 				cuda_error = cudaMemcpy(&devicePictureAddr[i*784], picture->get_input(), 784 * sizeof(float), cudaMemcpyHostToDevice);
-				cuda::printMatrix<<<1,1>>>(&devicePictureAddr[i*784], 28, 28);
-				cudaDeviceSynchronize();
+//				cuda::printMatrix<<<1,1>>>(&devicePictureAddr[i*784], 28, 28);
+//				cudaDeviceSynchronize();
 				cuda_error = cudaMemcpy(&deviceLabelAddr[i*10], picture->get_output(), 10 * sizeof(float), cudaMemcpyHostToDevice);
-				cuda::printMatrix<<<1,1>>>(&deviceLabelAddr[i*10], 10, 1);
-				cudaDeviceSynchronize();
+//				cuda::printMatrix<<<1,1>>>(&deviceLabelAddr[i*10], 10, 1);
+//				cudaDeviceSynchronize();
 			}
 
+//			cuda::printMatrix<<<1,1>>>(weightArrays_3[0][0], weightMatrixDims_x[0], weightMatrixDims_y[0]);
+//			cudaDeviceSynchronize();
 			cuda::train<<<1,150>>>(device_layer_list, layer_list->size(), devicePictureAddr, batch_size, deviceLabelAddr,
 					nodeDeviceArrays_3, weightDeviceArrays_3, biasDeviceArrays_3, nodeDerivDeviceArrays_3, weightDerivDeviceArrays_3,
 					weightDeviceArrayPtrs, biasDeviceArrayPtrs, weightDerivDeviceArrayPtrs, biasDerivDeviceArrayPtrs,

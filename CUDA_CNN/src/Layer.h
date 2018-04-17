@@ -44,6 +44,17 @@ public:
 
 };
 
+typedef struct{
+	LAYER_TYPE type;
+	int x_size;
+	int y_size;
+	int x_receptive;
+	int y_receptive;
+	int no_feature_maps;
+	int step_size;
+	int size;
+}LAYER_STRUCT;
+
 
 
 #endif /* LAYER_HPP_ */
