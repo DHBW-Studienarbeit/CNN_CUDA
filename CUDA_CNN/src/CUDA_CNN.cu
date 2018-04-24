@@ -10,7 +10,10 @@
 
 
 #include <iostream>
+//#include <iomanip>
 #include <string>
+#include <ctime>
+//#include <stdlib.h>
 #include "Network.h"
 
 #define PICTURE_SIZE_D			28
@@ -24,8 +27,7 @@
 #define MAX_POOL_SIZE_2_D		2
 #define FULLY_CONNECTED_SIZE_D	10
 
-#define BATCH_SIZE_D	1000
-#define NO_ITERATIONS_D 1
+#define NO_ITERATIONS_D 10
 
 using namespace std;
 
@@ -33,6 +35,10 @@ int main(int argc, char **argv) {
 	bool correct_net = false;
 	bool train_success = false;
 	float accuracy = 0.0f;
+
+	std::time_t curr_time = std::time(NULL);
+	std::tm* tm = std::localtime(&curr_time);
+	std::cout << "Start at " << tm->tm_hour << ":" << tm->tm_min << ":" << tm->tm_sec << std::endl;
 
 	Network* network = new Network();
 
@@ -66,6 +72,10 @@ int main(int argc, char **argv) {
 	{
 		std::cout << "Training failed!" << std::endl;
 	}
+
+	curr_time = std::time(NULL);
+	tm = std::localtime(&curr_time);
+	std::cout << "End at " << tm->tm_hour << ":" << tm->tm_min << ":" << tm->tm_sec << std::endl;
 
 
 	return 0;

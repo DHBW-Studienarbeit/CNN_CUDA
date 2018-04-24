@@ -20,20 +20,6 @@ namespace cuda {
 
 __global__ void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLengths)
 {
-//	for(int i = 0; i < no_node_matrices; i++)
-//	{
-//		curandGenerator_t generator;
-//		curandStatus_t curand_state;
-//
-//		curand_state = curandCreateGenerator(&generator, CURAND_RNG_PSEUDO_DEFAULT);
-//
-//		curand_state = curandSetPseudoRandomGeneratorSeed(generator, (unsigned long long) clock());
-//
-//		curand_state = curandGenerateUniform(generator, nodeArrayPtrs[i], arrayLengths[i]);
-//
-//		curand_state = curandDestroyGenerator(generator);
-//	}
-
 	int index = threadIdx.x;
 	int stride = blockDim.x;
 
@@ -47,11 +33,11 @@ __global__ void init(float** nodeArrayPtrs, int no_node_matrices, int* arrayLeng
 	{
 		for(int j = index; j < arrayLengths[i]; j+=stride)
 		{
-			nodeArrayPtrs[i][j] = curand_uniform(&curand_state);
+			nodeArrayPtrs[i][j] = 0.1 * curand_normal(&curand_state);
 //			printf("%d,%d:%f\n", i, j, nodeArrayPtrs[i][j]);
 		}
 	}
-	__syncthreads();
+	cudaDeviceSynchronize();
 }
 
 /**
@@ -95,7 +81,7 @@ __global__ void loadPicture(float* arrayPtr, float* picturePtr)
 			}
 		}
 	}
-	__syncthreads();
+	cudaDeviceSynchronize();
 }
 
 /**
@@ -137,7 +123,7 @@ __global__ void convolution(float* inputPtr, float* outputPtr, float* weightPtr,
 	}
 	cublasDestroy(cublasHandle);
 
-	__syncthreads();
+	cudaDeviceSynchronize();
 }
 
 /**
@@ -174,8 +160,6 @@ __global__ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, i
 //	cuda_error = cudaMalloc((void**)&pooling_mat, pooling_x*pooling_y*inputDim_y*sizeof(float));
 
 	__syncthreads();
-	cudaDeviceSynchronize();
-
 
 	/* feature maps sorted linear in array because of column major ordering */
 	for(int i = index; i < inputDim_y; i+=stride)
@@ -248,16 +232,14 @@ __global__ void maxPooling(float* inputPtr, float* outputPtr, int x_receptive, i
 		}
 	}
 
-//	__syncthreads();
+//	cudaDeviceSynchronize();
 //	cuda_error = cudaFree(pooling_mat);
 
-	__syncthreads();
+	cudaDeviceSynchronize();
 	if(index == 0)
 	{
 		free(pooling_mat);
 	}
-
-	__syncthreads();
 }
 
 __global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightPtr, float* biasPtr,
@@ -287,7 +269,7 @@ __global__ void fullyConnected(float* inputPtr, float* outputPtr, float* weightP
 	}
 	cublasDestroy(cublasHandle);
 
-	__syncthreads();
+	cudaDeviceSynchronize();
 }
 
 /**
@@ -316,29 +298,24 @@ __global__ void train(LAYER_STRUCT* layer_list, int no_layers, float* inputPictu
 	if(index < batch_size)
 	{
 		loadPicture<<<1,80>>>(nodeArrayPtrs[index][0], &inputPictures[index*784]);
-//		__syncthreads();
+//		cudaDeviceSynchronize();
 //		printPointers<<<1,1>>>(nodeArrayPtrs[index], 3);
-		__syncthreads();
+		cudaDeviceSynchronize();
 		/* blocks until all threads finish */
 
+//		cudaDeviceSynchronize();
+//		printf("Forward Retval: %f\n", ret_val);
 		/* forward splits up into 80 parallel threads in each layer task */
 		ret_val += forward(layer_list, no_layers, &labels[index*10], nodeArrayPtrs[index], weightArrayPtrs[index], biasArrayPtrs[index],
 				no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
 				nodeMatrixDims_y, weightMatrixDims_x, weightMatrixDims_y);
 
-
-		__syncthreads();
 		cudaDeviceSynchronize();
-		printf("Forward Retval: %f\n", ret_val);
 
-//		Layer* layer_list, int no_layers, float* labels,
-//				float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivArrayPtrs, float** weightDerivArrayPtrs,
-//				int no_node_matrices, int no_weight_matrices, int no_bias_matrices,
-//				int* nodeMatrixDims_x, int* nodeMatrixDims_y, int* weightMatrixDims_x, int* weightMatrixDims_y
 		backpropagate(layer_list, no_layers, &labels[index*10], nodeArrayPtrs[index], weightArrayPtrs[index],
 				nodeDerivatePtrs[index], weightDerivPtrs[index], no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
 				nodeMatrixDims_y, weightMatrixDims_x, weightMatrixDims_y);
-		__syncthreads();
+
 		cudaDeviceSynchronize();
 
 		while(add_count < batch_size)
@@ -380,7 +357,7 @@ __global__ void train(LAYER_STRUCT* layer_list, int no_layers, float* inputPictu
 				add_count++;
 			}
 		}
-		__syncthreads();
+
 		cudaDeviceSynchronize();
 //		printMatrix<<<1,1>>>(weightArrayPtrs[0][0], weightMatrixDims_x[0], weightMatrixDims_y[0]);
 //		cudaDeviceSynchronize();
@@ -408,6 +385,7 @@ __global__ void test(LAYER_STRUCT* layer_list, int no_layers, float* inputPictur
 		loadPicture<<<1,80>>>(nodeArrayPtrs[index][0], &inputPictures[index*784]);
 		/* blocks until all threads finish */
 
+		cudaDeviceSynchronize();
 		/* forward splits up into 80 parallel threads in each layer task */
 		forward(layer_list, no_layers, &labels[index*10], nodeArrayPtrs[index], weightArrayPtrs[index], biasArrayPtrs[index],
 				no_node_matrices, no_weight_matrices, no_bias_matrices, nodeMatrixDims_x,
@@ -432,7 +410,7 @@ __global__ void test(LAYER_STRUCT* layer_list, int no_layers, float* inputPictur
 			correct_detections++;
 		}
 	}
-	__syncthreads();
+	cudaDeviceSynchronize();
 	*ret_val = correct_detections;
 }
 
@@ -459,7 +437,6 @@ __global__ void gradient_descent(float** weightArrayPtrs, float** biasArrayPtrs,
 	}
 
 	cudaDeviceSynchronize();
-	__syncthreads();
 
 //	printMatrix<<<1,1>>>(weightDerivArrayPtrs[0], weightDims_x[0], weightDims_y[0]);
 ////	printMatrix<<<1,1>>>(weightArrayPtrs[0], weightDims_x[0], weightDims_y[0]);
@@ -497,6 +474,8 @@ __device__ float forward(LAYER_STRUCT* layer_list, int no_layers, float* labels,
 					cuda::convolution<<<1,80>>>(nodeArrayPtrs[node_index-1], nodeArrayPtrs[node_index], weightArrayPtrs[weight_index],
 							biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1], weightMatrixDims_x[weight_index],
 							weightMatrixDims_y[weight_index]);
+//					printMatrix<<<1,1>>>(nodeArrayPtrs[node_index], nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index]);
+//					cudaDeviceSynchronize();
 					weight_index++;
 					bias_index++;
 
@@ -545,12 +524,15 @@ __device__ float forward(LAYER_STRUCT* layer_list, int no_layers, float* labels,
 								y_receptive, nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
 								prevLayer->x_size, prevLayer->y_size, nextDim_x, nextDim_y, nextReceptive_x,
 								nextReceptive_y, FULLY_CONNECTED_LAYER);
+//						printMatrix<<<1,1>>>(nodeArrayPtrs[node_index], nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index]);
+//						cudaDeviceSynchronize();
 					}
 					else
 					{
 						return -1.0f;
 					}
-
+//					printMatrix<<<1,1>>>(nodeArrayPtrs[node_index], nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index]);
+//					cudaDeviceSynchronize();
 
 					break;
 				}
@@ -560,6 +542,8 @@ __device__ float forward(LAYER_STRUCT* layer_list, int no_layers, float* labels,
 							weightArrayPtrs[weight_index], biasArrayPtrs[bias_index], nodeMatrixDims_x[node_index-1], nodeMatrixDims_y[node_index-1],
 							weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
 
+//					printMatrix<<<1,1>>>(nodeArrayPtrs[node_index], nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index]);
+//					cudaDeviceSynchronize();
 
 					weight_index++;
 					bias_index++;
@@ -581,6 +565,9 @@ __device__ float forward(LAYER_STRUCT* layer_list, int no_layers, float* labels,
 
 		cudaDeviceSynchronize();
 
+//		printMatrix<<<1,1>>>(nodeArrayPtrs[no_layers-1], nodeMatrixDims_x[no_layers-1], nodeMatrixDims_y[no_layers-1]);
+//		cudaDeviceSynchronize();
+
 		return mathematics::get_cost(nodeArrayPtrs[no_layers-1], labels, OUTPUT_SIZE);
 }
 
@@ -599,24 +586,22 @@ __device__ void backpropagate(LAYER_STRUCT* layer_list, int no_layers, float* la
 	/* prepare derivation of last layer's activation */
 	mathematics::get_cost_derivatives(nodeArrayPtrs[node_index], labels,
 			nodeDerivArrayPtrs[node_index],	10);
-	printMatrix<<<1,1>>>(nodeDerivArrayPtrs[node_index], 10, 1);
-	cudaDeviceSynchronize();
+//	printMatrix<<<1,1>>>(nodeDerivArrayPtrs[node_index], 10, 1);
+//	cudaDeviceSynchronize();
 
-//	/* calculate dC/dw */
-//	for(int k = index; k < weightDim_x; k+=stride)
-//	{
-//		for(int j = 0; j < weightDim_y; j++)
-//		{
-//			/* matrices are ordered as column-major */
-//			weightDerivates[weight_index][j*weightDim_x+k] = nodeArrayPtrs[node_index-1][k]*nodeDerivates[node_index][j];
-//		}
-//	}
+	/* calculate dC/dw */
+//	weightDerivatesFinalLayer<<<1,80>>>(weightDerivArrayPtrs[weight_index], nodeArrayPtrs[node_index-1], nodeDerivArrayPtrs[node_index],
+//								weightMatrixDims_x[weight_index], weightMatrixDims_x[weight_index]);
+
+//	printMatrix<<<1,1>>>(nodeArrayPtrs[node_index], nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index]);
+//	printMatrix<<<1,1>>>(weightDerivArrayPtrs[weight_index], weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
+//	cudaDeviceSynchronize();
 
 	node_index--;
 	weight_index--;
 
 	/* actual backpropagation */
-	for(int i = no_layers-1; i > 0; i--)
+	for(int i = no_layers-1; i >= 0; i--)
 	{
 		switch (layer_list[i].type)
 		{
@@ -637,9 +622,10 @@ __device__ void backpropagate(LAYER_STRUCT* layer_list, int no_layers, float* la
 						prevLayer->x_size, prevLayer->y_size, nodeMatrixDims_x[node_index+1],
 						nodeMatrixDims_y[node_index+1], nextLayer->x_receptive,
 						nextLayer->y_receptive, CONV_LAYER);
-				printMatrix<<<1,1>>>(nodeDerivArrayPtrs[node_index], nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index]);
-				cudaDeviceSynchronize();
-				printMatrix<<<1,1>>>(weightDerivArrayPtrs[node_index], weightMatrixDims_x[node_index])
+//				printMatrix<<<1,1>>>(nodeDerivArrayPtrs[node_index], nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index]);
+//				cudaDeviceSynchronize();
+//				printMatrix<<<1,1>>>(weightDerivArrayPtrs[weight_index], weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
+//				cudaDeviceSynchronize();
 			}
 			else if(layer_list[i+1].type == FULLY_CONNECTED_LAYER)
 			{
@@ -659,7 +645,11 @@ __device__ void backpropagate(LAYER_STRUCT* layer_list, int no_layers, float* la
 						pooling_layer->y_receptive, nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index],
 						prevLayer->x_size, prevLayer->y_size, nodeMatrixDims_x[node_index+1],
 						nodeMatrixDims_y[node_index+1], nextReceptive_x,
-						nextReceptive_y, CONV_LAYER);
+						nextReceptive_y, FULLY_CONNECTED_LAYER);
+//				printMatrix<<<1,1>>>(nodeDerivArrayPtrs[node_index], nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index]);
+//				cudaDeviceSynchronize();
+//				printMatrix<<<1,1>>>(weightDerivArrayPtrs[weight_index], weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
+//				cudaDeviceSynchronize();
 			}
 
 			node_index--;
@@ -671,8 +661,12 @@ __device__ void backpropagate(LAYER_STRUCT* layer_list, int no_layers, float* la
 //				__global__ void fullyConnected_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
 //						int node_index, int weight_index, int prev_nodeDim_x, int weightDim_x, int weightDim_y)
 				cuda::fullyConnected_back<<<1,80>>>(nodeArrayPtrs, weightArrayPtrs, nodeDerivArrayPtrs,
-						weightDerivArrayPtrs, node_index, weight_index, nodeMatrixDims_x[node_index-1],
-						weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
+						weightDerivArrayPtrs, node_index, weight_index, nodeMatrixDims_x[node_index],
+						weightMatrixDims_x[weight_index+1], weightMatrixDims_y[weight_index+1]);
+//				printMatrix<<<1,1>>>(nodeDerivArrayPtrs[node_index], nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index]);
+//				cudaDeviceSynchronize();
+//				printMatrix<<<1,1>>>(weightDerivArrayPtrs[weight_index], weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
+//				cudaDeviceSynchronize();
 				node_index--;
 				weight_index--;
 				bias_index--;
@@ -685,8 +679,12 @@ __device__ void backpropagate(LAYER_STRUCT* layer_list, int no_layers, float* la
 //				float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
 //										int node_index, int weight_index, int prev_nodeDim_x, int weightDim_x, int weightDim_y
 				cuda::convolution_back<<<1,80>>>(nodeArrayPtrs, weightArrayPtrs, nodeDerivArrayPtrs,
-						weightDerivArrayPtrs, node_index, weight_index, nodeMatrixDims_x[node_index-1],
-						weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index], INPUT_LAYER);
+						weightDerivArrayPtrs, node_index, weight_index, nodeMatrixDims_x[node_index],
+						weightMatrixDims_x[weight_index+1], weightMatrixDims_y[weight_index+1], INPUT_LAYER);
+//				printMatrix<<<1,1>>>(nodeDerivArrayPtrs[node_index],nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index]);
+//				cudaDeviceSynchronize();
+//				printMatrix<<<1,1>>>(weightDerivArrayPtrs[0], weightMatrixDims_x[0], weightMatrixDims_y[0]);
+//				cudaDeviceSynchronize();
 				weight_index--;
 				bias_index--;
 				node_index--;
@@ -694,8 +692,12 @@ __device__ void backpropagate(LAYER_STRUCT* layer_list, int no_layers, float* la
 			else if (layer_list[i-1].type == POOLING_LAYER)
 			{
 				cuda::convolution_back<<<1,80>>>(nodeArrayPtrs, weightArrayPtrs, nodeDerivArrayPtrs,
-						weightDerivArrayPtrs, node_index, weight_index, nodeMatrixDims_x[node_index-1],
-						weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index], POOLING_LAYER);
+						weightDerivArrayPtrs, node_index, weight_index, nodeMatrixDims_x[node_index],
+						weightMatrixDims_x[weight_index+1], weightMatrixDims_y[weight_index+1], POOLING_LAYER);
+//				printMatrix<<<1,1>>>(nodeDerivArrayPtrs[node_index],nodeMatrixDims_x[node_index], nodeMatrixDims_y[node_index]);
+//				cudaDeviceSynchronize();
+//				printMatrix<<<1,1>>>(weightDerivArrayPtrs[weight_index], weightMatrixDims_x[weight_index], weightMatrixDims_y[weight_index]);
+//				cudaDeviceSynchronize();
 				weight_index--;
 				bias_index--;
 				node_index--;
@@ -708,7 +710,7 @@ __device__ void backpropagate(LAYER_STRUCT* layer_list, int no_layers, float* la
 		}
 	}
 
-	__syncthreads();
+	cudaDeviceSynchronize();
 }
 __global__ void convolution_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
 						int node_index, int weight_index, int prev_nodeDim_x, int weightDim_x, int weightDim_y,
@@ -742,8 +744,8 @@ __global__ void convolution_back(float** nodeArrayPtrs, float** weightArrayPtrs,
 		}
 	}
 
-	if(prevLayer != INPUT_LAYER)
-	{
+//	if(prevLayer != INPUT_LAYER)
+//	{
 		/* calculate dC/dw */
 		for(int k = index; k < weightDim_x; k+=stride) /* parallelize over columns of node matrix */
 		{
@@ -752,17 +754,17 @@ __global__ void convolution_back(float** nodeArrayPtrs, float** weightArrayPtrs,
 				float result = 0.0f;
 				/* matrices are ordered as column-major */
 				cublasState = cublasSdot(cublasHandle, prev_nodeDim_x,
-						(const float*) &nodeArrayPtrs[node_index-1][k*prev_nodeDim_x], 1,
-						(const float*) &nodeDerivates[weight_index][l*prev_nodeDim_x], 1,
+						(const float*) &nodeArrayPtrs[node_index][k*prev_nodeDim_x], 1,
+						(const float*) &nodeDerivates[node_index+1][l*prev_nodeDim_x], 1,
 						&result);
-				weightDerivates[weight_index][l*weightDim_x+k] = result;
+				weightDerivates[weight_index+1][l*weightDim_x+k] = result;
 			}
 		}
-	}
+//	}
 
 	cublasDestroy(cublasHandle);
 
-	__syncthreads();
+	cudaDeviceSynchronize();
 }
 
 __global__ void fullyConnected_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates, float** weightDerivates,
@@ -782,8 +784,8 @@ __global__ void fullyConnected_back(float** nodeArrayPtrs, float** weightArrayPt
 		float result = 0.0;
 		/* matrices are ordered as column-major */
 		cublasState = cublasSdot(cublasHandle, weightDim_y,
-				(const float*) &nodeDerivates[node_index+1][i], prev_nodeDim_x,
-				(const float*) &weightArrayPtrs[weight_index+1][i*weightDim_y], 1,
+				(const float*) nodeDerivates[node_index+1], prev_nodeDim_x,
+				(const float*) &weightArrayPtrs[weight_index+1][i], weightDim_x,
 				&result);
 		nodeDerivates[node_index][i] = result * mathematics::sigmoid_backward_derivated_once(nodeArrayPtrs[node_index][i]);
 	}
@@ -794,13 +796,13 @@ __global__ void fullyConnected_back(float** nodeArrayPtrs, float** weightArrayPt
 		for(int j = 0; j < weightDim_y; j++)
 		{
 			/* matrices are ordered as column-major */
-			weightDerivates[weight_index][j*weightDim_x+k] = nodeArrayPtrs[node_index-1][k]*nodeDerivates[node_index][j];
+			weightDerivates[weight_index+1][j*weightDim_x+k] = nodeArrayPtrs[node_index-1][k]*nodeDerivates[node_index][j];
 		}
 	}
 
 	cublasDestroy(cublasHandle);
 
-	__syncthreads();
+	cudaDeviceSynchronize();
 
 }
 __global__ void maxPooling_back(float** nodeArrayPtrs, float** weightArrayPtrs, float** nodeDerivates,
@@ -831,6 +833,7 @@ __global__ void maxPooling_back(float** nodeArrayPtrs, float** weightArrayPtrs, 
 	}
 
 	__syncthreads();
+//	cudaDeviceSynchronize();
 
 	/* recreate pooling matrix */
 	if(nextLayerType == CONV_LAYER)
@@ -848,7 +851,7 @@ __global__ void maxPooling_back(float** nodeArrayPtrs, float** weightArrayPtrs, 
 			int y_step = i % nextPoolDim_x ;
 			int x_step = i / nextPoolDim_x ;
 
-			pooling_mat[f*poolDim_y+x_step*pooling_x+y_step+p_x*12+p_y] = nodeDerivates[node_index+1][n];
+			pooling_mat[f*poolDim_y+x_step*pooling_x+y_step+p_x*pooling_x+p_y] = nodeDerivates[node_index+1][n];
 		}
 	}
 	else if(nextLayerType == FULLY_CONNECTED_LAYER)
@@ -897,10 +900,26 @@ __global__ void maxPooling_back(float** nodeArrayPtrs, float** weightArrayPtrs, 
 		}
 	}
 
-	__syncthreads();
+	cudaDeviceSynchronize();
 	if(index == 0)
 	{
 		free(pooling_mat);
+	}
+}
+
+__global__ void weightDerivatesFinalLayer(float* weightDerivates, float* nodeArray, float* nodeDerivates,
+										int weightDim_x, int weightDim_y)
+{
+	int index = threadIdx.x;
+	int stride = blockDim.x;
+
+	for(int k = index; k < weightDim_x; k+=stride)
+	{
+		for(int j = 0; j < weightDim_y; j++)
+		{
+			/* matrices are ordered as column-major */
+			weightDerivates[j*weightDim_x+k] = nodeArray[k]*nodeDerivates[j];
+		}
 	}
 }
 

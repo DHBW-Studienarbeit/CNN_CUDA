@@ -182,6 +182,7 @@ src/CUDA_CNN.o : ../src/CUDA_CNN.cu \
     /usr/include/c++/5/bits/ostream.tcc \
     /usr/include/c++/5/istream \
     /usr/include/c++/5/bits/istream.tcc \
+    /usr/include/c++/5/ctime \
     ../src/Network.h \
     /usr/include/c++/5/vector \
     /usr/include/c++/5/bits/stl_construct.h \

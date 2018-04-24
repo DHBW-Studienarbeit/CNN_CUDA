@@ -13,7 +13,7 @@
 
 PictureContainer::PictureContainer(std::string foldername, int num_of_files)
 {
-	this->next_index = 0;
+	this->next_index = -1;
 	this->file_index = 0;
 	this->foldername = foldername;
 	this->num_of_files = num_of_files;
@@ -44,7 +44,7 @@ void PictureContainer::load_pictures() {
 Picture * PictureContainer::get_nextpicture(void)
 {
 	next_index++;
-	if(next_index > PICS_PER_FILE)
+	if(next_index >= PICS_PER_FILE)
 	{
 		next_index=0;
 		file_index++;

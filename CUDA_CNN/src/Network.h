@@ -23,9 +23,11 @@
 #include "PictureContainer.h"
 
 
-#define NO_DATA_D	55000
-#define NO_TEST_FILES_D	 10000
-#define NO_PICS_PER_FILE_D	1000
+
+#define NO_TEST_FILES_D	 1 //10
+#define NO_TRAIN_FILES_D 1 //55
+#define NO_PICS_PER_FILE_D	PICS_PER_FILE
+#define NO_DATA_D	(NO_TRAIN_FILES_D*NO_PICS_PER_FILE_D) //55000
 //#define LEARNING_RATE 0.01f
 #define BATCH_SIZE 150
 

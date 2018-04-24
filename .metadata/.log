@@ -8292,3 +8292,1337 @@ Binding(CTRL+D,
 
 !ENTRY org.eclipse.cdt.dsf 4 0 2018-04-17 15:25:38.964
 !MESSAGE fTracker is not initilized
+!SESSION 2018-04-19 08:54:18.840 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 09:14:56.165
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 09:22:44.724
+!MESSAGE fTracker is not initilized
+
+!ENTRY com.nvidia.cuda.ide.debug 4 0 2018-04-19 09:27:08.377
+!MESSAGE 
+!STACK 0
+java.lang.InterruptedException
+	at java.lang.Object.wait(Native Method)
+	at java.lang.Object.wait(Object.java:503)
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:106)
+	at com.nvidia.cuda.ide.debug.util.DebugUtil.getTopFrame(DebugUtil.java:505)
+	at com.nvidia.cuda.ide.debug.launch.CudaDebugTextHover.getFrame(CudaDebugTextHover.java:29)
+	at org.eclipse.cdt.dsf.debug.ui.AbstractDsfDebugTextHover.canEvaluate(AbstractDsfDebugTextHover.java:109)
+	at org.eclipse.cdt.debug.ui.editors.AbstractDebugTextHover.getHoverInfo(AbstractDebugTextHover.java:157)
+	at org.eclipse.cdt.dsf.debug.ui.AbstractDsfDebugTextHover.getHoverInfo2(AbstractDsfDebugTextHover.java:213)
+	at org.eclipse.cdt.debug.internal.ui.editors.DelegatingDebugTextHover.getHoverInfo2(DelegatingDebugTextHover.java:67)
+	at org.eclipse.cdt.internal.ui.text.c.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:144)
+	at org.eclipse.cdt.internal.ui.text.c.hover.CEditorTextHoverProxy.getHoverInfo2(CEditorTextHoverProxy.java:84)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 09:27:42.896
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 09:32:27.720
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-19 09:34:27.267
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.debug.ui.viewmodel.SteppingController$3@6d7643ef): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Error: Failed to single-step the warp (dev=0, sm=0, wp=4), error=CUDBG_ERROR_UNKNOWN(0x1).\n java.lang.Exception: Error: Failed to single-step the warp (dev=0, sm=0, wp=4), error=CUDBG_ERROR_UNKNOWN(0x1).\n' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-19 09:34:27.267
+!MESSAGE Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Error: Failed to single-step the warp (dev=0, sm=0, wp=4), error=CUDBG_ERROR_UNKNOWN(0x1).\n
+!STACK 0
+java.lang.Exception: Error: Failed to single-step the warp (dev=0, sm=0, wp=4), error=CUDBG_ERROR_UNKNOWN(0x1).\n
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:929)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:758)
+
+!ENTRY org.eclipse.jface 2 0 2018-04-19 09:34:37.467
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-19 09:34:37.467
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.eof,EOF,
+		Send end of file,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6ca51521,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.console,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4a0e6140,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-19 09:41:55.359
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@155dd674): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-19 09:41:55.359
+!MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.dsf 4 -1 2018-04-19 09:41:56.418
+!MESSAGE Invocation exception when calling a service event handler method
+!STACK 0
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+Caused by: org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4441)
+	at org.eclipse.swt.SWT.error(SWT.java:4356)
+	at org.eclipse.swt.SWT.error(SWT.java:4327)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1214)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:727)
+	at org.eclipse.debug.internal.ui.commands.actions.ExecuteActionRequest.done(ExecuteActionRequest.java:43)
+	at org.eclipse.cdt.dsf.gdb.internal.ui.actions.DsfTerminateCommand$3$1.handleCompleted(DsfTerminateCommand.java:180)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:303)
+	at org.eclipse.cdt.dsf.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:63)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.done(RequestMonitor.java:300)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleError(RequestMonitor.java:447)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleErrorOrWarning(RequestMonitor.java:429)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleFailure(RequestMonitor.java:415)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleCompleted(RequestMonitor.java:378)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:303)
+	at org.eclipse.cdt.dsf.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:63)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.done(RequestMonitor.java:300)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl.stopCommandProcessing(AbstractMIControl.java:286)
+	at com.nvidia.cuda.ide.debug.launch.CudaControl.eventDispatched(CudaControl.java:295)
+	... 15 more
+Root exception:
+org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4441)
+	at org.eclipse.swt.SWT.error(SWT.java:4356)
+	at org.eclipse.swt.SWT.error(SWT.java:4327)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1214)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:727)
+	at org.eclipse.debug.internal.ui.commands.actions.ExecuteActionRequest.done(ExecuteActionRequest.java:43)
+	at org.eclipse.cdt.dsf.gdb.internal.ui.actions.DsfTerminateCommand$3$1.handleCompleted(DsfTerminateCommand.java:180)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:303)
+	at org.eclipse.cdt.dsf.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:63)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.done(RequestMonitor.java:300)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleError(RequestMonitor.java:447)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleErrorOrWarning(RequestMonitor.java:429)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleFailure(RequestMonitor.java:415)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleCompleted(RequestMonitor.java:378)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:303)
+	at org.eclipse.cdt.dsf.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:63)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.done(RequestMonitor.java:300)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl.stopCommandProcessing(AbstractMIControl.java:286)
+	at com.nvidia.cuda.ide.debug.launch.CudaControl.eventDispatched(CudaControl.java:295)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+
+!ENTRY org.eclipse.cdt.dsf 4 -1 2018-04-19 09:41:56.421
+!MESSAGE Invocation exception when calling a service event handler method
+!STACK 0
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.GeneratedMethodAccessor37.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+Caused by: java.util.concurrent.RejectedExecutionException: Display org.eclipse.swt.widgets.Display@178ba114 is disposed
+	at org.eclipse.cdt.dsf.ui.concurrent.SimpleDisplayExecutor.execute(SimpleDisplayExecutor.java:85)
+	at org.eclipse.cdt.dsf.ui.viewmodel.AbstractVMAdapter.handleEvent(AbstractVMAdapter.java:260)
+	at org.eclipse.cdt.dsf.ui.viewmodel.datamodel.AbstractDMVMAdapter.eventDispatched(AbstractDMVMAdapter.java:103)
+	... 14 more
+Caused by: org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4441)
+	at org.eclipse.swt.SWT.error(SWT.java:4356)
+	at org.eclipse.swt.SWT.error(SWT.java:4327)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1214)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:727)
+	at org.eclipse.cdt.dsf.ui.concurrent.SimpleDisplayExecutor.execute(SimpleDisplayExecutor.java:77)
+	... 16 more
+Root exception:
+java.util.concurrent.RejectedExecutionException: Display org.eclipse.swt.widgets.Display@178ba114 is disposed
+	at org.eclipse.cdt.dsf.ui.concurrent.SimpleDisplayExecutor.execute(SimpleDisplayExecutor.java:85)
+	at org.eclipse.cdt.dsf.ui.viewmodel.AbstractVMAdapter.handleEvent(AbstractVMAdapter.java:260)
+	at org.eclipse.cdt.dsf.ui.viewmodel.datamodel.AbstractDMVMAdapter.eventDispatched(AbstractDMVMAdapter.java:103)
+	at sun.reflect.GeneratedMethodAccessor37.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+Caused by: org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4441)
+	at org.eclipse.swt.SWT.error(SWT.java:4356)
+	at org.eclipse.swt.SWT.error(SWT.java:4327)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1214)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:727)
+	at org.eclipse.cdt.dsf.ui.concurrent.SimpleDisplayExecutor.execute(SimpleDisplayExecutor.java:77)
+	... 16 more
+!SESSION 2018-04-19 09:43:27.243 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 09:45:50.312
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.jface 2 0 2018-04-19 09:53:24.953
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-19 09:53:24.953
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.eof,EOF,
+		Send end of file,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@540e81de,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.console,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@47040ef,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 09:54:29.428
+!MESSAGE fTracker is not initilized
+
+!ENTRY com.nvidia.cuda.ide.debug 4 0 2018-04-19 10:05:15.646
+!MESSAGE Query returned several threads
+!STACK 0
+java.lang.IllegalStateException
+	at com.nvidia.cuda.ide.debug.model.state.ThreadsStateManager.createSourceLocation(ThreadsStateManager.java:335)
+	at com.nvidia.cuda.ide.debug.model.state.ThreadsStateManager$3.handleSuccess(ThreadsStateManager.java:315)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleCompleted(RequestMonitor.java:376)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:303)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:10:43.879
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:14:29.387
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:16:54.457
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:23:01.962
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:24:12.595
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:25:25.561
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:33:30.046
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:34:04.193
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:39:00.439
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-19 10:40:03.290
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.debug.ui.viewmodel.SteppingController$3@35cf41a9): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Error: Failed to single-step the warp (dev=0, sm=0, wp=1), error=CUDBG_ERROR_UNKNOWN(0x1).\n java.lang.Exception: Error: Failed to single-step the warp (dev=0, sm=0, wp=1), error=CUDBG_ERROR_UNKNOWN(0x1).\n' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-19 10:40:03.290
+!MESSAGE Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Error: Failed to single-step the warp (dev=0, sm=0, wp=1), error=CUDBG_ERROR_UNKNOWN(0x1).\n
+!STACK 0
+java.lang.Exception: Error: Failed to single-step the warp (dev=0, sm=0, wp=1), error=CUDBG_ERROR_UNKNOWN(0x1).\n
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:929)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:758)
+
+!ENTRY org.eclipse.cdt.dsf 4 -1 2018-04-19 10:40:27.368
+!MESSAGE Invocation exception when calling a service event handler method
+!STACK 0
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.GeneratedMethodAccessor60.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+Caused by: java.lang.NullPointerException
+	at org.eclipse.cdt.dsf.mi.service.MIRunControl.eventDispatched(MIRunControl.java:638)
+	at com.nvidia.cuda.ide.debug.launch.CudaRunControl.eventDispatched(CudaRunControl.java:30)
+	... 14 more
+Root exception:
+java.lang.NullPointerException
+	at org.eclipse.cdt.dsf.mi.service.MIRunControl.eventDispatched(MIRunControl.java:638)
+	at com.nvidia.cuda.ide.debug.launch.CudaRunControl.eventDispatched(CudaRunControl.java:30)
+	at sun.reflect.GeneratedMethodAccessor60.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:40:49.071
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:45:37.491
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 10:51:03.974
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 11:00:22.292
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 11:01:28.377
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 11:02:43.558
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 11:09:21.153
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-19 11:11:31.310
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.debug.ui.viewmodel.SteppingController$3@60a83a40): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Error: Failed to single-step the warp (dev=0, sm=0, wp=1), error=CUDBG_ERROR_UNKNOWN(0x1).\n java.lang.Exception: Error: Failed to single-step the warp (dev=0, sm=0, wp=1), error=CUDBG_ERROR_UNKNOWN(0x1).\n' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-19 11:11:31.310
+!MESSAGE Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Error: Failed to single-step the warp (dev=0, sm=0, wp=1), error=CUDBG_ERROR_UNKNOWN(0x1).\n
+!STACK 0
+java.lang.Exception: Error: Failed to single-step the warp (dev=0, sm=0, wp=1), error=CUDBG_ERROR_UNKNOWN(0x1).\n
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:929)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:758)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 11:14:30.463
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 11:14:40.383
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 11:16:59.593
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-19 11:18:41.094
+!MESSAGE fTracker is not initilized
+!SESSION 2018-04-20 09:04:04.496 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 09:09:32.402
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-20 09:22:22.813
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@a53f858): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-20 09:22:22.813
+!MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 09:24:10.481
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.core.jobs 4 2 2018-04-20 09:28:31.792
+!MESSAGE An internal error occurred during: "Interrupt monitor job.".
+!STACK 0
+java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask@7530989c rejected from org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor@46e505ac[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 6811]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2013)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:816)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:325)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:530)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:438)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.submit(ScheduledThreadPoolExecutor.java:629)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.submit(DefaultDsfExecutor.java:470)
+	at org.eclipse.cdt.dsf.gdb.service.GDBBackend$MonitorInterruptJob.run(GDBBackend.java:853)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 09:34:16.310
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 09:37:19.335
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 09:41:25.681
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 09:54:08.398
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-20 09:55:53.584
+!MESSAGE Breakpoint already removed
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10005 2018-04-20 09:55:53.584
+!MESSAGE Breakpoint already removed
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 09:59:08.712
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 10:03:08.481
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 10:08:34.722
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 10:13:09.685
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 -1 2018-04-20 10:42:51.878
+!MESSAGE Invocation exception when calling a service event handler method
+!STACK 0
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.GeneratedMethodAccessor54.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+Caused by: java.lang.NullPointerException
+	at org.eclipse.cdt.dsf.mi.service.MIRunControl.eventDispatched(MIRunControl.java:638)
+	at com.nvidia.cuda.ide.debug.launch.CudaRunControl.eventDispatched(CudaRunControl.java:30)
+	... 14 more
+Root exception:
+java.lang.NullPointerException
+	at org.eclipse.cdt.dsf.mi.service.MIRunControl.eventDispatched(MIRunControl.java:638)
+	at com.nvidia.cuda.ide.debug.launch.CudaRunControl.eventDispatched(CudaRunControl.java:30)
+	at sun.reflect.GeneratedMethodAccessor54.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 10:43:29.679
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-20 10:43:41.568
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@787b6ffd): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-20 10:43:41.568
+!MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.dsf 4 -1 2018-04-20 10:51:03.818
+!MESSAGE Invocation exception when calling a service event handler method
+!STACK 0
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.GeneratedMethodAccessor54.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+Caused by: java.lang.NullPointerException
+	at org.eclipse.cdt.dsf.mi.service.MIRunControl.eventDispatched(MIRunControl.java:638)
+	at com.nvidia.cuda.ide.debug.launch.CudaRunControl.eventDispatched(CudaRunControl.java:30)
+	... 14 more
+Root exception:
+java.lang.NullPointerException
+	at org.eclipse.cdt.dsf.mi.service.MIRunControl.eventDispatched(MIRunControl.java:638)
+	at com.nvidia.cuda.ide.debug.launch.CudaRunControl.eventDispatched(CudaRunControl.java:30)
+	at sun.reflect.GeneratedMethodAccessor54.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-20 10:51:30.526
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@2e08f88b): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-20 10:51:30.526
+!MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 10:51:42.556
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 -1 2018-04-20 10:51:56.490
+!MESSAGE Invocation exception when calling a service event handler method
+!STACK 0
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.GeneratedMethodAccessor54.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+Caused by: java.lang.NullPointerException
+	at org.eclipse.cdt.dsf.mi.service.MIRunControl.eventDispatched(MIRunControl.java:638)
+	at com.nvidia.cuda.ide.debug.launch.CudaRunControl.eventDispatched(CudaRunControl.java:30)
+	... 14 more
+Root exception:
+java.lang.NullPointerException
+	at org.eclipse.cdt.dsf.mi.service.MIRunControl.eventDispatched(MIRunControl.java:638)
+	at com.nvidia.cuda.ide.debug.launch.CudaRunControl.eventDispatched(CudaRunControl.java:30)
+	at sun.reflect.GeneratedMethodAccessor54.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.eclipse.cdt.dsf.service.DsfSession.doDispatchEvent(DsfSession.java:519)
+	at org.eclipse.cdt.dsf.service.DsfSession.access$2(DsfSession.java:463)
+	at org.eclipse.cdt.dsf.service.DsfSession$3.run(DsfSession.java:390)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:722)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 10:52:11.364
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 10:53:42.929
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 10:55:32.346
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 10:56:18.525
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 10:56:42.747
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 10:58:32.539
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 11:05:02.254
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 11:05:47.525
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 11:16:14.833
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 11:23:19.323
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 11:27:36.658
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 11:30:33.277
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 11:32:20.736
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-20 11:35:56.402
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.debug.ui.viewmodel.SteppingController$3@7e34c3b): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Error: Failed to single-step the warp (dev=0, sm=0, wp=2), error=CUDBG_ERROR_UNKNOWN(0x1).\n java.lang.Exception: Error: Failed to single-step the warp (dev=0, sm=0, wp=2), error=CUDBG_ERROR_UNKNOWN(0x1).\n' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-20 11:35:56.402
+!MESSAGE Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Error: Failed to single-step the warp (dev=0, sm=0, wp=2), error=CUDBG_ERROR_UNKNOWN(0x1).\n
+!STACK 0
+java.lang.Exception: Error: Failed to single-step the warp (dev=0, sm=0, wp=2), error=CUDBG_ERROR_UNKNOWN(0x1).\n
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:929)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:758)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-20 11:39:22.793
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@147fd6d6): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-20 11:39:22.793
+!MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-20 11:39:56.961
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@270f74b1): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-20 11:39:56.962
+!MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 11:40:13.310
+!MESSAGE fTracker is not initilized
+!SESSION 2018-04-20 11:43:19.275 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 11:50:25.637
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.jface 2 0 2018-04-20 11:53:14.526
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-20 11:53:14.526
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.eof,EOF,
+		Send end of file,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@71f2f300,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.console,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@52fbf72,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.core.jobs 4 2 2018-04-20 11:55:21.654
+!MESSAGE An internal error occurred during: "Interrupt monitor job.".
+!STACK 0
+java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask@3b4934e6 rejected from org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor@415e533d[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 2403]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2013)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:816)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:325)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:530)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:438)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.submit(ScheduledThreadPoolExecutor.java:629)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.submit(DefaultDsfExecutor.java:470)
+	at org.eclipse.cdt.dsf.gdb.service.GDBBackend$MonitorInterruptJob.run(GDBBackend.java:853)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 11:56:18.443
+!MESSAGE fTracker is not initilized
+!SESSION 2018-04-20 13:09:39.960 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:21:56.739
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.jface 2 0 2018-04-20 13:25:45.611
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-20 13:25:45.611
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.eof,EOF,
+		Send end of file,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@459c7963,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.console,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@23e57649,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:25:53.559
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:39:01.573
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:39:31.062
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:41:55.960
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:43:21.172
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:45:38.673
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:47:01.240
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.core.jobs 4 2 2018-04-20 13:48:17.220
+!MESSAGE An internal error occurred during: "Interrupt monitor job.".
+!STACK 0
+java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask@29211080 rejected from org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor@69a8418a[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 2531]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2013)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:816)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:325)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:530)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:438)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.submit(ScheduledThreadPoolExecutor.java:629)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.submit(DefaultDsfExecutor.java:470)
+	at org.eclipse.cdt.dsf.gdb.service.GDBBackend$MonitorInterruptJob.run(GDBBackend.java:853)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:48:23.592
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:52:22.904
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:54:36.017
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:57:48.027
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 13:58:39.221
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 14:00:12.707
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-20 14:01:04.407
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@55e38902): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-20 14:01:04.407
+!MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 14:01:04.470
+!MESSAGE fTracker is not initilized
+!SESSION 2018-04-20 14:01:22.357 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 14:03:20.630
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 14:06:09.562
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 14:12:33.532
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.jface 2 0 2018-04-20 14:17:14.051
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-20 14:17:14.051
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.eof,EOF,
+		Send end of file,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@40c4eebf,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.console,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@41165ed1,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-20 14:21:31.065
+!MESSAGE fTracker is not initilized
+!SESSION 2018-04-23 09:01:57.300 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.jface 2 0 2018-04-23 09:06:21.149
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-23 09:06:21.149
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.eof,EOF,
+		Send end of file,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7c0ed7fe,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.console,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@3286a453,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:09:51.513
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:15:05.155
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:18:37.458
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:24:25.615
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:28:36.850
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:35:49.212
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:35:50.755
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:42:20.061
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:45:12.435
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:50:49.484
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:53:33.453
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 09:57:23.987
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 10:09:31.529
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 10:17:52.747
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 10:30:29.760
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 10:36:34.493
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 10:43:27.762
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 10:59:29.558
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 11:08:53.492
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 11:12:11.216
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 11:23:05.833
+!MESSAGE fTracker is not initilized
+!SESSION 2018-04-23 12:25:05.643 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2018-04-23 12:25:10.653
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 12:32:14.952
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.jface 2 0 2018-04-23 12:32:42.275
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-23 12:32:42.276
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.eof,EOF,
+		Send end of file,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4f6ba18d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.console,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@233b58b7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.jface 2 0 2018-04-23 12:45:30.026
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-23 12:45:30.026
+!MESSAGE A conflict occurred for ALT+CTRL+I:
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@66a67b1,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@66a67b1,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-23 12:45:30.026
+!MESSAGE A conflict occurred for ALT+SHIFT+R:
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@33bd98c1,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@33bd98c1,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-23 12:45:30.026
+!MESSAGE A conflict occurred for F4:
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6477c170,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6477c170,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-23 12:45:30.026
+!MESSAGE A conflict occurred for F3:
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@723cd397,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@723cd397,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-23 12:45:30.026
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@77679918,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@77679918,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-23 12:45:30.026
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@327433e6,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@327433e6,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-23 12:45:30.026
+!MESSAGE A conflict occurred for ALT+CTRL+H:
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6afb5aea,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6afb5aea,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 12:57:57.005
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 12:58:54.480
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 13:10:01.415
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 13:36:54.397
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.core.jobs 4 2 2018-04-23 13:37:22.297
+!MESSAGE An internal error occurred during: "Interrupt monitor job.".
+!STACK 0
+java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask@49683a5d rejected from org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor@1adba171[Shutting down, pool size = 1, active threads = 0, queued tasks = 1, completed tasks = 2168]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2013)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:816)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:325)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:530)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:438)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.submit(ScheduledThreadPoolExecutor.java:629)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.submit(DefaultDsfExecutor.java:470)
+	at org.eclipse.cdt.dsf.gdb.service.GDBBackend$MonitorInterruptJob.run(GDBBackend.java:853)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 14:09:02.794
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.core.jobs 4 2 2018-04-23 14:13:53.476
+!MESSAGE An internal error occurred during: "Interrupt monitor job.".
+!STACK 0
+java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask@75a11f57 rejected from org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor@255fc3c2[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 2217]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2013)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:816)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:325)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:530)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:438)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.submit(ScheduledThreadPoolExecutor.java:629)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.submit(DefaultDsfExecutor.java:470)
+	at org.eclipse.cdt.dsf.gdb.service.GDBBackend$MonitorInterruptJob.run(GDBBackend.java:853)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 14:17:37.952
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.core.jobs 4 2 2018-04-23 14:21:52.505
+!MESSAGE An internal error occurred during: "Interrupt monitor job.".
+!STACK 0
+java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask@77cdb79c rejected from org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor@6d34b5ea[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 2261]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2013)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:816)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:325)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:530)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:438)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.submit(ScheduledThreadPoolExecutor.java:629)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.submit(DefaultDsfExecutor.java:470)
+	at org.eclipse.cdt.dsf.gdb.service.GDBBackend$MonitorInterruptJob.run(GDBBackend.java:853)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-23 14:26:18.552
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.debug.ui.viewmodel.SteppingController$3@83f6800): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function java.lang.Exception: Cannot find bounds of current function' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-23 14:26:18.552
+!MESSAGE Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function
+!STACK 0
+java.lang.Exception: Cannot find bounds of current function
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:929)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:758)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-23 14:26:20.778
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.debug.ui.viewmodel.SteppingController$3@2993148e): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function java.lang.Exception: Cannot find bounds of current function' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-23 14:26:20.778
+!MESSAGE Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function
+!STACK 0
+java.lang.Exception: Cannot find bounds of current function
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:929)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:758)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-23 14:26:23.979
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.debug.ui.viewmodel.SteppingController$3@354c418c): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function java.lang.Exception: Cannot find bounds of current function' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-23 14:26:23.979
+!MESSAGE Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function
+!STACK 0
+java.lang.Exception: Cannot find bounds of current function
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:929)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:758)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-23 14:26:24.961
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.debug.ui.viewmodel.SteppingController$3@6bc59384): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function java.lang.Exception: Cannot find bounds of current function' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-23 14:26:24.961
+!MESSAGE Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function
+!STACK 0
+java.lang.Exception: Cannot find bounds of current function
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:929)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:758)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-23 14:26:25.140
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.debug.ui.viewmodel.SteppingController$3@7c77178a): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function java.lang.Exception: Cannot find bounds of current function' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-23 14:26:25.140
+!MESSAGE Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function
+!STACK 0
+java.lang.Exception: Cannot find bounds of current function
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:929)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:758)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-23 14:26:35.036
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.debug.ui.viewmodel.SteppingController$3@71a736e1): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function java.lang.Exception: Cannot find bounds of current function' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-23 14:26:35.036
+!MESSAGE Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function
+!STACK 0
+java.lang.Exception: Cannot find bounds of current function
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:929)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:758)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-04-23 14:26:35.855
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.debug.ui.viewmodel.SteppingController$3@40c2af5d): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function java.lang.Exception: Cannot find bounds of current function' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-04-23 14:26:35.855
+!MESSAGE Failed to execute MI command:
+-exec-next 1
+Error message from debugger back end:
+Cannot find bounds of current function
+!STACK 0
+java.lang.Exception: Cannot find bounds of current function
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:929)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:758)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 14:27:42.895
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 14:28:28.699
+!MESSAGE fTracker is not initilized
+!SESSION 2018-04-23 14:29:51.344 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 14:32:40.933
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 14:34:06.730
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.jface 2 0 2018-04-23 14:34:30.442
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-23 14:34:30.443
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.eof,EOF,
+		Send end of file,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4d7f16d3,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.console,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@52b39e64,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 14:40:00.939
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 14:40:33.521
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 18:39:19.365
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 18:45:14.312
+!MESSAGE fTracker is not initilized
+
+!ENTRY org.eclipse.cdt.dsf 4 0 2018-04-23 20:15:44.385
+!MESSAGE fTracker is not initilized
+!SESSION 2018-04-24 08:00:48.991 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_07
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.jface 2 0 2018-04-24 08:20:08.992
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-04-24 08:20:08.992
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.eof,EOF,
+		Send end of file,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@3e0eb2a5,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.console,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@36f28e77,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)

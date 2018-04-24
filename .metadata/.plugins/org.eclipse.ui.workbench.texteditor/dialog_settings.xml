@@ -3,36 +3,36 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="291" key="DIALOG_WIDTH"/>
 		<item value="222" key="DIALOG_Y_ORIGIN"/>
-		<item value="656" key="DIALOG_HEIGHT"/>
 		<item value="1289" key="DIALOG_X_ORIGIN"/>
+		<item value="740" key="DIALOG_HEIGHT"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="Layer*" key="selection"/>
+		<item value=" = NULL;" key="selection"/>
 		<list key="findhistory">
-			<item value="Layer*"/>
-			<item value="input_"/>
-			<item value="conv_"/>
-			<item value="printPoint"/>
-			<item value="printPointers"/>
-			<item value="weightDerivArrayPtrs"/>
-			<item value="nodeDerivDeviceArrayPtrs"/>
-			<item value="nodeDerivArrayPtrs"/>
+			<item value=";"/>
+			<item value="int *"/>
+			<item value="; "/>
+			<item value="float **"/>
+			<item value="PICS_PER_FILE"/>
+			<item value="NO_PICS_PER_FILE_D"/>
+			<item value="cudaDeviceSynchronize()()"/>
+			<item value="cudaDeviceSynchronize"/>
 		</list>
 		<list key="replacehistory">
+			<item value=" = NULL;"/>
+			<item value=""/>
+			<item value="cudaDeviceSynchronize()"/>
+			<item value="cudaDeviceSynchronize"/>
 			<item value="LAYER_STRUCT*"/>
 			<item value="fullyConn_"/>
 			<item value="pooling_"/>
 			<item value="conv_"/>
-			<item value="DeviceArray"/>
-			<item value="3"/>
-			<item value="DeviceArrays"/>
-			<item value="DeviceArrays_"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">

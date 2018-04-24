@@ -15,11 +15,13 @@ __device__ float sigmoid_once(float in)
 {
 	double temp = exp(in);
 	return (float)(temp / (1+temp));
+//	return tanh(in);
 }
 
 __device__ float sigmoid_backward_derivated_once(float activation)
 {
 	return activation * (1 - activation);
+//	return (1/(1-(activation*activation)));
 }
 
 __device__ void sigmoid(float *in, float *out, int size)

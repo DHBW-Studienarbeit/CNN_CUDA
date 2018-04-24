@@ -67,7 +67,7 @@ __global__ void maxPooling_back(float** nodeArrayPtrs, float** weightArrayPtrs, 
 		int inputDim_x, int inputDim_y, int convDim_x, int convDim_y,
 		int nextDim_x, int nextDim_y, int nextReceptive_x,
 		int nextReceptive_y, LAYER_TYPE nextLayerType);
-
+__global__ void weightDerivatesFinalLayer(float* weightDerivates, float* nodeArray, float* nodeDerivates, int weightDim_x, int weightDim_y);
 __global__ void printPointers(float** ptrs, int length);
 
 __global__ void printMatrix(float* matrix, int dim_x, int dim_y);

@@ -1,6 +1,777 @@
-15:12:09 **** Incremental Build of configuration Debug for project CUDA_CNN ****
+08:05:57 **** Incremental Build of configuration Debug for project CUDA_CNN ****
 make -k -j8 all 
-make: Für das Ziel „all“ ist nichts zu tun.
+Building file: ../src/CUDA_CNN.cu
+Building file: ../src/ConvLayer.cu
+Building file: ../src/DropoutLayer.cu
+Building file: ../src/FullyConnectedLayer.cu
+Invoking: NVCC Compiler
+Building file: ../src/InputLayer.cu
+Invoking: NVCC Compiler
+Building file: ../src/Layer.cu
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/CUDA_CNN.d" "../src/CUDA_CNN.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/ConvLayer.d" "../src/ConvLayer.cu"
+Invoking: NVCC Compiler
+Invoking: NVCC Compiler
+Building file: ../src/MaxPoolingLayer.cu
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/DropoutLayer.d" "../src/DropoutLayer.cu"
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/FullyConnectedLayer.d" "../src/FullyConnectedLayer.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/InputLayer.d" "../src/InputLayer.cu"
+Invoking: NVCC Compiler
+Building file: ../src/Network.cu
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Layer.d" "../src/Layer.cu"
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/MaxPoolingLayer.d" "../src/MaxPoolingLayer.cu"
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Network.d" "../src/Network.cu"
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _SPACE_= 
+#$ _SPACE_= 
+#$ _TARGET_SIZE_=
+#$ _SPACE_= 
+#$ _SPACE_= 
+#$ _TARGET_DIR_=
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _CUDART_=cudart
+#$ _CUDART_=cudart
+#$ _CUDART_=cudart
+#$ _CUDART_=cudart
+#$ _TARGET_SIZE_=64
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_SIZE_=
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _SPACE_= 
+#$ _TARGET_DIR_=
+#$ _TARGET_DIR_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ _CUDART_=cudart
+#$ _TARGET_SIZE_=64
+#$ _TARGET_SIZE_=64
+#$ _TARGET_SIZE_=64
+#$ _TARGET_SIZE_=64
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ PTXAS_FLAGS=
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ CUDAFE_FLAGS=
+#$ CUDAFE_FLAGS=
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ PTXAS_FLAGS=
+#$ PTXAS_FLAGS=
+#$ PTXAS_FLAGS=
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/CUDA_CNN.cu" > "/tmp/tmpxft_00000f8e_00000000-4_CUDA_CNN.cpp1.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/InputLayer.cu" > "/tmp/tmpxft_00000f98_00000000-4_InputLayer.cpp1.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/DropoutLayer.cu" > "/tmp/tmpxft_00000f95_00000000-4_DropoutLayer.cpp1.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/FullyConnectedLayer.cu" > "/tmp/tmpxft_00000f99_00000000-4_FullyConnectedLayer.cpp1.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Network.cu" > "/tmp/tmpxft_00000f9d_00000000-4_Network.cpp1.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/MaxPoolingLayer.cu" > "/tmp/tmpxft_00000f9c_00000000-4_MaxPoolingLayer.cpp1.ii" 
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Layer.cu" > "/tmp/tmpxft_00000f9a_00000000-4_Layer.cpp1.ii" 
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/ConvLayer.cu" > "/tmp/tmpxft_00000f92_00000000-4_ConvLayer.cpp1.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/DropoutLayer.cu" > "/tmp/tmpxft_00000f95_00000000-6_DropoutLayer.cpp4.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/MaxPoolingLayer.cu" > "/tmp/tmpxft_00000f9c_00000000-6_MaxPoolingLayer.cpp4.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/InputLayer.cu" > "/tmp/tmpxft_00000f98_00000000-6_InputLayer.cpp4.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Layer.cu" > "/tmp/tmpxft_00000f9a_00000000-6_Layer.cpp4.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/FullyConnectedLayer.cu" > "/tmp/tmpxft_00000f99_00000000-6_FullyConnectedLayer.cpp4.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/ConvLayer.cu" > "/tmp/tmpxft_00000f92_00000000-6_ConvLayer.cpp4.ii" 
+#$ -- Filter Dependencies -- > src/MaxPoolingLayer.d
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/MaxPoolingLayer.o" "../src/MaxPoolingLayer.cu"
+#$ -- Filter Dependencies -- > src/DropoutLayer.d
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ -- Filter Dependencies -- > src/InputLayer.d
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/DropoutLayer.o" "../src/DropoutLayer.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/InputLayer.o" "../src/InputLayer.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Layer.o" "../src/Layer.cu"
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/FullyConnectedLayer.o" "../src/FullyConnectedLayer.cu"
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ -- Filter Dependencies -- > src/Layer.d#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/MaxPoolingLayer.cu" > "/tmp/tmpxft_00000fdc_00000000-7_MaxPoolingLayer.cpp1.ii" 
 
-15:12:09 Build Finished (took 307ms)
+#$ -- Filter Dependencies -- > src/FullyConnectedLayer.d
+#$ -- Filter Dependencies -- > src/ConvLayer.d
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/DropoutLayer.cu" > "/tmp/tmpxft_00000fe1_00000000-7_DropoutLayer.cpp1.ii" 
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/ConvLayer.o" "../src/ConvLayer.cu"
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/InputLayer.cu" > "/tmp/tmpxft_00000fe6_00000000-7_InputLayer.cpp1.ii" 
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Layer.cu" > "/tmp/tmpxft_00000fe7_00000000-7_Layer.cpp1.ii" 
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/FullyConnectedLayer.cu" > "/tmp/tmpxft_00000fee_00000000-7_FullyConnectedLayer.cpp1.ii" 
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/ConvLayer.cu" > "/tmp/tmpxft_00000ffa_00000000-7_ConvLayer.cpp1.ii" 
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fdc_00000000-4_MaxPoolingLayer.cudafe1.c" --stub_file_name "/tmp/tmpxft_00000fdc_00000000-4_MaxPoolingLayer.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_00000fdc_00000000-4_MaxPoolingLayer.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_00000fdc_00000000-3_MaxPoolingLayer.module_id" --include_file_name "tmpxft_00000fdc_00000000-2_MaxPoolingLayer.fatbin.c" "/tmp/tmpxft_00000fdc_00000000-7_MaxPoolingLayer.cpp1.ii" 
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fe6_00000000-4_InputLayer.cudafe1.c" --stub_file_name "/tmp/tmpxft_00000fe6_00000000-4_InputLayer.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_00000fe6_00000000-4_InputLayer.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_00000fe6_00000000-3_InputLayer.module_id" --include_file_name "tmpxft_00000fe6_00000000-2_InputLayer.fatbin.c" "/tmp/tmpxft_00000fe6_00000000-7_InputLayer.cpp1.ii" 
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fee_00000000-4_FullyConnectedLayer.cudafe1.c" --stub_file_name "/tmp/tmpxft_00000fee_00000000-4_FullyConnectedLayer.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_00000fee_00000000-4_FullyConnectedLayer.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_00000fee_00000000-3_FullyConnectedLayer.module_id" --include_file_name "tmpxft_00000fee_00000000-2_FullyConnectedLayer.fatbin.c" "/tmp/tmpxft_00000fee_00000000-7_FullyConnectedLayer.cpp1.ii" 
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fe7_00000000-4_Layer.cudafe1.c" --stub_file_name "/tmp/tmpxft_00000fe7_00000000-4_Layer.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_00000fe7_00000000-4_Layer.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_00000fe7_00000000-3_Layer.module_id" --include_file_name "tmpxft_00000fe7_00000000-2_Layer.fatbin.c" "/tmp/tmpxft_00000fe7_00000000-7_Layer.cpp1.ii" 
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fe1_00000000-4_DropoutLayer.cudafe1.c" --stub_file_name "/tmp/tmpxft_00000fe1_00000000-4_DropoutLayer.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_00000fe1_00000000-4_DropoutLayer.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_00000fe1_00000000-3_DropoutLayer.module_id" --include_file_name "tmpxft_00000fe1_00000000-2_DropoutLayer.fatbin.c" "/tmp/tmpxft_00000fe1_00000000-7_DropoutLayer.cpp1.ii" 
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000ffa_00000000-4_ConvLayer.cudafe1.c" --stub_file_name "/tmp/tmpxft_00000ffa_00000000-4_ConvLayer.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_00000ffa_00000000-4_ConvLayer.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_00000ffa_00000000-3_ConvLayer.module_id" --include_file_name "tmpxft_00000ffa_00000000-2_ConvLayer.fatbin.c" "/tmp/tmpxft_00000ffa_00000000-7_ConvLayer.cpp1.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/CUDA_CNN.cu" > "/tmp/tmpxft_00000f8e_00000000-6_CUDA_CNN.cpp4.ii" 
+#$ -- Filter Dependencies -- > src/CUDA_CNN.d
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/CUDA_CNN.o" "../src/CUDA_CNN.cu"
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/CUDA_CNN.cu" > "/tmp/tmpxft_00001015_00000000-7_CUDA_CNN.cpp1.ii" 
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001015_00000000-4_CUDA_CNN.cudafe1.c" --stub_file_name "/tmp/tmpxft_00001015_00000000-4_CUDA_CNN.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_00001015_00000000-4_CUDA_CNN.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_00001015_00000000-3_CUDA_CNN.module_id" --include_file_name "tmpxft_00001015_00000000-2_CUDA_CNN.fatbin.c" "/tmp/tmpxft_00001015_00000000-7_CUDA_CNN.cpp1.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Network.cu" > "/tmp/tmpxft_00000f9d_00000000-6_Network.cpp4.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/DropoutLayer.cu" > "/tmp/tmpxft_00000fe1_00000000-5_DropoutLayer.cpp4.ii" 
+#$ -- Filter Dependencies -- > src/Network.d
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/MaxPoolingLayer.cu" > "/tmp/tmpxft_00000fdc_00000000-5_MaxPoolingLayer.cpp4.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/FullyConnectedLayer.cu" > "/tmp/tmpxft_00000fee_00000000-5_FullyConnectedLayer.cpp4.ii" 
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Network.o" "../src/Network.cu"
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/InputLayer.cu" > "/tmp/tmpxft_00000fe6_00000000-5_InputLayer.cpp4.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/ConvLayer.cu" > "/tmp/tmpxft_00000ffa_00000000-5_ConvLayer.cpp4.ii" 
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Network.cu" > "/tmp/tmpxft_00001029_00000000-7_Network.cpp1.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Layer.cu" > "/tmp/tmpxft_00000fe7_00000000-5_Layer.cpp4.ii" 
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fe1_00000000-4_DropoutLayer.cudafe1.cpp" --stub_file_name "tmpxft_00000fe1_00000000-4_DropoutLayer.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_00000fe1_00000000-3_DropoutLayer.module_id" "/tmp/tmpxft_00000fe1_00000000-5_DropoutLayer.cpp4.ii" 
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fee_00000000-4_FullyConnectedLayer.cudafe1.cpp" --stub_file_name "tmpxft_00000fee_00000000-4_FullyConnectedLayer.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_00000fee_00000000-3_FullyConnectedLayer.module_id" "/tmp/tmpxft_00000fee_00000000-5_FullyConnectedLayer.cpp4.ii" 
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fe6_00000000-4_InputLayer.cudafe1.cpp" --stub_file_name "tmpxft_00000fe6_00000000-4_InputLayer.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_00000fe6_00000000-3_InputLayer.module_id" "/tmp/tmpxft_00000fe6_00000000-5_InputLayer.cpp4.ii" 
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000ffa_00000000-4_ConvLayer.cudafe1.cpp" --stub_file_name "tmpxft_00000ffa_00000000-4_ConvLayer.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_00000ffa_00000000-3_ConvLayer.module_id" "/tmp/tmpxft_00000ffa_00000000-5_ConvLayer.cpp4.ii" 
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fdc_00000000-4_MaxPoolingLayer.cudafe1.cpp" --stub_file_name "tmpxft_00000fdc_00000000-4_MaxPoolingLayer.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_00000fdc_00000000-3_MaxPoolingLayer.module_id" "/tmp/tmpxft_00000fdc_00000000-5_MaxPoolingLayer.cpp4.ii" 
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fe7_00000000-4_Layer.cudafe1.cpp" --stub_file_name "tmpxft_00000fe7_00000000-4_Layer.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_00000fe7_00000000-3_Layer.module_id" "/tmp/tmpxft_00000fe7_00000000-5_Layer.cpp4.ii" 
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001029_00000000-4_Network.cudafe1.c" --stub_file_name "/tmp/tmpxft_00001029_00000000-4_Network.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_00001029_00000000-4_Network.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_00001029_00000000-3_Network.module_id" --include_file_name "tmpxft_00001029_00000000-2_Network.fatbin.c" "/tmp/tmpxft_00001029_00000000-7_Network.cpp1.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/CUDA_CNN.cu" > "/tmp/tmpxft_00001015_00000000-5_CUDA_CNN.cpp4.ii" 
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001015_00000000-4_CUDA_CNN.cudafe1.cpp" --stub_file_name "tmpxft_00001015_00000000-4_CUDA_CNN.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_00001015_00000000-3_CUDA_CNN.module_id" "/tmp/tmpxft_00001015_00000000-5_CUDA_CNN.cpp4.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fe1_00000000-4_DropoutLayer.cudafe1.gpu" > "/tmp/tmpxft_00000fe1_00000000-9_DropoutLayer.cpp2.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fdc_00000000-4_MaxPoolingLayer.cudafe1.gpu" > "/tmp/tmpxft_00000fdc_00000000-9_MaxPoolingLayer.cpp2.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fe6_00000000-4_InputLayer.cudafe1.gpu" > "/tmp/tmpxft_00000fe6_00000000-9_InputLayer.cpp2.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fee_00000000-4_FullyConnectedLayer.cudafe1.gpu" > "/tmp/tmpxft_00000fee_00000000-9_FullyConnectedLayer.cpp2.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fe7_00000000-4_Layer.cudafe1.gpu" > "/tmp/tmpxft_00000fe7_00000000-9_Layer.cpp2.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000ffa_00000000-4_ConvLayer.cudafe1.gpu" > "/tmp/tmpxft_00000ffa_00000000-9_ConvLayer.cpp2.i" 
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fe7_00000000-10_Layer.cudafe2.c" --stub_file_name "/tmp/tmpxft_00000fe7_00000000-10_Layer.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_00000fe7_00000000-10_Layer.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_00000fe7_00000000-3_Layer.module_id" --include_file_name "tmpxft_00000fe7_00000000-2_Layer.fatbin.c" "/tmp/tmpxft_00000fe7_00000000-9_Layer.cpp2.i" 
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fe6_00000000-10_InputLayer.cudafe2.c" --stub_file_name "/tmp/tmpxft_00000fe6_00000000-10_InputLayer.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_00000fe6_00000000-10_InputLayer.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_00000fe6_00000000-3_InputLayer.module_id" --include_file_name "tmpxft_00000fe6_00000000-2_InputLayer.fatbin.c" "/tmp/tmpxft_00000fe6_00000000-9_InputLayer.cpp2.i" 
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000ffa_00000000-10_ConvLayer.cudafe2.c" --stub_file_name "/tmp/tmpxft_00000ffa_00000000-10_ConvLayer.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_00000ffa_00000000-10_ConvLayer.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_00000ffa_00000000-3_ConvLayer.module_id" --include_file_name "tmpxft_00000ffa_00000000-2_ConvLayer.fatbin.c" "/tmp/tmpxft_00000ffa_00000000-9_ConvLayer.cpp2.i" 
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fee_00000000-10_FullyConnectedLayer.cudafe2.c" --stub_file_name "/tmp/tmpxft_00000fee_00000000-10_FullyConnectedLayer.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_00000fee_00000000-10_FullyConnectedLayer.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_00000fee_00000000-3_FullyConnectedLayer.module_id" --include_file_name "tmpxft_00000fee_00000000-2_FullyConnectedLayer.fatbin.c" "/tmp/tmpxft_00000fee_00000000-9_FullyConnectedLayer.cpp2.i" 
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fe1_00000000-10_DropoutLayer.cudafe2.c" --stub_file_name "/tmp/tmpxft_00000fe1_00000000-10_DropoutLayer.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_00000fe1_00000000-10_DropoutLayer.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_00000fe1_00000000-3_DropoutLayer.module_id" --include_file_name "tmpxft_00000fe1_00000000-2_DropoutLayer.fatbin.c" "/tmp/tmpxft_00000fe1_00000000-9_DropoutLayer.cpp2.i" 
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00000fdc_00000000-10_MaxPoolingLayer.cudafe2.c" --stub_file_name "/tmp/tmpxft_00000fdc_00000000-10_MaxPoolingLayer.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_00000fdc_00000000-10_MaxPoolingLayer.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_00000fdc_00000000-3_MaxPoolingLayer.module_id" --include_file_name "tmpxft_00000fdc_00000000-2_MaxPoolingLayer.fatbin.c" "/tmp/tmpxft_00000fdc_00000000-9_MaxPoolingLayer.cpp2.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fe1_00000000-10_DropoutLayer.cudafe2.gpu" > "/tmp/tmpxft_00000fe1_00000000-11_DropoutLayer.cpp3.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000ffa_00000000-10_ConvLayer.cudafe2.gpu" > "/tmp/tmpxft_00000ffa_00000000-11_ConvLayer.cpp3.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fee_00000000-10_FullyConnectedLayer.cudafe2.gpu" > "/tmp/tmpxft_00000fee_00000000-11_FullyConnectedLayer.cpp3.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fe6_00000000-10_InputLayer.cudafe2.gpu" > "/tmp/tmpxft_00000fe6_00000000-11_InputLayer.cpp3.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fe7_00000000-10_Layer.cudafe2.gpu" > "/tmp/tmpxft_00000fe7_00000000-11_Layer.cpp3.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fdc_00000000-10_MaxPoolingLayer.cudafe2.gpu" > "/tmp/tmpxft_00000fdc_00000000-11_MaxPoolingLayer.cpp3.i" 
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/DropoutLayer.cu"  "/tmp/tmpxft_00000fe1_00000000-11_DropoutLayer.cpp3.i" -o "/tmp/tmpxft_00000fe1_00000000-6_DropoutLayer.ptx"
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/InputLayer.cu"  "/tmp/tmpxft_00000fe6_00000000-11_InputLayer.cpp3.i" -o "/tmp/tmpxft_00000fe6_00000000-6_InputLayer.ptx"
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/ConvLayer.cu"  "/tmp/tmpxft_00000ffa_00000000-11_ConvLayer.cpp3.i" -o "/tmp/tmpxft_00000ffa_00000000-6_ConvLayer.ptx"
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/Layer.cu"  "/tmp/tmpxft_00000fe7_00000000-11_Layer.cpp3.i" -o "/tmp/tmpxft_00000fe7_00000000-6_Layer.ptx"
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/FullyConnectedLayer.cu"  "/tmp/tmpxft_00000fee_00000000-11_FullyConnectedLayer.cpp3.i" -o "/tmp/tmpxft_00000fee_00000000-6_FullyConnectedLayer.ptx"
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/MaxPoolingLayer.cu"  "/tmp/tmpxft_00000fdc_00000000-11_MaxPoolingLayer.cpp3.i" -o "/tmp/tmpxft_00000fdc_00000000-6_MaxPoolingLayer.ptx"
+../src/Network.cu(92): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(175): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(613): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(799): warning: variable "cuda_error" was set but never used
+
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001015_00000000-4_CUDA_CNN.cudafe1.gpu" > "/tmp/tmpxft_00001015_00000000-9_CUDA_CNN.cpp2.i" 
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001015_00000000-10_CUDA_CNN.cudafe2.c" --stub_file_name "/tmp/tmpxft_00001015_00000000-10_CUDA_CNN.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_00001015_00000000-10_CUDA_CNN.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_00001015_00000000-3_CUDA_CNN.module_id" --include_file_name "tmpxft_00001015_00000000-2_CUDA_CNN.fatbin.c" "/tmp/tmpxft_00001015_00000000-9_CUDA_CNN.cpp2.i" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Network.cu" > "/tmp/tmpxft_00001029_00000000-5_Network.cpp4.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001015_00000000-10_CUDA_CNN.cudafe2.gpu" > "/tmp/tmpxft_00001015_00000000-11_CUDA_CNN.cpp3.i" 
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/CUDA_CNN.cu"  "/tmp/tmpxft_00001015_00000000-11_CUDA_CNN.cpp3.i" -o "/tmp/tmpxft_00001015_00000000-6_CUDA_CNN.ptx"
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001029_00000000-4_Network.cudafe1.cpp" --stub_file_name "tmpxft_00001029_00000000-4_Network.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_00001029_00000000-3_Network.module_id" "/tmp/tmpxft_00001029_00000000-5_Network.cpp4.ii" 
+../src/Network.cu(92): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(175): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(613): warning: variable "cuda_error" was set but never used
+
+../src/Network.cu(799): warning: variable "cuda_error" was set but never used
+
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001029_00000000-4_Network.cudafe1.gpu" > "/tmp/tmpxft_00001029_00000000-9_Network.cpp2.i" 
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001029_00000000-10_Network.cudafe2.c" --stub_file_name "/tmp/tmpxft_00001029_00000000-10_Network.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_00001029_00000000-10_Network.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_00001029_00000000-3_Network.module_id" --include_file_name "tmpxft_00001029_00000000-2_Network.fatbin.c" "/tmp/tmpxft_00001029_00000000-9_Network.cpp2.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001029_00000000-10_Network.cudafe2.gpu" > "/tmp/tmpxft_00001029_00000000-11_Network.cpp3.i" 
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/Network.cu"  "/tmp/tmpxft_00001029_00000000-11_Network.cpp3.i" -o "/tmp/tmpxft_00001029_00000000-6_Network.ptx"
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_00001029_00000000-6_Network.ptx"  -o "/tmp/tmpxft_00001029_00000000-12_Network.sm_60.cubin" 
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_00000fdc_00000000-6_MaxPoolingLayer.ptx"  -o "/tmp/tmpxft_00000fdc_00000000-12_MaxPoolingLayer.sm_60.cubin" 
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_00000ffa_00000000-6_ConvLayer.ptx"  -o "/tmp/tmpxft_00000ffa_00000000-12_ConvLayer.sm_60.cubin" 
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_00000fe7_00000000-6_Layer.ptx"  -o "/tmp/tmpxft_00000fe7_00000000-12_Layer.sm_60.cubin" 
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_00001015_00000000-6_CUDA_CNN.ptx"  -o "/tmp/tmpxft_00001015_00000000-12_CUDA_CNN.sm_60.cubin" 
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_00000fe6_00000000-6_InputLayer.ptx"  -o "/tmp/tmpxft_00000fe6_00000000-12_InputLayer.sm_60.cubin" 
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_00000fe1_00000000-6_DropoutLayer.ptx"  -o "/tmp/tmpxft_00000fe1_00000000-12_DropoutLayer.sm_60.cubin" 
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_00000fee_00000000-6_FullyConnectedLayer.ptx"  -o "/tmp/tmpxft_00000fee_00000000-12_FullyConnectedLayer.sm_60.cubin" 
+#$ fatbinary --create="/tmp/tmpxft_00001015_00000000-2_CUDA_CNN.fatbin" -64 --ident="../src/CUDA_CNN.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_00001015_00000000-12_CUDA_CNN.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_00001015_00000000-6_CUDA_CNN.ptx" --embedded-fatbin="/tmp/tmpxft_00001015_00000000-2_CUDA_CNN.fatbin.c" --cuda --device-c
+#$ fatbinary --create="/tmp/tmpxft_00000ffa_00000000-2_ConvLayer.fatbin" -64 --ident="../src/ConvLayer.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_00000ffa_00000000-12_ConvLayer.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_00000ffa_00000000-6_ConvLayer.ptx" --embedded-fatbin="/tmp/tmpxft_00000ffa_00000000-2_ConvLayer.fatbin.c" --cuda --device-c
+#$ fatbinary --create="/tmp/tmpxft_00000fe6_00000000-2_InputLayer.fatbin" -64 --ident="../src/InputLayer.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_00000fe6_00000000-12_InputLayer.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_00000fe6_00000000-6_InputLayer.ptx" --embedded-fatbin="/tmp/tmpxft_00000fe6_00000000-2_InputLayer.fatbin.c" --cuda --device-c
+#$ fatbinary --create="/tmp/tmpxft_00000fdc_00000000-2_MaxPoolingLayer.fatbin" -64 --ident="../src/MaxPoolingLayer.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_00000fdc_00000000-12_MaxPoolingLayer.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_00000fdc_00000000-6_MaxPoolingLayer.ptx" --embedded-fatbin="/tmp/tmpxft_00000fdc_00000000-2_MaxPoolingLayer.fatbin.c" --cuda --device-c
+#$ fatbinary --create="/tmp/tmpxft_00000fee_00000000-2_FullyConnectedLayer.fatbin" -64 --ident="../src/FullyConnectedLayer.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_00000fee_00000000-12_FullyConnectedLayer.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_00000fee_00000000-6_FullyConnectedLayer.ptx" --embedded-fatbin="/tmp/tmpxft_00000fee_00000000-2_FullyConnectedLayer.fatbin.c" --cuda --device-c
+#$ fatbinary --create="/tmp/tmpxft_00000fe1_00000000-2_DropoutLayer.fatbin" -64 --ident="../src/DropoutLayer.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_00000fe1_00000000-12_DropoutLayer.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_00000fe1_00000000-6_DropoutLayer.ptx" --embedded-fatbin="/tmp/tmpxft_00000fe1_00000000-2_DropoutLayer.fatbin.c" --cuda --device-c
+#$ fatbinary --create="/tmp/tmpxft_00000fe7_00000000-2_Layer.fatbin" -64 --ident="../src/Layer.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_00000fe7_00000000-12_Layer.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_00000fe7_00000000-6_Layer.ptx" --embedded-fatbin="/tmp/tmpxft_00000fe7_00000000-2_Layer.fatbin.c" --cuda --device-c
+#$ fatbinary --create="/tmp/tmpxft_00001029_00000000-2_Network.fatbin" -64 --ident="../src/Network.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_00001029_00000000-12_Network.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_00001029_00000000-6_Network.ptx" --embedded-fatbin="/tmp/tmpxft_00001029_00000000-2_Network.fatbin.c" --cuda --device-c
+#$ rm /tmp/tmpxft_00000fe7_00000000-2_Layer.fatbin
+#$ rm /tmp/tmpxft_00001029_00000000-2_Network.fatbin
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001029_00000000-4_Network.cudafe1.cpp" > "/tmp/tmpxft_00001029_00000000-13_Network.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fe7_00000000-4_Layer.cudafe1.cpp" > "/tmp/tmpxft_00000fe7_00000000-13_Layer.ii" 
+#$ rm /tmp/tmpxft_00000fee_00000000-2_FullyConnectedLayer.fatbin
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fee_00000000-4_FullyConnectedLayer.cudafe1.cpp" > "/tmp/tmpxft_00000fee_00000000-13_FullyConnectedLayer.ii" 
+#$ rm /tmp/tmpxft_00001015_00000000-2_CUDA_CNN.fatbin
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001015_00000000-4_CUDA_CNN.cudafe1.cpp" > "/tmp/tmpxft_00001015_00000000-13_CUDA_CNN.ii" 
+#$ rm /tmp/tmpxft_00000fe6_00000000-2_InputLayer.fatbin
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fe6_00000000-4_InputLayer.cudafe1.cpp" > "/tmp/tmpxft_00000fe6_00000000-13_InputLayer.ii" 
+#$ rm /tmp/tmpxft_00000ffa_00000000-2_ConvLayer.fatbin
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000ffa_00000000-4_ConvLayer.cudafe1.cpp" > "/tmp/tmpxft_00000ffa_00000000-13_ConvLayer.ii" 
+#$ rm /tmp/tmpxft_00000fdc_00000000-2_MaxPoolingLayer.fatbin
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fdc_00000000-4_MaxPoolingLayer.cudafe1.cpp" > "/tmp/tmpxft_00000fdc_00000000-13_MaxPoolingLayer.ii" 
+#$ rm /tmp/tmpxft_00000fe1_00000000-2_DropoutLayer.fatbin
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00000fe1_00000000-4_DropoutLayer.cudafe1.cpp" > "/tmp/tmpxft_00000fe1_00000000-13_DropoutLayer.ii" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/MaxPoolingLayer.o" "/tmp/tmpxft_00000fdc_00000000-13_MaxPoolingLayer.ii" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/InputLayer.o" "/tmp/tmpxft_00000fe6_00000000-13_InputLayer.ii" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/ConvLayer.o" "/tmp/tmpxft_00000ffa_00000000-13_ConvLayer.ii" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/FullyConnectedLayer.o" "/tmp/tmpxft_00000fee_00000000-13_FullyConnectedLayer.ii" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/DropoutLayer.o" "/tmp/tmpxft_00000fe1_00000000-13_DropoutLayer.ii" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/Layer.o" "/tmp/tmpxft_00000fe7_00000000-13_Layer.ii" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/CUDA_CNN.o" "/tmp/tmpxft_00001015_00000000-13_CUDA_CNN.ii" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/Network.o" "/tmp/tmpxft_00001029_00000000-13_Network.ii" 
+Finished building: ../src/InputLayer.cu
+Finished building: ../src/MaxPoolingLayer.cu
+Finished building: ../src/DropoutLayer.cu
+Finished building: ../src/Layer.cu
+Finished building: ../src/FullyConnectedLayer.cu
+Finished building: ../src/ConvLayer.cu
+ 
+Finished building: ../src/CUDA_CNN.cu
+ 
+ 
+Building file: ../src/Picture.cu
+ 
+ 
+ 
+ 
+Invoking: NVCC Compiler
+Building file: ../src/PictureContainer.cu
+Building file: ../src/cuda_kernels.cu
+Building file: ../src/mathematics.cu
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/Picture.d" "../src/Picture.cu"
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/PictureContainer.d" "../src/PictureContainer.cu"
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/mathematics.d" "../src/mathematics.cu"
+Invoking: NVCC Compiler
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v -gencode arch=compute_60,code=sm_60  -odir "src" -M -o "src/cuda_kernels.d" "../src/cuda_kernels.cu"
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Picture.cu" > "/tmp/tmpxft_00001127_00000000-4_Picture.cpp1.ii" 
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/PictureContainer.cu" > "/tmp/tmpxft_00001129_00000000-4_PictureContainer.cpp1.ii" 
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/cuda_kernels.cu" > "/tmp/tmpxft_0000112c_00000000-4_cuda_kernels.cpp1.ii" 
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/mathematics.cu" > "/tmp/tmpxft_0000112d_00000000-4_mathematics.cpp1.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/mathematics.cu" > "/tmp/tmpxft_0000112d_00000000-6_mathematics.cpp4.ii" 
+#$ -- Filter Dependencies -- > src/mathematics.d
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/mathematics.o" "../src/mathematics.cu"
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/mathematics.cu" > "/tmp/tmpxft_00001145_00000000-7_mathematics.cpp1.ii" 
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001145_00000000-4_mathematics.cudafe1.c" --stub_file_name "/tmp/tmpxft_00001145_00000000-4_mathematics.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_00001145_00000000-4_mathematics.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_00001145_00000000-3_mathematics.module_id" --include_file_name "tmpxft_00001145_00000000-2_mathematics.fatbin.c" "/tmp/tmpxft_00001145_00000000-7_mathematics.cpp1.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/cuda_kernels.cu" > "/tmp/tmpxft_0000112c_00000000-6_cuda_kernels.cpp4.ii" 
+Finished building: ../src/Network.cu
+ 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/PictureContainer.cu" > "/tmp/tmpxft_00001129_00000000-6_PictureContainer.cpp4.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Picture.cu" > "/tmp/tmpxft_00001127_00000000-6_Picture.cpp4.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/mathematics.cu" > "/tmp/tmpxft_00001145_00000000-5_mathematics.cpp4.ii" 
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001145_00000000-4_mathematics.cudafe1.cpp" --stub_file_name "tmpxft_00001145_00000000-4_mathematics.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_00001145_00000000-3_mathematics.module_id" "/tmp/tmpxft_00001145_00000000-5_mathematics.cpp4.ii" 
+#$ -- Filter Dependencies -- > src/cuda_kernels.d
+#$ -- Filter Dependencies -- > src/Picture.d
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/cuda_kernels.o" "../src/cuda_kernels.cu"
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/Picture.o" "../src/Picture.cu"
+#$ -- Filter Dependencies -- > src/PictureContainer.d
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/cuda_kernels.cu" > "/tmp/tmpxft_0000115f_00000000-7_cuda_kernels.cpp1.ii" 
+/usr/local/cuda-8.0/bin/nvcc -G -g -O0 -v --compile --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60  -x cu -o  "src/PictureContainer.o" "../src/PictureContainer.cu"
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Picture.cu" > "/tmp/tmpxft_00001161_00000000-7_Picture.cpp1.ii" 
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-8.0/bin
+#$ _THERE_=/usr/local/cuda-8.0/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_SIZE_=64
+#$ TOP=/usr/local/cuda-8.0/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-8.0/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-8.0/bin/../lib::/usr/local/cuda-8.0/bin/../lib:/usr/local/cuda-8.0/bin/../lib64
+#$ PATH=/usr/local/cuda-8.0/bin/../open64/bin:/usr/local/cuda-8.0/bin/../nvvm/bin:/usr/local/cuda-8.0/bin:/usr/local/cuda-8.0/bin:/home/benjamin/bin:/home/benjamin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/benjamin/eclipse:/usr/java/jre1.8.0_161:/usr/local/cuda-8.0/bin
+#$ INCLUDES="-I/usr/local/cuda-8.0/bin/..//include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-8.0/bin/..//lib64/stubs" "-L/usr/local/cuda-8.0/bin/..//lib64"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/PictureContainer.cu" > "/tmp/tmpxft_0000116d_00000000-7_PictureContainer.cpp1.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001145_00000000-4_mathematics.cudafe1.gpu" > "/tmp/tmpxft_00001145_00000000-9_mathematics.cpp2.i" 
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001145_00000000-10_mathematics.cudafe2.c" --stub_file_name "/tmp/tmpxft_00001145_00000000-10_mathematics.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_00001145_00000000-10_mathematics.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_00001145_00000000-3_mathematics.module_id" --include_file_name "tmpxft_00001145_00000000-2_mathematics.fatbin.c" "/tmp/tmpxft_00001145_00000000-9_mathematics.cpp2.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001145_00000000-10_mathematics.cudafe2.gpu" > "/tmp/tmpxft_00001145_00000000-11_mathematics.cpp3.i" 
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001161_00000000-4_Picture.cudafe1.c" --stub_file_name "/tmp/tmpxft_00001161_00000000-4_Picture.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_00001161_00000000-4_Picture.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_00001161_00000000-3_Picture.module_id" --include_file_name "tmpxft_00001161_00000000-2_Picture.fatbin.c" "/tmp/tmpxft_00001161_00000000-7_Picture.cpp1.ii" 
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_0000115f_00000000-4_cuda_kernels.cudafe1.c" --stub_file_name "/tmp/tmpxft_0000115f_00000000-4_cuda_kernels.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_0000115f_00000000-4_cuda_kernels.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_0000115f_00000000-3_cuda_kernels.module_id" --include_file_name "tmpxft_0000115f_00000000-2_cuda_kernels.fatbin.c" "/tmp/tmpxft_0000115f_00000000-7_cuda_kernels.cpp1.ii" 
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/mathematics.cu"  "/tmp/tmpxft_00001145_00000000-11_mathematics.cpp3.i" -o "/tmp/tmpxft_00001145_00000000-6_mathematics.ptx"
+#$ cudafe --allow_managed --m64 --gnu_version=50400 -tused --no_remove_unneeded_entities --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_0000116d_00000000-4_PictureContainer.cudafe1.c" --stub_file_name "/tmp/tmpxft_0000116d_00000000-4_PictureContainer.cudafe1.stub.c" --gen_device_file_name "/tmp/tmpxft_0000116d_00000000-4_PictureContainer.cudafe1.gpu" --nv_arch "compute_60" --gen_module_id_file --module_id_file_name "/tmp/tmpxft_0000116d_00000000-3_PictureContainer.module_id" --include_file_name "tmpxft_0000116d_00000000-2_PictureContainer.fatbin.c" "/tmp/tmpxft_0000116d_00000000-7_PictureContainer.cpp1.ii" 
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_00001145_00000000-6_mathematics.ptx"  -o "/tmp/tmpxft_00001145_00000000-12_mathematics.sm_60.cubin" 
+#$ fatbinary --create="/tmp/tmpxft_00001145_00000000-2_mathematics.fatbin" -64 --ident="../src/mathematics.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_00001145_00000000-12_mathematics.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_00001145_00000000-6_mathematics.ptx" --embedded-fatbin="/tmp/tmpxft_00001145_00000000-2_mathematics.fatbin.c" --cuda --device-c
+#$ rm /tmp/tmpxft_00001145_00000000-2_mathematics.fatbin
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001145_00000000-4_mathematics.cudafe1.cpp" > "/tmp/tmpxft_00001145_00000000-13_mathematics.ii" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/mathematics.o" "/tmp/tmpxft_00001145_00000000-13_mathematics.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/Picture.cu" > "/tmp/tmpxft_00001161_00000000-5_Picture.cpp4.ii" 
+Finished building: ../src/mathematics.cu
+ 
+../src/cuda_kernels.cu(100): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(106): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(107): warning: variable "beta_ptr" was declared but never referenced
+
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/PictureContainer.cu" > "/tmp/tmpxft_0000116d_00000000-5_PictureContainer.cpp4.ii" 
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001161_00000000-4_Picture.cudafe1.cpp" --stub_file_name "tmpxft_00001161_00000000-4_Picture.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_00001161_00000000-3_Picture.module_id" "/tmp/tmpxft_00001161_00000000-5_Picture.cpp4.ii" 
+../src/cuda_kernels.cu(109): warning: variable "output_size" was declared but never referenced
+
+../src/cuda_kernels.cu(213): warning: variable "help" was declared but never referenced
+
+../src/cuda_kernels.cu(146): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(151): warning: variable "help" was set but never used
+
+../src/cuda_kernels.cu(154): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(251): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(257): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(258): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(289): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(377): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(492): warning: variable "convDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(493): warning: variable "convDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(606): warning: transfer of control bypasses initialization of:
+            variable "pooling_layer"
+(613): here
+
+../src/cuda_kernels.cu(722): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(728): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(729): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(776): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(777): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(820): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(827): warning: variable "cuda_error" was declared but never referenced
+
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_0000116d_00000000-4_PictureContainer.cudafe1.cpp" --stub_file_name "tmpxft_0000116d_00000000-4_PictureContainer.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_0000116d_00000000-3_PictureContainer.module_id" "/tmp/tmpxft_0000116d_00000000-5_PictureContainer.cpp4.ii" 
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__  "-I/usr/local/cuda-8.0/bin/..//include"   -D"__CUDACC_VER__=80061" -D"__CUDACC_VER_BUILD__=61" -D"__CUDACC_VER_MINOR__=0" -D"__CUDACC_VER_MAJOR__=8" -include "cuda_runtime.h" -m64 -g -gdwarf-2 "../src/cuda_kernels.cu" > "/tmp/tmpxft_0000115f_00000000-5_cuda_kernels.cpp4.ii" 
+#$ cudafe++ --allow_managed --m64 --gnu_version=50400 --parse_templates --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_0000115f_00000000-4_cuda_kernels.cudafe1.cpp" --stub_file_name "tmpxft_0000115f_00000000-4_cuda_kernels.cudafe1.stub.c" --module_id_file_name "/tmp/tmpxft_0000115f_00000000-3_cuda_kernels.module_id" "/tmp/tmpxft_0000115f_00000000-5_cuda_kernels.cpp4.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001161_00000000-4_Picture.cudafe1.gpu" > "/tmp/tmpxft_00001161_00000000-9_Picture.cpp2.i" 
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_00001161_00000000-10_Picture.cudafe2.c" --stub_file_name "/tmp/tmpxft_00001161_00000000-10_Picture.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_00001161_00000000-10_Picture.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_00001161_00000000-3_Picture.module_id" --include_file_name "tmpxft_00001161_00000000-2_Picture.fatbin.c" "/tmp/tmpxft_00001161_00000000-9_Picture.cpp2.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001161_00000000-10_Picture.cudafe2.gpu" > "/tmp/tmpxft_00001161_00000000-11_Picture.cpp3.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_0000116d_00000000-4_PictureContainer.cudafe1.gpu" > "/tmp/tmpxft_0000116d_00000000-9_PictureContainer.cpp2.i" 
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/Picture.cu"  "/tmp/tmpxft_00001161_00000000-11_Picture.cpp3.i" -o "/tmp/tmpxft_00001161_00000000-6_Picture.ptx"
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_0000116d_00000000-10_PictureContainer.cudafe2.c" --stub_file_name "/tmp/tmpxft_0000116d_00000000-10_PictureContainer.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_0000116d_00000000-10_PictureContainer.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_0000116d_00000000-3_PictureContainer.module_id" --include_file_name "tmpxft_0000116d_00000000-2_PictureContainer.fatbin.c" "/tmp/tmpxft_0000116d_00000000-9_PictureContainer.cpp2.i" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_0000116d_00000000-10_PictureContainer.cudafe2.gpu" > "/tmp/tmpxft_0000116d_00000000-11_PictureContainer.cpp3.i" 
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/PictureContainer.cu"  "/tmp/tmpxft_0000116d_00000000-11_PictureContainer.cpp3.i" -o "/tmp/tmpxft_0000116d_00000000-6_PictureContainer.ptx"
+../src/cuda_kernels.cu(100): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(106): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(107): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(109): warning: variable "output_size" was declared but never referenced
+
+../src/cuda_kernels.cu(213): warning: variable "help" was declared but never referenced
+
+../src/cuda_kernels.cu(146): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(151): warning: variable "help" was set but never used
+
+../src/cuda_kernels.cu(154): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(251): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(257): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(258): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(289): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(377): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(492): warning: variable "convDim_x" was declared but never referenced
+
+../src/cuda_kernels.cu(493): warning: variable "convDim_y" was declared but never referenced
+
+../src/cuda_kernels.cu(606): warning: transfer of control bypasses initialization of:
+            variable "pooling_layer"
+(613): here
+
+../src/cuda_kernels.cu(722): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(728): warning: variable "alpha_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(729): warning: variable "beta_ptr" was declared but never referenced
+
+../src/cuda_kernels.cu(776): warning: variable "cuda_error" was declared but never referenced
+
+../src/cuda_kernels.cu(777): warning: variable "cublasState" was set but never used
+
+../src/cuda_kernels.cu(820): warning: variable "dimSquare" was declared but never referenced
+
+../src/cuda_kernels.cu(827): warning: variable "cuda_error" was declared but never referenced
+
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_00001161_00000000-6_Picture.ptx"  -o "/tmp/tmpxft_00001161_00000000-12_Picture.sm_60.cubin" 
+#$ fatbinary --create="/tmp/tmpxft_00001161_00000000-2_Picture.fatbin" -64 --ident="../src/Picture.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_00001161_00000000-12_Picture.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_00001161_00000000-6_Picture.ptx" --embedded-fatbin="/tmp/tmpxft_00001161_00000000-2_Picture.fatbin.c" --cuda --device-c
+#$ rm /tmp/tmpxft_00001161_00000000-2_Picture.fatbin
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_00001161_00000000-4_Picture.cudafe1.cpp" > "/tmp/tmpxft_00001161_00000000-13_Picture.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDACC__ -D__NVCC__ -D__CUDACC_RDC__ -D__CUDANVVM__  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_0000115f_00000000-4_cuda_kernels.cudafe1.gpu" > "/tmp/tmpxft_0000115f_00000000-9_cuda_kernels.cpp2.i" 
+#$ cudafe -w --allow_managed --m64 --gnu_version=50400 --c --debug_mode  --device-c --gen_c_file_name "/tmp/tmpxft_0000115f_00000000-10_cuda_kernels.cudafe2.c" --stub_file_name "/tmp/tmpxft_0000115f_00000000-10_cuda_kernels.cudafe2.stub.c" --gen_device_file_name "/tmp/tmpxft_0000115f_00000000-10_cuda_kernels.cudafe2.gpu" --nv_arch "compute_60" --module_id_file_name "/tmp/tmpxft_0000115f_00000000-3_cuda_kernels.module_id" --include_file_name "tmpxft_0000115f_00000000-2_cuda_kernels.fatbin.c" "/tmp/tmpxft_0000115f_00000000-9_cuda_kernels.cpp2.i" 
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_0000116d_00000000-6_PictureContainer.ptx"  -o "/tmp/tmpxft_0000116d_00000000-12_PictureContainer.sm_60.cubin" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/Picture.o" "/tmp/tmpxft_00001161_00000000-13_Picture.ii" 
+#$ fatbinary --create="/tmp/tmpxft_0000116d_00000000-2_PictureContainer.fatbin" -64 --ident="../src/PictureContainer.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_0000116d_00000000-12_PictureContainer.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_0000116d_00000000-6_PictureContainer.ptx" --embedded-fatbin="/tmp/tmpxft_0000116d_00000000-2_PictureContainer.fatbin.c" --cuda --device-c
+#$ rm /tmp/tmpxft_0000116d_00000000-2_PictureContainer.fatbin
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_0000116d_00000000-4_PictureContainer.cudafe1.cpp" > "/tmp/tmpxft_0000116d_00000000-13_PictureContainer.ii" 
+#$ gcc -D__CUDA_ARCH__=600 -E -x c   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__CUDABE__ -D__CUDANVVM__ -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_0000115f_00000000-10_cuda_kernels.cudafe2.gpu" > "/tmp/tmpxft_0000115f_00000000-11_cuda_kernels.cpp3.i" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/PictureContainer.o" "/tmp/tmpxft_0000116d_00000000-13_PictureContainer.ii" 
+#$ cicc  -arch compute_60 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -g -O0 -nvvmir-library "/usr/local/cuda-8.0/bin/../nvvm/libdevice/libdevice.compute_30.10.bc"  --device-c --orig_src_file_name "../src/cuda_kernels.cu"  "/tmp/tmpxft_0000115f_00000000-11_cuda_kernels.cpp3.i" -o "/tmp/tmpxft_0000115f_00000000-6_cuda_kernels.ptx"
+Finished building: ../src/PictureContainer.cu
+ 
+Finished building: ../src/Picture.cu
+ 
+#$ ptxas  -arch=sm_60 -m64 --compile-only  -g --dont-merge-basicblocks --return-at-end "/tmp/tmpxft_0000115f_00000000-6_cuda_kernels.ptx"  -o "/tmp/tmpxft_0000115f_00000000-12_cuda_kernels.sm_60.cubin" 
+#$ fatbinary --create="/tmp/tmpxft_0000115f_00000000-2_cuda_kernels.fatbin" -64 --ident="../src/cuda_kernels.cu" --cmdline="--compile-only  -g --dont-merge-basicblocks --return-at-end " -g "--image=profile=sm_60,file=/tmp/tmpxft_0000115f_00000000-12_cuda_kernels.sm_60.cubin" "--image=profile=compute_60,file=/tmp/tmpxft_0000115f_00000000-6_cuda_kernels.ptx" --embedded-fatbin="/tmp/tmpxft_0000115f_00000000-2_cuda_kernels.fatbin.c" --cuda --device-c
+#$ rm /tmp/tmpxft_0000115f_00000000-2_cuda_kernels.fatbin
+#$ gcc -D__CUDA_ARCH__=600 -E -x c++   -DCUDA_DOUBLE_MATH_FUNCTIONS  -D__USE_FAST_MATH__=0  -D__CUDA_FTZ=0 -D__CUDA_PREC_DIV=1 -D__CUDA_PREC_SQRT=1 "-I/usr/local/cuda-8.0/bin/..//include"   -m64 -g -gdwarf-2 "/tmp/tmpxft_0000115f_00000000-4_cuda_kernels.cudafe1.cpp" > "/tmp/tmpxft_0000115f_00000000-13_cuda_kernels.ii" 
+#$ gcc -c -x c++ "-I/usr/local/cuda-8.0/bin/..//include"   -fpreprocessed -m64 -g -gdwarf-2 -o "src/cuda_kernels.o" "/tmp/tmpxft_0000115f_00000000-13_cuda_kernels.ii" 
+Finished building: ../src/cuda_kernels.cu
+ 
+Building target: CUDA_CNN
+Invoking: NVCC Linker
+/usr/local/cuda-8.0/bin/nvcc --cudart static --relocatable-device-code=true -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=sm_60 -link -o  "CUDA_CNN"  ./src/CUDA_CNN.o ./src/ConvLayer.o ./src/DropoutLayer.o ./src/FullyConnectedLayer.o ./src/InputLayer.o ./src/Layer.o ./src/MaxPoolingLayer.o ./src/Network.o ./src/Picture.o ./src/PictureContainer.o ./src/cuda_kernels.o ./src/mathematics.o   -lcublas_device -lcurand
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+ptxas info    : 'device-function-maxrregcount' is a BETA feature
+Finished building target: CUDA_CNN
+ 
+
+08:06:08 Build Finished (took 11s.546ms)
 
